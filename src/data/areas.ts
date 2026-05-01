@@ -1,0 +1,27 @@
+import { BilingualText } from '@/types';
+
+export const deliveryAreas: BilingualText[] = [
+  { en: 'Salmiya', ar: 'السالمية' },
+  { en: 'Rumaithiya', ar: 'الرميثية' },
+  { en: 'Bayan', ar: 'بيان' },
+  { en: 'Mishref', ar: 'مشرف' },
+  { en: 'Jabriya', ar: 'الجابرية' },
+  { en: 'Hawalli', ar: 'حولي' },
+  { en: 'Shaab', ar: 'الشعب' },
+  { en: 'Fahaheel', ar: 'الفحاحيل' },
+  { en: 'Mangaf', ar: 'المنقف' },
+  { en: 'Abu Halifa', ar: 'أبو حليفة' },
+  { en: 'Fintas', ar: 'الفنطاس' },
+  { en: 'Mahboula', ar: 'المهبولة' },
+  { en: 'Riqqa', ar: 'الرقة' },
+  { en: 'Salwa', ar: 'سلوى' },
+  { en: 'Surra', ar: 'السرة' },
+  { en: 'Nuzha', ar: 'النزهة' },
+  { en: 'Yarmouk', ar: 'اليرموك' },
+  { en: 'Shuwaikh', ar: 'الشويخ' },
+  { en: 'Daiya', ar: 'الدعية' },
+  { en: 'Qadsiya', ar: 'القادسية' },
+  { en: 'Adailiya', ar: 'العديلية' },
+  { en: 'Kaifan', ar: 'كيفان' },
+  { en: 'Abdullah Al Salem', ar: 'عبدالله السالم' },
+];

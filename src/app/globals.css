@@ -1,0 +1,131 @@
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  .theme {
+    --font-heading: var(--font-sans);
+    --font-sans: var(--font-sans);
+  }
+  :root {
+    /* Tafseela Brand Palette */
+    --background: #FFF4ED;
+    --foreground: #2C2C2A;
+    --card: #FFFFFF;
+    --card-foreground: #2C2C2A;
+    --popover: #FFFFFF;
+    --popover-foreground: #2C2C2A;
+    --primary: #BF066A;
+    --primary-foreground: #FFFFFF;
+    --secondary: #FBE0E8;
+    --secondary-foreground: #5C0A3D;
+    --muted: #FBE0E8;
+    --muted-foreground: #ED93B1;
+    --accent: #FBE0E8;
+    --accent-foreground: #5C0A3D;
+    --destructive: #DC2626;
+    --border: #ED93B1;
+    --input: #ED93B1;
+    --ring: #BF066A;
+    --chart-1: #BF066A;
+    --chart-2: #5C0A3D;
+    --chart-3: #ED93B1;
+    --chart-4: #FBE0E8;
+    --chart-5: #2C2C2A;
+    --radius: 0.625rem;
+    --sidebar: #FFF4ED;
+    --sidebar-foreground: #2C2C2A;
+    --sidebar-primary: #BF066A;
+    --sidebar-primary-foreground: #FFFFFF;
+    --sidebar-accent: #FBE0E8;
+    --sidebar-accent-foreground: #5C0A3D;
+    --sidebar-border: #ED93B1;
+    --sidebar-ring: #BF066A;
+  }
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* Custom Animations */
+@keyframes heart-pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Animation Utility Classes */
+.animate-heart-pop {
+  animation: heart-pop 0.3s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.4s ease-out;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-in-out;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+  background-size: 200% 100%;
+}
+
+/* Hide scrollbar utility */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
