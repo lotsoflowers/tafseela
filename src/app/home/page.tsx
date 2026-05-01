@@ -7,6 +7,7 @@ import { ArrowLeft, ArrowRight, Sparkles, Store as StoreIcon, ChevronLeft, Chevr
 import PageShell from '@/components/layout/PageShell';
 import SearchBar from '@/components/shared/SearchBar';
 import CategoryFilter from '@/components/shared/CategoryFilter';
+import HeroOverlayActions from '@/components/shared/HeroOverlayActions';
 import ProductCard from '@/components/product/ProductCard';
 import StoreCard from '@/components/store/StoreCard';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -37,11 +38,12 @@ export default function HomePage() {
   };
 
   return (
-    <PageShell className="bg-cream dark:bg-background">
+    <PageShell showTopBar={false} className="bg-cream dark:bg-background">
       <div className="animate-fade-in space-y-5 pb-4">
-        {/* Hero — full-bleed editorial card. Real product image as backdrop,
-            dramatic dark gradient for legibility, big display heading, CTA. */}
-        <div className="relative mx-4 mt-3 overflow-hidden rounded-3xl aspect-[4/5] sm:aspect-[3/2] shadow-[0_8px_24px_rgba(92,10,61,0.12)] dark:shadow-[0_8px_24px_rgba(0,0,0,0.5)]">
+        {/* Hero — bleeds to the very top of the screen, no header above it.
+            Real product image as backdrop, dramatic dark gradient for
+            legibility, floating actions, big display heading, CTA. */}
+        <div className="relative -mt-px overflow-hidden aspect-[4/5] sm:aspect-[3/2]">
           <Image
             src={HERO_IMAGE}
             alt={t({ en: 'New arrivals', ar: 'وصل حديثاً' })}
@@ -54,9 +56,25 @@ export default function HomePage() {
           {/* Layered gradient — keeps the photo visible up top, deepens to plum at the bottom for text legibility */}
           <div className="absolute inset-0 bg-gradient-to-t from-plum via-plum/60 to-plum/0" />
           <div className="absolute inset-0 bg-gradient-to-r from-plum/40 via-transparent to-transparent rtl:bg-gradient-to-l" />
+          {/* Faint top wash so the floating action icons stay legible */}
+          <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/35 to-transparent pointer-events-none" />
 
-          {/* Floating eyebrow chip in the top-start corner */}
-          <div className="absolute top-4 start-4 z-10">
+          {/* Floating top row — wordmark + actions, no surrounding header */}
+          <div className="absolute inset-x-0 top-0 z-20 flex items-center justify-between px-4 pt-[calc(env(safe-area-inset-top)+10px)] pb-2">
+            <Link href="/home" className="group inline-flex items-center gap-2">
+              <span
+                aria-hidden
+                className="size-2 rounded-full bg-gradient-to-br from-soft to-hero shadow-[0_0_8px_rgba(255,255,255,0.4)]"
+              />
+              <span className="text-[19px] font-extrabold tracking-tight text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.45)]">
+                {t({ en: 'Tafseela', ar: 'تفصيلة' })}
+              </span>
+            </Link>
+            <HeroOverlayActions />
+          </div>
+
+          {/* Floating eyebrow chip — moved down so it doesn't collide with the actions */}
+          <div className="absolute top-[68px] start-4 z-10">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 dark:bg-black/40 backdrop-blur-md px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-hero ring-1 ring-white/40">
               <span className="size-1.5 rounded-full bg-hero animate-pulse" />
               {t({ en: 'New this week', ar: 'جديد هذا الأسبوع' })}
