@@ -131,15 +131,21 @@ export default function FitQuestionnaire({
             <RadioGroup
               value={usualSize}
               onValueChange={(val) => setUsualSize(val as ProductSize)}
-              className="flex flex-wrap gap-3"
+              className="flex flex-wrap gap-2"
             >
               {USUAL_SIZES.map((size) => (
-                <div key={size} className="flex items-center gap-1.5">
-                  <RadioGroupItem value={size} id={`size-${size}`} />
-                  <Label htmlFor={`size-${size}`} className="text-sm text-ink">
-                    {size}
-                  </Label>
-                </div>
+                <label
+                  key={size}
+                  className={cn(
+                    'flex cursor-pointer items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm transition-colors select-none',
+                    usualSize === size
+                      ? 'border-hero bg-hero text-white'
+                      : 'border-soft/50 bg-white text-ink hover:border-hero/40'
+                  )}
+                >
+                  <RadioGroupItem value={size} className="sr-only" />
+                  <span className="font-medium">{size}</span>
+                </label>
               ))}
             </RadioGroup>
           </div>
@@ -152,15 +158,21 @@ export default function FitQuestionnaire({
             <RadioGroup
               value={preferredFit}
               onValueChange={(val) => setPreferredFit(val as FitProfile['preferredFit'])}
-              className="flex flex-wrap gap-3"
+              className="flex flex-wrap gap-2"
             >
               {FIT_PREFERENCES.map((pref) => (
-                <div key={pref.value} className="flex items-center gap-1.5">
-                  <RadioGroupItem value={pref.value} id={`fit-${pref.value}`} />
-                  <Label htmlFor={`fit-${pref.value}`} className="text-sm text-ink">
-                    {t(pref.label)}
-                  </Label>
-                </div>
+                <label
+                  key={pref.value}
+                  className={cn(
+                    'flex cursor-pointer items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm transition-colors select-none',
+                    preferredFit === pref.value
+                      ? 'border-hero bg-hero text-white'
+                      : 'border-soft/50 bg-white text-ink hover:border-hero/40'
+                  )}
+                >
+                  <RadioGroupItem value={pref.value} className="sr-only" />
+                  <span className="font-medium">{t(pref.label)}</span>
+                </label>
               ))}
             </RadioGroup>
           </div>
