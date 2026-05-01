@@ -115,8 +115,8 @@ export type User = {
 export type FitProfile = {
   height: number;
   weight: number;
-  usualSize: ProductSize;
-  preferredFit: 'fitted' | 'regular' | 'loose';
+  usualSize?: ProductSize;
+  preferredFit?: 'fitted' | 'regular' | 'loose';
 };
 
 export type FitRecommendation = {

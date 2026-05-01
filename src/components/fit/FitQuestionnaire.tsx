@@ -33,24 +33,20 @@ export default function FitQuestionnaire({
   const [isOpen, setIsOpen] = useState(false);
   const [height, setHeight] = useState(165);
   const [weight, setWeight] = useState(60);
-  const [usualSize, setUsualSize] = useState<ProductSize | null>(null);
-  const [preferredFit, setPreferredFit] = useState<FitProfile['preferredFit'] | null>(null);
+  const [usualSize, setUsualSize] = useState<ProductSize | ''>('');
+  const [preferredFit, setPreferredFit] = useState<FitProfile['preferredFit']>('regular');
 
   const handleSubmit = () => {
-    if (!usualSize || !preferredFit) return;
-
     const profile: FitProfile = {
       height,
       weight,
-      usualSize,
+      usualSize: usualSize || undefined,
       preferredFit,
     };
 
     const result = getRecommendation(profile, productFit);
     onResult(result);
   };
-
-  const isFormValid = usualSize !== null && preferredFit !== null;
 
   return (
     <div className={cn('rounded-xl border border-soft/50 bg-cream/50', className)}>
@@ -122,13 +118,18 @@ export default function FitQuestionnaire({
             </div>
           </div>
 
-          {/* Usual size */}
+          {/* Usual size (optional) */}
           <div>
-            <Label className="mb-2 block text-sm font-medium text-ink">
-              {language === 'ar' ? 'مقاسك المعتاد' : 'Your usual size'}
-            </Label>
+            <div className="mb-2 flex items-center justify-between">
+              <Label className="block text-sm font-medium text-ink">
+                {language === 'ar' ? 'مقاسك المعتاد' : 'Your usual size'}
+              </Label>
+              <span className="text-xs text-ink/40">
+                {language === 'ar' ? 'اختياري — للدقة' : 'Optional — for accuracy'}
+              </span>
+            </div>
             <RadioGroup
-              value={usualSize ?? undefined}
+              value={usualSize}
               onValueChange={(val) => setUsualSize(val as ProductSize)}
               className="flex flex-wrap gap-3"
             >
@@ -149,7 +150,7 @@ export default function FitQuestionnaire({
               {language === 'ar' ? 'تفضيلك للقصة' : 'Fit preference'}
             </Label>
             <RadioGroup
-              value={preferredFit ?? undefined}
+              value={preferredFit}
               onValueChange={(val) => setPreferredFit(val as FitProfile['preferredFit'])}
               className="flex flex-wrap gap-3"
             >
@@ -167,8 +168,7 @@ export default function FitQuestionnaire({
           {/* Submit */}
           <Button
             onClick={handleSubmit}
-            disabled={!isFormValid}
-            className="w-full bg-hero text-white hover:bg-hero/90 disabled:opacity-50"
+            className="w-full bg-hero text-white hover:bg-hero/90"
           >
             {language === 'ar' ? 'احسبي مقاسك' : 'Get my size'}
           </Button>
