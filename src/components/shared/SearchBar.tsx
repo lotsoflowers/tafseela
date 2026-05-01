@@ -27,16 +27,20 @@ export default function SearchBar({ className, onClick }: SearchBarProps) {
       type="button"
       onClick={handleClick}
       className={cn(
-        'flex w-full items-center gap-2 rounded-full border border-soft bg-white px-4 py-3 text-start',
-        'transition-colors hover:border-hero/40 active:bg-blush/30',
+        'flex w-full items-center gap-2.5 rounded-2xl px-4 py-3.5 text-start',
+        'glass border border-soft/40 shadow-sm',
+        'transition-all duration-300',
+        'hover:border-hero/30 hover:shadow-md hover:shadow-hero/5',
+        'active:scale-[0.99]',
+        'focus:outline-none focus:ring-2 focus:ring-hero/30 focus:border-hero/40',
         className
       )}
     >
-      <Search className="size-5 shrink-0 text-soft" />
-      <span className="text-sm text-soft">
+      <Search className="size-5 shrink-0 text-hero/50" />
+      <span className="text-sm text-ink/40">
         {t({
-          en: 'Search products or stores',
-          ar: 'ابحثي عن منتج أو متجر',
+          en: 'Search products or stores...',
+          ar: 'ابحثي عن منتج أو متجر...',
         })}
       </span>
     </button>

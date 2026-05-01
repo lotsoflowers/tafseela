@@ -22,7 +22,7 @@ export default function CategoryFilter({
   return (
     <div
       className={cn(
-        'flex gap-2 overflow-x-auto hide-scrollbar',
+        'flex gap-2 overflow-x-auto hide-scrollbar py-0.5',
         className
       )}
     >
@@ -34,10 +34,11 @@ export default function CategoryFilter({
             type="button"
             onClick={() => onSelect(category.id)}
             className={cn(
-              'shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-colors',
+              'shrink-0 rounded-full px-4 py-2 text-sm font-medium',
+              'transition-all duration-300 ease-out',
               isActive
-                ? 'bg-hero text-white'
-                : 'border border-soft bg-white text-ink hover:bg-blush/30'
+                ? 'bg-gradient-to-r from-hero to-plum text-white shadow-md shadow-hero/20 scale-[1.02]'
+                : 'border border-soft/50 bg-white text-ink/70 hover:border-hero/30 hover:bg-blush/30 hover:text-ink'
             )}
           >
             {t(category.name)}

@@ -14,22 +14,23 @@ export default function TopBar({ className }: { className?: string }) {
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 flex items-center justify-between bg-white px-4 py-3 border-b border-gray-100',
+        'sticky top-0 z-50 flex items-center justify-between px-4 py-3',
+        'glass-strong border-b border-white/30',
         className
       )}
     >
-      {/* Logo */}
-      <Link href="/home" className="font-bold text-xl text-plum">
+      {/* Logo with gradient text */}
+      <Link href="/home" className="gradient-text text-xl font-extrabold tracking-tight">
         {t({ en: 'Tafseela', ar: 'تفصيلة' })}
       </Link>
 
       {/* Right actions */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2">
         <LanguageToggle />
 
         <Link
           href="/search"
-          className="p-2 text-ink/70 hover:text-ink transition-colors"
+          className="rounded-full p-2 text-ink/60 hover:text-hero hover:bg-hero/10 transition-all duration-200"
           aria-label={t({ en: 'Search', ar: 'البحث' })}
         >
           <Search className="h-5 w-5" />
@@ -37,12 +38,12 @@ export default function TopBar({ className }: { className?: string }) {
 
         <Link
           href="/cart"
-          className="relative p-2 text-ink/70 hover:text-ink transition-colors"
+          className="relative rounded-full p-2 text-ink/60 hover:text-hero hover:bg-hero/10 transition-all duration-200"
           aria-label={t({ en: 'Cart', ar: 'سلة التسوق' })}
         >
           <ShoppingBag className="h-5 w-5" />
           {itemCount > 0 && (
-            <span className="absolute -top-0.5 -end-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-hero px-1 text-[10px] font-bold text-white">
+            <span className="absolute -top-0.5 -end-0.5 flex h-4.5 min-w-4.5 items-center justify-center rounded-full bg-gradient-to-r from-hero to-plum px-1 text-[10px] font-bold text-white shadow-sm animate-badge-pulse">
               {itemCount}
             </span>
           )}

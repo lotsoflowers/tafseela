@@ -24,7 +24,7 @@ export default function PageShell({
       <main
         className={cn(
           'flex-1',
-          showBottomNav && 'pb-20 lg:pb-0',
+          showBottomNav && 'pb-24 lg:pb-0',
           className
         )}
       >
