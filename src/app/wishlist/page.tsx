@@ -6,6 +6,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { products } from '@/data/products';
 import PageShell from '@/components/layout/PageShell';
+import LargeTitle from '@/components/layout/LargeTitle';
 import ProductCard from '@/components/product/ProductCard';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -18,8 +19,16 @@ export default function WishlistPage() {
 
   return (
     <PageShell>
-      <div className="min-h-screen bg-cream dark:bg-background px-4 pt-2 pb-6 animate-fade-in">
-        {/* Title sits in the TopBar — no duplicate H1 here */}
+      <div className="min-h-screen bg-cream dark:bg-background pb-6 animate-fade-in">
+        <LargeTitle
+          title={{ en: 'Wishlist', ar: 'المفضلة' }}
+          subtitle={
+            wishlisted.length > 0
+              ? { en: `${wishlisted.length} saved`, ar: `${wishlisted.length} محفوظ` }
+              : undefined
+          }
+        />
+        <div className="px-4">
         {wishlisted.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <div className="w-20 h-20 rounded-full bg-blush dark:bg-secondary flex items-center justify-center mb-4">
@@ -51,6 +60,7 @@ export default function WishlistPage() {
             ))}
           </div>
         )}
+        </div>
       </div>
     </PageShell>
   );

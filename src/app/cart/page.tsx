@@ -9,6 +9,7 @@ import { formatPrice } from '@/lib/format';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import PageShell from '@/components/layout/PageShell';
+import LargeTitle from '@/components/layout/LargeTitle';
 import CartStoreGroup from '@/components/cart/CartStoreGroup';
 
 export default function CartPage() {
@@ -24,8 +25,8 @@ export default function CartPage() {
 
   return (
     <PageShell className="bg-cream dark:bg-background">
-      <div className="max-w-lg mx-auto px-4 py-6">
-        {/* Title sits in the TopBar — no duplicate H1 here */}
+      <LargeTitle title={{ en: 'My Cart', ar: 'سلتي' }} />
+      <div className="max-w-lg mx-auto px-4 pb-6">
         {isEmpty ? (
           /* Empty state */
           <div className="flex flex-col items-center justify-center py-20 text-center">

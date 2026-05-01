@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { ChevronLeft, ChevronRight, Search, ShoppingBag } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -44,6 +45,27 @@ export default function TopBar({ className }: { className?: string }) {
   const ChevronBack = direction === 'rtl' ? ChevronRight : ChevronLeft;
   const title = !isHome ? titleFor(pathname) : null;
 
+  // iOS Large Title transition: when a <LargeTitle> exists on the page,
+  // hide our centered bar title until the user has scrolled it off-screen.
+  // When no <LargeTitle> is present (cart/wishlist/etc. before they're
+  // converted), fall back to always-visible.
+  const [showBarTitle, setShowBarTitle] = useState(true);
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    const largeTitle = document.querySelector('[data-large-title]');
+    if (!largeTitle) {
+      setShowBarTitle(true);
+      return;
+    }
+    setShowBarTitle(false); // start hidden when a LargeTitle is present
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowBarTitle(!entry.isIntersecting),
+      { rootMargin: '-44px 0px 0px 0px' }
+    );
+    observer.observe(largeTitle);
+    return () => observer.disconnect();
+  }, [pathname]);
+
   return (
     <header
       className={cn(
@@ -86,10 +108,18 @@ export default function TopBar({ className }: { className?: string }) {
         )}
       </div>
 
-      {/* Centered title — iOS UINavigationBar pattern */}
+      {/* Centered title — iOS UINavigationBar. Fades in only after the
+          page-level LargeTitle scrolls off, mirroring UIKit's
+          prefersLargeTitles transition. */}
       <div className="flex justify-center">
         {title && (
-          <h1 className="truncate text-[16px] font-semibold tracking-tight text-ink dark:text-foreground">
+          <h1
+            className={cn(
+              'truncate text-[16px] font-semibold tracking-tight text-ink dark:text-foreground',
+              'transition-opacity duration-200 ease-out',
+              showBarTitle ? 'opacity-100' : 'opacity-0'
+            )}
+          >
             {t(title)}
           </h1>
         )}
