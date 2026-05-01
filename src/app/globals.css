@@ -52,35 +52,36 @@
   }
 
   /* ===== Dark mode palette =====
-     Surfaces invert to a warm near-black with cream foregrounds.
-     Brand accents (Hero/Soft) shift slightly toward Soft pink so
-     they read warmer on dark surfaces without losing identity. */
+     Lives inside the Tafseela palette family — surfaces are deep
+     plum, not neutral charcoal. Backgrounds reach toward Plum (#5C0A3D),
+     foregrounds toward Blush/Cream, and the brand pinks (Soft / Hero)
+     stay bright as primary + accent. */
   .dark {
-    --background: #14100E;
-    --foreground: #F5E9DE;
-    --card: #211B17;
-    --card-foreground: #F5E9DE;
-    --popover: #211B17;
-    --popover-foreground: #F5E9DE;
+    --background: #1A0814;
+    --foreground: #FBE0E8;
+    --card: #2D1224;
+    --card-foreground: #FBE0E8;
+    --popover: #2D1224;
+    --popover-foreground: #FBE0E8;
     --primary: #ED93B1;
-    --primary-foreground: #14100E;
-    --secondary: #2A221E;
-    --secondary-foreground: #F5E9DE;
-    --muted: #2A221E;
-    --muted-foreground: #B8AAA0;
+    --primary-foreground: #1A0814;
+    --secondary: #3F1A33;
+    --secondary-foreground: #FBE0E8;
+    --muted: #3F1A33;
+    --muted-foreground: #C9A8BA;
     --accent: #BF066A;
     --accent-foreground: #FFFFFF;
     --destructive: #F87171;
-    --border: #3A2F2A;
-    --input: #3A2F2A;
+    --border: #4A1F3C;
+    --input: #4A1F3C;
     --ring: #ED93B1;
-    --sidebar: #14100E;
-    --sidebar-foreground: #F5E9DE;
+    --sidebar: #1A0814;
+    --sidebar-foreground: #FBE0E8;
     --sidebar-primary: #ED93B1;
-    --sidebar-primary-foreground: #14100E;
-    --sidebar-accent: #2A221E;
-    --sidebar-accent-foreground: #F5E9DE;
-    --sidebar-border: #3A2F2A;
+    --sidebar-primary-foreground: #1A0814;
+    --sidebar-accent: #3F1A33;
+    --sidebar-accent-foreground: #FBE0E8;
+    --sidebar-border: #4A1F3C;
     --sidebar-ring: #ED93B1;
   }
   * {
@@ -281,13 +282,15 @@
 }
 
 .dark .glass {
-  background: rgba(33, 27, 23, 0.65);
-  border-color: rgba(245, 233, 222, 0.08);
+  /* Plum-tinted glass — sampled from --card with a touch of transparency */
+  background: rgba(45, 18, 36, 0.65);
+  border-color: rgba(251, 224, 232, 0.08);
 }
 
 .dark .glass-strong {
-  background: rgba(20, 16, 14, 0.85);
-  border-color: rgba(245, 233, 222, 0.10);
+  /* Sampled from --background — keeps the plum cast even at high opacity */
+  background: rgba(26, 8, 20, 0.85);
+  border-color: rgba(251, 224, 232, 0.10);
 }
 
 /* ===== Shine Effect ===== */

@@ -16,36 +16,63 @@ export default function TopBar({ className }: { className?: string }) {
     <header
       className={cn(
         'sticky top-0 z-50 flex items-center justify-between px-4 py-3',
-        'glass-strong border-b border-white/30',
+        'glass-strong',
+        // Subtle hairline only — no heavy bottom border. Plum-tinted in dark.
+        'border-b border-soft/15 dark:border-foreground/[0.06]',
         className
       )}
     >
-      {/* Logo with gradient text */}
-      <Link href="/home" className="gradient-text text-xl font-extrabold tracking-tight">
-        {t({ en: 'Tafseela', ar: 'تفصيلة' })}
+      {/* Logo — gradient wordmark, slightly tighter tracking, with a small soft dot accent */}
+      <Link
+        href="/home"
+        className="group inline-flex items-center gap-2"
+      >
+        <span
+          aria-hidden
+          className="size-2 rounded-full bg-gradient-to-br from-hero to-plum opacity-90 group-hover:opacity-100 transition-opacity"
+        />
+        <span className="gradient-text text-[19px] font-extrabold tracking-tight">
+          {t({ en: 'Tafseela', ar: 'تفصيلة' })}
+        </span>
       </Link>
 
-      {/* Right actions */}
-      <div className="flex items-center gap-1.5">
+      {/* Action cluster — every button shares the same shape, color treatment, and tap target */}
+      <div className="flex items-center gap-0.5">
         <ThemeToggle />
         <LanguageToggle />
 
         <Link
           href="/search"
-          className="rounded-full p-2 text-ink/60 hover:text-hero hover:bg-hero/10 transition-all duration-200 dark:text-foreground/70 dark:hover:bg-foreground/10"
           aria-label={t({ en: 'Search', ar: 'البحث' })}
+          className={cn(
+            'inline-flex size-9 items-center justify-center rounded-full',
+            'text-ink/70 dark:text-foreground/75 transition-colors',
+            'hover:bg-hero/10 hover:text-hero dark:hover:bg-foreground/10'
+          )}
         >
-          <Search className="h-5 w-5" />
+          <Search className="size-[18px]" strokeWidth={2} />
         </Link>
 
         <Link
           href="/cart"
-          className="relative rounded-full p-2 text-ink/60 hover:text-hero hover:bg-hero/10 transition-all duration-200 dark:text-foreground/70 dark:hover:bg-foreground/10"
           aria-label={t({ en: 'Cart', ar: 'سلة التسوق' })}
+          className={cn(
+            'relative inline-flex size-9 items-center justify-center rounded-full',
+            'text-ink/70 dark:text-foreground/75 transition-colors',
+            'hover:bg-hero/10 hover:text-hero dark:hover:bg-foreground/10'
+          )}
         >
-          <ShoppingBag className="h-5 w-5" />
+          <ShoppingBag className="size-[18px]" strokeWidth={2} />
           {itemCount > 0 && (
-            <span className="absolute -top-0.5 -end-0.5 flex h-4.5 min-w-4.5 items-center justify-center rounded-full bg-gradient-to-r from-hero to-plum px-1 text-[10px] font-bold text-white shadow-sm animate-badge-pulse">
+            <span
+              className={cn(
+                'absolute -top-0.5 -end-0.5 flex h-4 min-w-4 items-center justify-center px-1',
+                'rounded-full bg-hero text-[9px] font-bold text-white',
+                // Ring picks up the page bg so the badge "floats" cleanly in both themes.
+                'ring-2 ring-background',
+                'animate-badge-pulse'
+              )}
+            >
               {itemCount}
             </span>
           )}
