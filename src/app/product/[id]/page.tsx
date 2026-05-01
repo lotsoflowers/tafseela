@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, use } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import {
   ArrowLeft,
@@ -29,11 +29,11 @@ import { Separator } from '@/components/ui/separator';
 import type { ProductSize, FitRecommendation } from '@/types';
 
 interface ProductPageProps {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }
 
 export default function ProductPage({ params }: ProductPageProps) {
-  const { id } = use(params);
+  const { id } = params;
   const { language, direction, t } = useLanguage();
   const { isAuthenticated, openAuthModal } = useAuth();
   const { addItem, itemCount } = useCart();

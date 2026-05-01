@@ -16,7 +16,7 @@ const inter = Inter({
 const ibmPlexArabic = IBM_Plex_Sans_Arabic({
   subsets: ['arabic', 'latin'],
   weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-arabic',
+  variable: '--font-ibm-plex-arabic',
   display: 'swap',
 });
 
