@@ -18,17 +18,17 @@ export default function WishlistPage() {
 
   return (
     <PageShell>
-      <div className="min-h-screen bg-cream px-4 pt-4 pb-6 animate-fade-in">
-        <h1 className="text-xl font-bold text-ink mb-4">
+      <div className="min-h-screen bg-cream dark:bg-background px-4 pt-4 pb-6 animate-fade-in">
+        <h1 className="text-xl font-bold text-ink dark:text-foreground mb-4">
           {t({ en: 'Wishlist', ar: 'المفضلة' })}
         </h1>
 
         {wishlisted.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
-            <div className="w-20 h-20 rounded-full bg-blush flex items-center justify-center mb-4">
+            <div className="w-20 h-20 rounded-full bg-blush dark:bg-secondary flex items-center justify-center mb-4">
               <Heart className="w-10 h-10 text-soft" />
             </div>
-            <p className="text-ink font-medium text-lg mb-2">
+            <p className="text-ink dark:text-foreground font-medium text-lg mb-2">
               {t({ en: 'No wishlist items yet', ar: 'ما عندج مفضلة بعد' })}
             </p>
             <p className="text-ink/50 text-sm mb-6">
@@ -46,7 +46,7 @@ export default function WishlistPage() {
               <div key={product.id} className="space-y-2">
                 <ProductCard product={product} />
                 {product.isOutOfStock && (
-                  <Badge variant="secondary" className="bg-blush text-plum text-xs w-full justify-center">
+                  <Badge variant="secondary" className="bg-blush dark:bg-secondary text-plum dark:text-soft text-xs w-full justify-center">
                     {t({ en: "You'll be notified", ar: 'سيوصلج إشعار' })}
                   </Badge>
                 )}

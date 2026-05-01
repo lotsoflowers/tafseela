@@ -62,7 +62,7 @@ export default function SizeChartDialog({ chart, storeName, className }: SizeCha
 
       <DialogContent className="!max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-plum">
+          <DialogTitle className="text-plum dark:text-soft">
             {language === 'ar' ? `جدول مقاسات ${storeName}` : `${storeName} size chart`}
           </DialogTitle>
           <DialogDescription className="text-xs text-ink/60">
@@ -75,7 +75,7 @@ export default function SizeChartDialog({ chart, storeName, className }: SizeCha
         <div className="overflow-x-auto rounded-lg border border-soft/40">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-blush/60 text-plum">
+              <tr className="bg-blush/60 text-plum dark:text-soft">
                 <th className="px-3 py-2 text-start font-semibold">
                   {language === 'ar' ? 'المقاس' : 'Size'}
                 </th>
@@ -91,8 +91,8 @@ export default function SizeChartDialog({ chart, storeName, className }: SizeCha
                 <tr
                   key={row.size}
                   className={cn(
-                    'border-t border-soft/30',
-                    i % 2 === 0 ? 'bg-white' : 'bg-cream/40'
+                    'border-t border-soft/30 dark:border-border',
+                    i % 2 === 0 ? 'bg-white dark:bg-card' : 'bg-cream/40 dark:bg-secondary/30'
                   )}
                 >
                   <td className="px-3 py-2 font-bold text-hero">{row.size}</td>

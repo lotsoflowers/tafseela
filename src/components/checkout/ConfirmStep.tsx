@@ -45,9 +45,9 @@ export default function ConfirmStep({
       {storeGroups.map((group) => {
         const store = stores.find((s) => s.id === group.storeId);
         return (
-          <div key={group.storeId} className="rounded-xl bg-white p-4 space-y-3">
+          <div key={group.storeId} className="rounded-xl bg-white dark:bg-card p-4 space-y-3">
             <div className="flex items-center justify-between">
-              <h3 className="font-semibold text-ink text-sm">
+              <h3 className="font-semibold text-ink dark:text-foreground text-sm">
                 {store ? t(store.name) : group.storeId}
               </h3>
               <span className="text-xs text-muted-foreground">
@@ -64,7 +64,7 @@ export default function ConfirmStep({
                 >
                   <div className="size-10 shrink-0 rounded-lg bg-soft/40" />
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm text-ink line-clamp-1">{t(product.name)}</p>
+                    <p className="text-sm text-ink dark:text-foreground line-clamp-1">{t(product.name)}</p>
                     <div className="flex items-center gap-2 mt-0.5">
                       <Badge variant="secondary" className="text-xs">
                         {item.size}
@@ -74,7 +74,7 @@ export default function ConfirmStep({
                       </span>
                     </div>
                   </div>
-                  <span className="text-sm font-medium text-ink shrink-0">
+                  <span className="text-sm font-medium text-ink dark:text-foreground shrink-0">
                     {formatPrice(product.price * item.quantity)}
                   </span>
                 </div>
@@ -86,12 +86,12 @@ export default function ConfirmStep({
 
       {/* Delivery address */}
       {address && (
-        <div className="rounded-xl bg-white p-4 space-y-2">
-          <h3 className="font-semibold text-ink text-sm">
+        <div className="rounded-xl bg-white dark:bg-card p-4 space-y-2">
+          <h3 className="font-semibold text-ink dark:text-foreground text-sm">
             {language === 'ar' ? 'عنوان التوصيل' : 'Delivery Address'}
           </h3>
           <div className="text-sm text-muted-foreground space-y-0.5">
-            <p className="text-ink font-medium">{address.fullName}</p>
+            <p className="text-ink dark:text-foreground font-medium">{address.fullName}</p>
             <p>{address.phone}</p>
             <p>
               {language === 'ar' ? address.area.ar : address.area.en}
@@ -113,8 +113,8 @@ export default function ConfirmStep({
       )}
 
       {/* Payment method */}
-      <div className="rounded-xl bg-white p-4 space-y-2">
-        <h3 className="font-semibold text-ink text-sm">
+      <div className="rounded-xl bg-white dark:bg-card p-4 space-y-2">
+        <h3 className="font-semibold text-ink dark:text-foreground text-sm">
           {language === 'ar' ? 'طريقة الدفع' : 'Payment Method'}
         </h3>
         <p className="text-sm text-muted-foreground">
@@ -125,7 +125,7 @@ export default function ConfirmStep({
       </div>
 
       {/* Total */}
-      <div className="rounded-xl bg-white p-4 space-y-2">
+      <div className="rounded-xl bg-white dark:bg-card p-4 space-y-2">
         <div className="flex items-center justify-between text-sm text-muted-foreground">
           <span>{language === 'ar' ? 'المجموع الفرعي' : 'Subtotal'}</span>
           <span>{formatPrice(subtotal)}</span>
@@ -139,7 +139,7 @@ export default function ConfirmStep({
           <span>{formatPrice(1.5 * storeCount)}</span>
         </div>
         <Separator className="bg-blush/50" />
-        <div className="flex items-center justify-between font-bold text-ink text-lg">
+        <div className="flex items-center justify-between font-bold text-ink dark:text-foreground text-lg">
           <span>{language === 'ar' ? 'الإجمالي' : 'Total'}</span>
           <span>{formatPrice(total)}</span>
         </div>

@@ -74,17 +74,17 @@ export default function ProfilePage() {
 
   return (
     <PageShell>
-      <div className="min-h-screen bg-cream px-4 pt-4 pb-6 animate-fade-in">
-        <h1 className="text-xl font-bold text-ink mb-6">
+      <div className="min-h-screen bg-cream dark:bg-background px-4 pt-4 pb-6 animate-fade-in">
+        <h1 className="text-xl font-bold text-ink dark:text-foreground mb-6">
           {t({ en: 'My Profile', ar: 'حسابي' })}
         </h1>
 
         {!isAuthenticated ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
-            <div className="w-20 h-20 rounded-full bg-blush flex items-center justify-center mb-4">
+            <div className="w-20 h-20 rounded-full bg-blush dark:bg-secondary flex items-center justify-center mb-4">
               <User className="w-10 h-10 text-soft" />
             </div>
-            <p className="text-ink font-medium text-lg mb-2">
+            <p className="text-ink dark:text-foreground font-medium text-lg mb-2">
               {t({ en: 'Sign in to your account', ar: 'سجلي دخولج' })}
             </p>
             <p className="text-ink/50 text-sm mb-6">
@@ -104,7 +104,7 @@ export default function ProfilePage() {
                 {user?.name?.charAt(0) || 'S'}
               </div>
               <div>
-                <p className="text-lg font-bold text-ink">{user?.name}</p>
+                <p className="text-lg font-bold text-ink dark:text-foreground">{user?.name}</p>
                 <p className="text-sm text-ink/60">{user?.phone}</p>
               </div>
             </div>
@@ -116,7 +116,7 @@ export default function ProfilePage() {
                 { label: { en: 'Reviews', ar: 'تقييمات' }, value: '0' },
                 { label: { en: 'Wishlist', ar: 'المفضلة' }, value: String(wishlistItems.length) },
               ].map((stat) => (
-                <div key={stat.label.en} className="bg-white rounded-lg p-3 text-center shadow-sm">
+                <div key={stat.label.en} className="bg-white dark:bg-card rounded-lg p-3 text-center shadow-sm">
                   <p className="text-xl font-bold text-hero">{stat.value}</p>
                   <p className="text-xs text-ink/60">{t(stat.label)}</p>
                 </div>
@@ -124,17 +124,17 @@ export default function ProfilePage() {
             </div>
 
             {/* Menu Items */}
-            <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+            <div className="bg-white dark:bg-card rounded-xl shadow-sm overflow-hidden">
               {menuItems.map((item, index) => {
                 const content = (
                   <div className="flex items-center justify-between px-4 py-3.5 hover:bg-blush/30 transition-colors cursor-pointer">
-                    <div className="flex items-center gap-3 text-ink">
+                    <div className="flex items-center gap-3 text-ink dark:text-foreground">
                       <span className="text-soft">{item.icon}</span>
                       <span className="text-sm font-medium">{t(item.label)}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       {item.label.en === 'Language' && (
-                        <span className="text-xs text-ink/50 bg-blush px-2 py-0.5 rounded">
+                        <span className="text-xs text-ink/50 bg-blush dark:bg-secondary px-2 py-0.5 rounded">
                           {language === 'ar' ? 'العربية' : 'English'}
                         </span>
                       )}
@@ -154,7 +154,7 @@ export default function ProfilePage() {
                     ) : (
                       content
                     )}
-                    {index < menuItems.length - 1 && <Separator className="bg-cream" />}
+                    {index < menuItems.length - 1 && <Separator className="bg-cream dark:bg-background" />}
                   </div>
                 );
               })}

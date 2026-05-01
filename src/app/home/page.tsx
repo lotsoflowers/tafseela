@@ -101,7 +101,7 @@ export default function HomePage() {
             </p>
             <Link
               href="/search"
-              className="mt-4 inline-flex w-fit items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-plum shadow-lg transition-transform active:scale-[0.97] hover:bg-blush"
+              className="mt-4 inline-flex w-fit items-center gap-2 rounded-full bg-white dark:bg-card px-5 py-3 text-sm font-bold text-plum dark:text-soft shadow-lg transition-transform active:scale-[0.97] hover:bg-blush"
             >
               {t({ en: 'Shop new arrivals', ar: 'تصفحي الجديد' })}
               {direction === 'rtl' ? (

@@ -52,7 +52,7 @@ export function TrackingStepper({ currentStatus, trackingUpdates, className }: T
                   'w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all',
                   isCompleted && 'bg-plum text-white',
                   isActive && 'bg-hero text-white animate-pulse',
-                  !isCompleted && !isActive && 'bg-blush text-soft'
+                  !isCompleted && !isActive && 'bg-blush dark:bg-secondary text-soft'
                 )}
               >
                 {isCompleted ? (
@@ -77,7 +77,7 @@ export function TrackingStepper({ currentStatus, trackingUpdates, className }: T
               <p
                 className={cn(
                   'font-medium text-sm',
-                  isCompleted && 'text-plum',
+                  isCompleted && 'text-plum dark:text-soft',
                   isActive && 'text-hero font-bold',
                   !isCompleted && !isActive && 'text-ink/40'
                 )}

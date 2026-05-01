@@ -35,7 +35,7 @@ export default function SizeSelector({
               isSelected
                 ? 'bg-hero text-white'
                 : isAvailable
-                  ? 'border border-soft bg-white text-ink hover:border-hero/50'
+                  ? 'border border-soft dark:border-border bg-white dark:bg-card text-ink dark:text-foreground hover:border-hero/50'
                   : 'bg-gray-100 text-gray-400 line-through'
             )}
           >

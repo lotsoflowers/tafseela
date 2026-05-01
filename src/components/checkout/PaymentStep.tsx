@@ -68,7 +68,7 @@ export default function PaymentStep({ onNext, className }: PaymentStepProps) {
               'w-full rounded-xl border-2 p-4 text-start transition-colors',
               isSelected
                 ? 'border-hero bg-blush/30'
-                : 'border-transparent bg-white hover:border-soft/50'
+                : 'border-transparent bg-white dark:bg-card hover:border-soft/50'
             )}
           >
             <div className="flex items-center gap-3">
@@ -81,9 +81,9 @@ export default function PaymentStep({ onNext, className }: PaymentStepProps) {
               >
                 {isSelected && <div className="size-2.5 rounded-full bg-hero" />}
               </div>
-              <Icon className="size-5 text-ink shrink-0" />
+              <Icon className="size-5 text-ink dark:text-foreground shrink-0" />
               <div className="flex-1 min-w-0">
-                <p className="font-medium text-ink text-sm">{t(method.label)}</p>
+                <p className="font-medium text-ink dark:text-foreground text-sm">{t(method.label)}</p>
                 <p className="text-xs text-muted-foreground">{t(method.desc)}</p>
               </div>
             </div>

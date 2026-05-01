@@ -64,8 +64,8 @@ export default function NotificationsPage() {
 
   return (
     <PageShell>
-      <div className="min-h-screen bg-cream px-4 pt-4 pb-6 animate-fade-in">
-        <h1 className="text-xl font-bold text-ink mb-4">
+      <div className="min-h-screen bg-cream dark:bg-background px-4 pt-4 pb-6 animate-fade-in">
+        <h1 className="text-xl font-bold text-ink dark:text-foreground mb-4">
           {t({ en: 'Notification Settings', ar: 'إعدادات الإشعارات' })}
         </h1>
 
@@ -73,10 +73,10 @@ export default function NotificationsPage() {
           {NOTIFICATION_SETTINGS.map((setting) => (
             <div
               key={setting.id}
-              className="bg-white rounded-xl p-4 shadow-sm flex items-center justify-between"
+              className="bg-white dark:bg-card rounded-xl p-4 shadow-sm flex items-center justify-between"
             >
               <div className="flex-1 me-4">
-                <p className="text-sm font-medium text-ink">{t(setting.label)}</p>
+                <p className="text-sm font-medium text-ink dark:text-foreground">{t(setting.label)}</p>
                 <p className="text-xs text-ink/50 mt-0.5">{t(setting.description)}</p>
               </div>
               <Switch

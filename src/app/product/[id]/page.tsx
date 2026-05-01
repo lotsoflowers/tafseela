@@ -54,7 +54,7 @@ export default function ProductPage({ params }: ProductPageProps) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
-          <p className="text-lg font-semibold text-ink">
+          <p className="text-lg font-semibold text-ink dark:text-foreground">
             {language === 'ar' ? 'المنتج غير موجود' : 'Product not found'}
           </p>
           <Link
@@ -88,16 +88,16 @@ export default function ProductPage({ params }: ProductPageProps) {
   const wishlisted = isWishlisted(product.id);
 
   return (
-    <div className="min-h-screen bg-white pb-24">
+    <div className="min-h-screen bg-white dark:bg-card pb-24">
       {/* Top bar */}
-      <div className="sticky top-0 z-30 flex items-center justify-between bg-white/90 px-4 py-3 backdrop-blur-sm">
+      <div className="sticky top-0 z-30 flex items-center justify-between bg-white/90 dark:bg-card/90 px-4 py-3 backdrop-blur-sm">
         <Link
           href="/home"
-          className="flex size-10 items-center justify-center rounded-full bg-cream"
+          className="flex size-10 items-center justify-center rounded-full bg-cream dark:bg-background"
         >
           <ArrowLeft
             className={cn(
-              'size-5 text-ink',
+              'size-5 text-ink dark:text-foreground',
               direction === 'rtl' && 'rotate-180'
             )}
           />
@@ -105,9 +105,9 @@ export default function ProductPage({ params }: ProductPageProps) {
 
         <Link
           href="/cart"
-          className="relative flex size-10 items-center justify-center rounded-full bg-cream"
+          className="relative flex size-10 items-center justify-center rounded-full bg-cream dark:bg-background"
         >
-          <ShoppingBag className="size-5 text-ink" />
+          <ShoppingBag className="size-5 text-ink dark:text-foreground" />
           {itemCount > 0 && (
             <span className="absolute -end-1 -top-1 flex size-5 items-center justify-center rounded-full bg-hero text-[10px] font-bold text-white">
               {itemCount}
@@ -131,17 +131,17 @@ export default function ProductPage({ params }: ProductPageProps) {
             href={`/store/${store.id}`}
             className="inline-flex items-center gap-2"
           >
-            <div className="flex size-8 items-center justify-center rounded-full bg-soft/20 text-xs font-bold text-plum">
+            <div className="flex size-8 items-center justify-center rounded-full bg-soft/20 text-xs font-bold text-plum dark:text-soft">
               {t(store.name).charAt(0)}
             </div>
-            <span className="text-sm font-medium text-plum">
+            <span className="text-sm font-medium text-plum dark:text-soft">
               {t(store.name)}
             </span>
           </Link>
         )}
 
         {/* Product name */}
-        <h1 className="text-xl font-bold text-ink">{t(product.name)}</h1>
+        <h1 className="text-xl font-bold text-ink dark:text-foreground">{t(product.name)}</h1>
 
         {/* Price + rating */}
         <div className="flex items-center justify-between">
@@ -171,7 +171,7 @@ export default function ProductPage({ params }: ProductPageProps) {
         {!product.isOutOfStock && (
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <p className="text-sm font-medium text-ink">
+              <p className="text-sm font-medium text-ink dark:text-foreground">
                 {language === 'ar' ? 'اختاري المقاس' : 'Select size'}
               </p>
               {store?.sizeChart && (
@@ -203,7 +203,7 @@ export default function ProductPage({ params }: ProductPageProps) {
 
         {/* Description */}
         <div>
-          <h2 className="mb-2 text-base font-semibold text-ink">
+          <h2 className="mb-2 text-base font-semibold text-ink dark:text-foreground">
             {language === 'ar' ? 'التفاصيل' : 'Details'}
           </h2>
           <p className="text-sm leading-relaxed text-ink/70">
@@ -213,7 +213,7 @@ export default function ProductPage({ params }: ProductPageProps) {
 
         {/* Fit info */}
         <div>
-          <h2 className="mb-2 text-base font-semibold text-ink">
+          <h2 className="mb-2 text-base font-semibold text-ink dark:text-foreground">
             {language === 'ar' ? 'معلومات القصة' : 'Fit info'}
           </h2>
           <FitBadge fit={product.fit} className="text-sm" />
@@ -223,7 +223,7 @@ export default function ProductPage({ params }: ProductPageProps) {
 
         {/* Reviews */}
         <div>
-          <h2 className="mb-3 text-base font-semibold text-ink">
+          <h2 className="mb-3 text-base font-semibold text-ink dark:text-foreground">
             {language === 'ar' ? 'التقييمات' : 'Reviews'}
             {productReviews.length > 0 && (
               <span className="ms-1 text-sm font-normal text-ink/50">
@@ -249,7 +249,7 @@ export default function ProductPage({ params }: ProductPageProps) {
       </div>
 
       {/* Sticky bottom bar */}
-      <div className="fixed bottom-0 start-0 end-0 z-30 border-t border-soft/30 bg-white px-4 py-3">
+      <div className="fixed bottom-0 start-0 end-0 z-30 border-t border-soft/30 bg-white dark:bg-card px-4 py-3">
         {product.isOutOfStock ? (
           <button
             type="button"

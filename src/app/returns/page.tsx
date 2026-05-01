@@ -48,10 +48,10 @@ export default function ReturnsPage() {
 
   return (
     <PageShell>
-      <div className="min-h-screen bg-cream px-4 pt-4 pb-6 animate-fade-in">
+      <div className="min-h-screen bg-cream dark:bg-background px-4 pt-4 pb-6 animate-fade-in">
         {/* Logo */}
         <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-plum">Tafseela</h1>
+          <h1 className="text-2xl font-bold text-plum dark:text-soft">Tafseela</h1>
           <p className="text-sm text-ink/60 mt-1">
             {t({ en: 'Returns & Refunds', ar: 'سياسة الإرجاع والاسترجاع' })}
           </p>
@@ -63,9 +63,9 @@ export default function ReturnsPage() {
             <AccordionItem
               key={index}
               value={`section-${index}`}
-              className="bg-white rounded-xl shadow-sm border-0 overflow-hidden px-4"
+              className="bg-white dark:bg-card rounded-xl shadow-sm border-0 overflow-hidden px-4"
             >
-              <AccordionTrigger className="text-sm font-bold text-ink hover:no-underline py-4">
+              <AccordionTrigger className="text-sm font-bold text-ink dark:text-foreground hover:no-underline py-4">
                 {t(section.title)}
               </AccordionTrigger>
               <AccordionContent className="text-sm text-ink/70 whitespace-pre-line pb-4">

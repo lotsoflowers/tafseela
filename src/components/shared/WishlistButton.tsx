@@ -29,7 +29,7 @@ export default function WishlistButton({ productId, className }: WishlistButtonP
       onClick={handleClick}
       aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
       className={cn(
-        'flex size-8 items-center justify-center rounded-full bg-white shadow-md transition-transform',
+        'flex size-8 items-center justify-center rounded-full bg-white dark:bg-card shadow-md transition-transform',
         'hover:scale-110 active:scale-95',
         animating && 'animate-heart-pop',
         className
@@ -38,7 +38,7 @@ export default function WishlistButton({ productId, className }: WishlistButtonP
       <Heart
         className={cn(
           'size-4 transition-colors',
-          wishlisted ? 'fill-red-500 text-red-500' : 'fill-none text-ink'
+          wishlisted ? 'fill-red-500 text-red-500' : 'fill-none text-ink dark:text-foreground'
         )}
       />
     </button>

@@ -23,20 +23,20 @@ export default function CartPage() {
   const isEmpty = items.length === 0;
 
   return (
-    <PageShell className="bg-cream">
+    <PageShell className="bg-cream dark:bg-background">
       <div className="max-w-lg mx-auto px-4 py-6">
         {/* Header */}
-        <h1 className="text-xl font-bold text-ink mb-6">
+        <h1 className="text-xl font-bold text-ink dark:text-foreground mb-6">
           {language === 'ar' ? 'سلتي' : 'My Cart'}
         </h1>
 
         {isEmpty ? (
           /* Empty state */
           <div className="flex flex-col items-center justify-center py-20 text-center">
-            <div className="size-24 rounded-full bg-blush flex items-center justify-center mb-6">
+            <div className="size-24 rounded-full bg-blush dark:bg-secondary flex items-center justify-center mb-6">
               <ShoppingBag className="size-10 text-hero" />
             </div>
-            <p className="text-lg font-medium text-ink mb-2">
+            <p className="text-lg font-medium text-ink dark:text-foreground mb-2">
               {language === 'ar' ? 'سلتك فاضية' : 'Your cart is empty'}
             </p>
             <Link href="/home">
@@ -66,8 +66,8 @@ export default function CartPage() {
             </div>
 
             {/* Order summary */}
-            <div className="mt-6 rounded-xl bg-white p-4 space-y-3">
-              <h2 className="font-semibold text-ink text-sm">
+            <div className="mt-6 rounded-xl bg-white dark:bg-card p-4 space-y-3">
+              <h2 className="font-semibold text-ink dark:text-foreground text-sm">
                 {language === 'ar' ? 'ملخص الطلب' : 'Order Summary'}
               </h2>
               <div className="flex items-center justify-between text-sm text-muted-foreground">
@@ -83,7 +83,7 @@ export default function CartPage() {
                 <span>{formatPrice(1.5 * storeCount)}</span>
               </div>
               <Separator className="bg-blush/50" />
-              <div className="flex items-center justify-between font-bold text-ink text-lg">
+              <div className="flex items-center justify-between font-bold text-ink dark:text-foreground text-lg">
                 <span>{language === 'ar' ? 'الإجمالي' : 'Total'}</span>
                 <span>{formatPrice(total)}</span>
               </div>

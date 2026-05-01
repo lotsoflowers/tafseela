@@ -18,12 +18,12 @@ export default function ReviewCard({ review, className }: ReviewCardProps) {
   return (
     <div
       className={cn(
-        'rounded-xl bg-blush p-4',
+        'rounded-xl bg-blush dark:bg-secondary p-4',
         className
       )}
     >
       <div className="mb-2 flex items-center justify-between">
-        <span className="font-semibold text-ink">
+        <span className="font-semibold text-ink dark:text-foreground">
           {t(review.userName)}
         </span>
         <span className="text-xs text-ink/50">

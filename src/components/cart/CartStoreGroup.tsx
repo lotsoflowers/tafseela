@@ -31,9 +31,9 @@ export default function CartStoreGroup({ storeId, items, className }: CartStoreG
       : `Delivery from ${storeName}`;
 
   return (
-    <div className={cn('rounded-xl bg-white p-4', className)}>
+    <div className={cn('rounded-xl bg-white dark:bg-card p-4', className)}>
       {/* Store header */}
-      <h3 className="font-semibold text-ink text-sm mb-1">{storeName}</h3>
+      <h3 className="font-semibold text-ink dark:text-foreground text-sm mb-1">{storeName}</h3>
 
       {/* Items */}
       <div className="divide-y divide-blush/50">
@@ -48,7 +48,7 @@ export default function CartStoreGroup({ storeId, items, className }: CartStoreG
           <span>{deliveryLabel}</span>
           <span>{formatPrice(1.5)}</span>
         </div>
-        <div className="flex items-center justify-between font-medium text-ink">
+        <div className="flex items-center justify-between font-medium text-ink dark:text-foreground">
           <span>{language === 'ar' ? 'المجموع' : 'Subtotal'}</span>
           <span>{formatPrice(storeSubtotal + 1.5)}</span>
         </div>

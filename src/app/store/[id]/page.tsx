@@ -33,8 +33,8 @@ export default function StorePage() {
 
   if (!store) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-cream">
-        <p className="text-lg font-semibold text-ink">
+      <div className="flex min-h-screen items-center justify-center bg-cream dark:bg-background">
+        <p className="text-lg font-semibold text-ink dark:text-foreground">
           {t({ en: 'Store not found', ar: 'المتجر غير موجود' })}
         </p>
       </div>
@@ -53,14 +53,14 @@ export default function StorePage() {
   const initial = t(store.name).charAt(0).toUpperCase();
 
   return (
-    <div className="min-h-screen bg-cream">
+    <div className="min-h-screen bg-cream dark:bg-background">
       {/* Back button */}
       <button
         type="button"
         onClick={() => router.back()}
         className="absolute start-4 top-4 z-10 flex size-10 items-center justify-center rounded-full bg-white/80 shadow-sm backdrop-blur-sm"
       >
-        <ArrowLeft className={cn('size-5 text-ink', language === 'ar' && 'rotate-180')} />
+        <ArrowLeft className={cn('size-5 text-ink dark:text-foreground', language === 'ar' && 'rotate-180')} />
       </button>
 
       {/* Banner */}
@@ -81,7 +81,7 @@ export default function StorePage() {
 
       {/* Store info */}
       <div className="px-4 pt-12 text-center">
-        <h1 className="text-xl font-bold text-ink">{t(store.name)}</h1>
+        <h1 className="text-xl font-bold text-ink dark:text-foreground">{t(store.name)}</h1>
         <p className="mt-1 text-sm text-ink/60">{t(store.description)}</p>
 
         {/* Stats */}
@@ -118,7 +118,7 @@ export default function StorePage() {
       {/* Reviews section */}
       {displayedReviews.length > 0 && (
         <div className="mt-8 px-4 pb-8">
-          <h2 className="mb-4 text-lg font-bold text-ink">
+          <h2 className="mb-4 text-lg font-bold text-ink dark:text-foreground">
             {t({ en: 'Reviews', ar: 'التقييمات' })}
           </h2>
           <div className="space-y-3">

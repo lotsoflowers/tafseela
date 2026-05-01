@@ -45,7 +45,7 @@ export default function CartItem({ item, className }: CartItemProps) {
 
       {/* Product info */}
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium text-ink leading-tight line-clamp-2">
+        <p className="text-sm font-medium text-ink dark:text-foreground leading-tight line-clamp-2">
           {t(product.name)}
         </p>
         <div className="flex items-center gap-2 mt-1">
@@ -69,7 +69,7 @@ export default function CartItem({ item, className }: CartItemProps) {
         >
           <Minus className="size-3" />
         </Button>
-        <span className="w-6 text-center text-sm font-medium text-ink">
+        <span className="w-6 text-center text-sm font-medium text-ink dark:text-foreground">
           {item.quantity}
         </span>
         <Button

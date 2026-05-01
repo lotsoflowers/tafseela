@@ -65,7 +65,7 @@ export default function AuthModal() {
             {/* Google */}
             <Button
               onClick={() => login('google')}
-              className="w-full border border-gray-200 bg-white text-ink hover:bg-gray-50"
+              className="w-full border border-gray-200 bg-white dark:bg-card text-ink dark:text-foreground hover:bg-gray-50"
             >
               <span className="me-2 text-base font-bold text-blue-500">G</span>
               {language === 'ar' ? 'المتابعة مع Google' : 'Continue with Google'}
@@ -91,7 +91,7 @@ export default function AuthModal() {
 
             {/* Phone input */}
             <div className="flex gap-2" dir="ltr">
-              <div className="flex h-9 items-center rounded-lg border border-soft bg-cream/50 px-3 text-sm font-medium text-ink">
+              <div className="flex h-9 items-center rounded-lg border border-soft dark:border-border bg-cream/50 px-3 text-sm font-medium text-ink dark:text-foreground">
                 +965
               </div>
               <input
@@ -102,7 +102,7 @@ export default function AuthModal() {
                 onChange={(e) =>
                   setPhoneNumber(e.target.value.replace(/\D/g, '').slice(0, 8))
                 }
-                className="flex-1 rounded-lg border border-soft bg-white px-3 py-2 text-sm text-ink placeholder:text-ink/30 focus:border-hero focus:outline-none"
+                className="flex-1 rounded-lg border border-soft dark:border-border bg-white dark:bg-card px-3 py-2 text-sm text-ink dark:text-foreground placeholder:text-ink/30 focus:border-hero focus:outline-none"
               />
             </div>
 

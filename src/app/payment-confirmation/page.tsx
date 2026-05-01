@@ -9,14 +9,14 @@ export default function PaymentConfirmationPage() {
   const { language } = useLanguage();
 
   return (
-    <div className="min-h-screen bg-cream flex flex-col items-center justify-center px-4 animate-in fade-in duration-500">
+    <div className="min-h-screen bg-cream dark:bg-background flex flex-col items-center justify-center px-4 animate-in fade-in duration-500">
       {/* Animated checkmark */}
       <div className="size-24 rounded-full bg-hero flex items-center justify-center mb-8 animate-in zoom-in duration-500">
         <Check className="size-12 text-white" strokeWidth={3} />
       </div>
 
       {/* Success message */}
-      <h1 className="text-2xl font-bold text-ink text-center mb-2">
+      <h1 className="text-2xl font-bold text-ink dark:text-foreground text-center mb-2">
         {language === 'ar' ? 'تم الطلب بنجاح!' : 'Order placed successfully!'}
       </h1>
 
@@ -42,7 +42,7 @@ export default function PaymentConfirmationPage() {
         <Link href="/home" className="block">
           <Button
             variant="outline"
-            className="w-full border-plum text-plum hover:bg-plum/5 h-12 text-base font-semibold rounded-xl"
+            className="w-full border-plum text-plum dark:text-soft hover:bg-plum/5 h-12 text-base font-semibold rounded-xl"
           >
             {language === 'ar' ? 'كملي التسوق' : 'Continue shopping'}
           </Button>

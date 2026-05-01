@@ -19,7 +19,7 @@ interface ProductCarouselProps {
 const SLIDE_COLORS = [
   'bg-hero/10',
   'bg-soft/30',
-  'bg-blush',
+  'bg-blush dark:bg-secondary',
   'bg-plum/10',
 ];
 
