@@ -2,6 +2,34 @@ import { Store } from '@/types';
 
 export const stores: Store[] = [
   {
+    id: 'modish',
+    name: { en: 'Modish', ar: 'موديش' },
+    description: {
+      en: 'Contemporary women\'s fashion — clean silhouettes, new arrivals weekly',
+      ar: 'أزياء نسائية عصرية — قصات نظيفة، وصول جديد كل أسبوع',
+    },
+    logo: '/images/stores/modish-logo.png',
+    banner: '/images/stores/modish-banner.jpg',
+    rating: 4.9,
+    productCount: 380,
+    reviewCount: 842,
+    website: 'https://modish.com.kw',
+    sizeChart: {
+      unit: 'in',
+      notes: {
+        en: 'Measurements taken from a reference garment in size S; bust grows ~2" per size up. Model is 176 cm / 55 kg in size S.',
+        ar: 'القياسات مأخوذة من قطعة مرجعية بمقاس S؛ الصدر يكبر بحوالي 2 إنش لكل مقاس. العارضة 176 سم / 55 كجم بمقاس S.',
+      },
+      measurements: [
+        { size: 'XS', bust: 38, waist: 28, hips: 38, length: 47, shoulder: 19 },
+        { size: 'S',  bust: 40, waist: 30, hips: 40, length: 48, shoulder: 20 },
+        { size: 'M',  bust: 42, waist: 32, hips: 42, length: 48, shoulder: 21 },
+        { size: 'L',  bust: 44, waist: 34, hips: 44, length: 48, shoulder: 22 },
+        { size: 'XL', bust: 46, waist: 36, hips: 46, length: 49, shoulder: 23 },
+      ],
+    },
+  },
+  {
     id: 'gozline',
     name: { en: 'Gozline', ar: 'جوزلين' },
     description: {
