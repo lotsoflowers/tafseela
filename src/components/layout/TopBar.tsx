@@ -3,10 +3,9 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { ChevronLeft, ChevronRight, Search, ShoppingBag } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ShoppingBag } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useCart } from '@/contexts/CartContext';
-import LanguageToggle from '@/components/shared/LanguageToggle';
 import { cn } from '@/lib/utils';
 import type { BilingualText } from '@/types';
 
@@ -125,23 +124,9 @@ export default function TopBar({ className }: { className?: string }) {
         )}
       </div>
 
-      {/* Trailing actions — packed tight, no internal padding between */}
+      {/* Trailing actions — just the cart. Search lives on the bottom nav,
+          language + theme live in Profile → Preferences. */}
       <div className="flex items-center justify-end -me-1">
-        <LanguageToggle />
-
-        <Link
-          href="/search"
-          aria-label={t({ en: 'Search', ar: 'البحث' })}
-          className={cn(
-            'inline-flex size-9 items-center justify-center rounded-full',
-            'text-ink/75 dark:text-foreground/75 transition-colors',
-            'hover:bg-hero/10 hover:text-hero dark:hover:bg-foreground/10',
-            'active:scale-[0.96]'
-          )}
-        >
-          <Search className="size-[18px]" strokeWidth={2} />
-        </Link>
-
         <Link
           href="/cart"
           aria-label={t({ en: 'Cart', ar: 'سلة التسوق' })}

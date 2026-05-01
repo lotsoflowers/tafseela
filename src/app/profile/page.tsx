@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import {
-  Package, MapPin, Heart, Bell, Globe, FileText, Moon,
+  Package, Heart, Bell, Globe, FileText, Moon,
   MessageCircle, LogOut, ChevronRight, ChevronLeft, User,
 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -65,19 +65,13 @@ export default function ProfilePage() {
           icon: <Package className="size-[18px]" strokeWidth={2.25} />,
           iconTint: 'hero',
           label: { en: 'My orders', ar: 'طلباتي' },
-          href: '/order/mock-order-1',
+          href: '/order/ORD-2025-001',
         },
         {
           icon: <Heart className="size-[18px]" strokeWidth={2.25} />,
           iconTint: 'red',
           label: { en: 'Wishlist', ar: 'المفضلة' },
           href: '/wishlist',
-        },
-        {
-          icon: <MapPin className="size-[18px]" strokeWidth={2.25} />,
-          iconTint: 'green',
-          label: { en: 'My addresses', ar: 'عناويني' },
-          href: '#',
         },
       ],
     },
