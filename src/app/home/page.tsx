@@ -165,44 +165,60 @@ export default function HomePage() {
           />
         </div>
 
-        {/* Tabs — minimal underline style */}
+        {/* iOS-style segmented control */}
         <div className="px-4 space-y-4">
-          <div className="flex items-center gap-6 border-b border-soft/30 dark:border-border">
+          <div
+            role="tablist"
+            className={cn(
+              'relative grid grid-cols-2 rounded-[10px] p-0.5',
+              'bg-ink/[0.06] dark:bg-foreground/[0.08]'
+            )}
+          >
+            {/* Sliding pill — picks the active half */}
+            <span
+              aria-hidden
+              className={cn(
+                'absolute inset-y-0.5 w-[calc(50%-2px)] rounded-[8px]',
+                'bg-white dark:bg-card',
+                'shadow-[0_3px_8px_rgba(92,10,61,0.12),0_1px_1px_rgba(0,0,0,0.04)]',
+                'dark:shadow-[0_3px_8px_rgba(0,0,0,0.4)]',
+                'transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]',
+                activeTab === 'products'
+                  ? 'translate-x-0.5 rtl:-translate-x-0.5'
+                  : 'translate-x-[calc(100%+2px)] rtl:-translate-x-[calc(100%+2px)]'
+              )}
+            />
             <button
               type="button"
+              role="tab"
+              aria-selected={activeTab === 'products'}
               onClick={() => setActiveTab('products')}
-              aria-pressed={activeTab === 'products'}
               className={cn(
-                'relative flex items-center gap-2 pb-2.5 text-sm font-semibold transition-colors',
-                activeTab === 'products' ? 'text-ink dark:text-foreground' : 'text-ink/40 hover:text-ink/70 dark:text-foreground/40 dark:hover:text-foreground/70'
+                'relative z-10 flex items-center justify-center gap-1.5 py-2 text-[13px] font-semibold',
+                'transition-colors duration-200 active:scale-[0.97]',
+                activeTab === 'products'
+                  ? 'text-ink dark:text-foreground'
+                  : 'text-ink/55 dark:text-foreground/55'
               )}
             >
-              <Sparkles className="size-4" />
+              <Sparkles className="size-3.5" strokeWidth={2.5} />
               {t({ en: 'Products', ar: 'منتجات' })}
-              <span
-                className={cn(
-                  'absolute -bottom-px start-0 end-0 h-[2px] rounded-full transition-all duration-300',
-                  activeTab === 'products' ? 'bg-hero opacity-100' : 'bg-transparent opacity-0'
-                )}
-              />
             </button>
             <button
               type="button"
+              role="tab"
+              aria-selected={activeTab === 'stores'}
               onClick={() => setActiveTab('stores')}
-              aria-pressed={activeTab === 'stores'}
               className={cn(
-                'relative flex items-center gap-2 pb-2.5 text-sm font-semibold transition-colors',
-                activeTab === 'stores' ? 'text-ink dark:text-foreground' : 'text-ink/40 hover:text-ink/70 dark:text-foreground/40 dark:hover:text-foreground/70'
+                'relative z-10 flex items-center justify-center gap-1.5 py-2 text-[13px] font-semibold',
+                'transition-colors duration-200 active:scale-[0.97]',
+                activeTab === 'stores'
+                  ? 'text-ink dark:text-foreground'
+                  : 'text-ink/55 dark:text-foreground/55'
               )}
             >
-              <StoreIcon className="size-4" />
+              <StoreIcon className="size-3.5" strokeWidth={2.5} />
               {t({ en: 'Stores', ar: 'متاجر' })}
-              <span
-                className={cn(
-                  'absolute -bottom-px start-0 end-0 h-[2px] rounded-full transition-all duration-300',
-                  activeTab === 'stores' ? 'bg-hero opacity-100' : 'bg-transparent opacity-0'
-                )}
-              />
             </button>
           </div>
 

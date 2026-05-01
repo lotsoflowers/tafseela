@@ -48,8 +48,24 @@ const config: Config = {
         ring: "var(--ring)",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "var(--font-ibm-plex-arabic)", "sans-serif"],
-        arabic: ["var(--font-ibm-plex-arabic)", "sans-serif"],
+        // iOS Safari resolves -apple-system to SF Pro / SF Arabic, so the app
+        // picks up the native system stack on iPhone before falling back to
+        // our custom fonts elsewhere.
+        sans: [
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "var(--font-inter)",
+          "var(--font-ibm-plex-arabic)",
+          "Segoe UI",
+          "system-ui",
+          "sans-serif",
+        ],
+        arabic: [
+          "-apple-system",
+          "var(--font-ibm-plex-arabic)",
+          "system-ui",
+          "sans-serif",
+        ],
       },
       borderRadius: {
         lg: "12px",
