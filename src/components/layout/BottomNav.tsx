@@ -22,8 +22,8 @@ export default function BottomNav() {
 
   return (
     <nav className="fixed bottom-3 inset-x-3 z-50 lg:hidden">
-      <div className="glass-strong rounded-2xl shadow-lg border border-white/40 pb-[env(safe-area-inset-bottom)]">
-        <div className="flex items-center justify-around px-2 py-2">
+      <div className="glass-strong rounded-3xl border border-white/50 shadow-[0_8px_32px_rgba(92,10,61,0.08),0_2px_4px_rgba(92,10,61,0.04)] pb-[env(safe-area-inset-bottom)]">
+        <div className="flex items-center justify-around px-1.5 py-1.5">
           {tabs.map(({ href, icon: Icon, label }) => {
             const isActive = pathname === href || pathname.startsWith(href + '/');
             const isCart = href === '/cart';
@@ -32,35 +32,36 @@ export default function BottomNav() {
               <Link
                 key={href}
                 href={href}
+                aria-current={isActive ? 'page' : undefined}
                 className={cn(
-                  'flex flex-col items-center gap-0.5 px-3 py-1 text-[10px] font-medium transition-all duration-200',
-                  isActive ? 'text-hero' : 'text-ink/50 hover:text-ink/70'
+                  'group/tab relative flex min-w-[44px] flex-col items-center justify-center gap-0.5 rounded-2xl px-3 py-2 text-[10px] font-medium',
+                  'transition-[color,background-color] duration-300',
+                  isActive
+                    ? 'bg-hero/10 text-hero'
+                    : 'text-ink/45 hover:text-ink/70 hover:bg-blush/40'
                 )}
               >
-                {/* Active dot indicator */}
-                <span
-                  className={cn(
-                    'mb-0.5 h-0.5 w-4 rounded-full transition-all duration-300',
-                    isActive
-                      ? 'bg-hero opacity-100'
-                      : 'bg-transparent opacity-0'
-                  )}
-                />
                 <span className="relative">
                   <Icon
                     className={cn(
-                      'h-5 w-5 transition-transform duration-200',
+                      'h-[22px] w-[22px] transition-transform duration-300 ease-out',
                       isActive && 'scale-110'
                     )}
+                    strokeWidth={isActive ? 2.5 : 2}
                     fill={isActive ? 'currentColor' : 'none'}
                   />
                   {isCart && itemCount > 0 && (
-                    <span className="absolute -top-1.5 -end-2 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-gradient-to-r from-hero to-plum px-0.5 text-[8px] font-bold text-white shadow-sm">
+                    <span className="absolute -top-1.5 -end-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-gradient-to-r from-hero to-plum px-1 text-[9px] font-bold text-white shadow-sm ring-2 ring-white/80 animate-badge-pulse">
                       {itemCount}
                     </span>
                   )}
                 </span>
-                <span className={cn('transition-all duration-200', isActive && 'font-semibold')}>
+                <span
+                  className={cn(
+                    'leading-none transition-all duration-300',
+                    isActive ? 'font-semibold' : 'font-medium'
+                  )}
+                >
                   {t(label)}
                 </span>
               </Link>

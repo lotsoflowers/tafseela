@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { getRecommendation } from '@/lib/fit-logic';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -128,26 +127,29 @@ export default function FitQuestionnaire({
                 {language === 'ar' ? 'اختياري — للدقة' : 'Optional — for accuracy'}
               </span>
             </div>
-            <RadioGroup
-              value={usualSize}
-              onValueChange={(val) => setUsualSize(val as ProductSize)}
-              className="flex flex-wrap gap-2"
-            >
-              {USUAL_SIZES.map((size) => (
-                <label
-                  key={size}
-                  className={cn(
-                    'flex cursor-pointer items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm transition-colors select-none',
-                    usualSize === size
-                      ? 'border-hero bg-hero text-white'
-                      : 'border-soft/50 bg-white text-ink hover:border-hero/40'
-                  )}
-                >
-                  <RadioGroupItem value={size} className="sr-only" />
-                  <span className="font-medium">{size}</span>
-                </label>
-              ))}
-            </RadioGroup>
+            <div role="radiogroup" className="flex flex-wrap gap-2">
+              {USUAL_SIZES.map((size) => {
+                const active = usualSize === size;
+                return (
+                  <button
+                    key={size}
+                    type="button"
+                    role="radio"
+                    aria-checked={active}
+                    onClick={() => setUsualSize(active ? '' : size)}
+                    className={cn(
+                      'flex min-w-11 cursor-pointer items-center justify-center rounded-full border px-3.5 py-1.5 text-sm font-semibold transition-colors select-none',
+                      'focus:outline-none focus-visible:ring-2 focus-visible:ring-hero/40',
+                      active
+                        ? 'border-hero bg-hero text-white shadow-sm shadow-hero/20'
+                        : 'border-soft/50 bg-white text-ink hover:border-hero/40 hover:text-hero'
+                    )}
+                  >
+                    {size}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Fit preference */}
@@ -155,26 +157,29 @@ export default function FitQuestionnaire({
             <Label className="mb-2 block text-sm font-medium text-ink">
               {language === 'ar' ? 'تفضيلك للقصة' : 'Fit preference'}
             </Label>
-            <RadioGroup
-              value={preferredFit}
-              onValueChange={(val) => setPreferredFit(val as FitProfile['preferredFit'])}
-              className="flex flex-wrap gap-2"
-            >
-              {FIT_PREFERENCES.map((pref) => (
-                <label
-                  key={pref.value}
-                  className={cn(
-                    'flex cursor-pointer items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm transition-colors select-none',
-                    preferredFit === pref.value
-                      ? 'border-hero bg-hero text-white'
-                      : 'border-soft/50 bg-white text-ink hover:border-hero/40'
-                  )}
-                >
-                  <RadioGroupItem value={pref.value} className="sr-only" />
-                  <span className="font-medium">{t(pref.label)}</span>
-                </label>
-              ))}
-            </RadioGroup>
+            <div role="radiogroup" className="flex flex-wrap gap-2">
+              {FIT_PREFERENCES.map((pref) => {
+                const active = preferredFit === pref.value;
+                return (
+                  <button
+                    key={pref.value}
+                    type="button"
+                    role="radio"
+                    aria-checked={active}
+                    onClick={() => setPreferredFit(pref.value)}
+                    className={cn(
+                      'cursor-pointer rounded-full border px-4 py-1.5 text-sm font-semibold transition-colors select-none',
+                      'focus:outline-none focus-visible:ring-2 focus-visible:ring-hero/40',
+                      active
+                        ? 'border-hero bg-hero text-white shadow-sm shadow-hero/20'
+                        : 'border-soft/50 bg-white text-ink hover:border-hero/40 hover:text-hero'
+                    )}
+                  >
+                    {t(pref.label)}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Submit */}

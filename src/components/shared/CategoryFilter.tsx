@@ -33,12 +33,13 @@ export default function CategoryFilter({
             key={category.id}
             type="button"
             onClick={() => onSelect(category.id)}
+            aria-pressed={isActive}
             className={cn(
-              'shrink-0 rounded-full px-4 py-2 text-sm font-medium',
-              'transition-all duration-300 ease-out',
+              'shrink-0 rounded-full px-4 py-1.5 text-[13px] font-semibold whitespace-nowrap',
+              'transition-[background-color,color,border-color] duration-200',
               isActive
-                ? 'bg-gradient-to-r from-hero to-plum text-white shadow-md shadow-hero/20 scale-[1.02]'
-                : 'border border-soft/50 bg-white text-ink/70 hover:border-hero/30 hover:bg-blush/30 hover:text-ink'
+                ? 'bg-ink text-white'
+                : 'border border-soft/40 bg-white/70 text-ink/65 hover:border-ink/30 hover:text-ink'
             )}
           >
             {t(category.name)}

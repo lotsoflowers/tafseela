@@ -14,7 +14,7 @@ import { categories } from '@/data/categories';
 import { cn } from '@/lib/utils';
 
 export default function HomePage() {
-  const { t, direction } = useLanguage();
+  const { language, t, direction } = useLanguage();
   const [activeTab, setActiveTab] = useState<'products' | 'stores'>('products');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const featuredScrollRef = useRef<HTMLDivElement>(null);
@@ -35,29 +35,35 @@ export default function HomePage() {
   return (
     <PageShell className="bg-cream">
       <div className="animate-fade-in space-y-5 pb-4">
-        {/* Hero Banner */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-plum via-hero to-plum px-5 py-8">
-          <div className="pattern-dots absolute inset-0" />
-          <div className="pattern-diagonal absolute inset-0" />
+        {/* Hero — editorial, not poster. Soft blush-to-cream gradient, oversized display type, single hero accent line. */}
+        <div className="relative overflow-hidden bg-gradient-to-b from-blush/50 via-cream to-cream px-5 pt-7 pb-6">
+          {/* Subtle floating mark, off to one side */}
+          <span
+            className="absolute top-4 end-5 text-hero/15 text-5xl select-none animate-float"
+            aria-hidden
+          >
+            {'✦'}
+          </span>
 
-          {/* Floating decorative elements */}
-          <span className="absolute top-3 end-6 text-white/10 text-3xl animate-float" style={{ animationDelay: '0s' }}>{'✦'}</span>
-          <span className="absolute bottom-4 start-8 text-white/10 text-2xl animate-float" style={{ animationDelay: '1s' }}>{'♡'}</span>
-          <span className="absolute top-1/2 end-16 text-white/[0.07] text-xl animate-float" style={{ animationDelay: '0.5s' }}>{'◇'}</span>
-
-          <div className="relative z-10 text-center space-y-2">
-            <h1 className="text-2xl font-bold text-white drop-shadow-sm">
-              {t({
-                en: 'Discover the Latest Fashion',
-                ar: 'اكتشفي أحدث الموضة',
-              })}
+          <div className="relative z-10 space-y-3">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-hero">
+              {t({ en: 'Tafseela', ar: 'تفصيلة' })}
+            </p>
+            <h1 className="text-3xl font-bold leading-[1.1] tracking-tight text-plum">
+              {language === 'ar' ? (
+                <>اكتشفي أحدث<br />الموضة</>
+              ) : (
+                <>Discover the<br />latest fashion</>
+              )}
             </h1>
-            <p className="text-sm text-white/70">
+            <p className="max-w-[28ch] text-sm leading-relaxed text-ink/60">
               {t({
-                en: 'Curated collections from Kuwait\'s best boutiques',
+                en: 'Curated collections from Kuwait’s best boutiques',
                 ar: 'مجموعات منتقاة من أفضل بوتيكات الكويت',
               })}
             </p>
+            {/* Brand accent line */}
+            <div className="mt-2 h-0.5 w-10 rounded-full bg-gradient-to-r from-hero to-soft" />
           </div>
         </div>
 
@@ -113,35 +119,44 @@ export default function HomePage() {
           />
         </div>
 
-        {/* Custom Tabs */}
+        {/* Tabs — minimal underline style */}
         <div className="px-4 space-y-4">
-          {/* Tab buttons */}
-          <div className="flex gap-1 rounded-2xl bg-blush/50 p-1">
+          <div className="flex items-center gap-6 border-b border-soft/30">
             <button
               type="button"
               onClick={() => setActiveTab('products')}
+              aria-pressed={activeTab === 'products'}
               className={cn(
-                'flex-1 flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold transition-all duration-300',
-                activeTab === 'products'
-                  ? 'bg-white text-hero shadow-md'
-                  : 'text-ink/50 hover:text-ink/70'
+                'relative flex items-center gap-2 pb-2.5 text-sm font-semibold transition-colors',
+                activeTab === 'products' ? 'text-ink' : 'text-ink/40 hover:text-ink/70'
               )}
             >
               <Sparkles className="size-4" />
               {t({ en: 'Products', ar: 'منتجات' })}
+              <span
+                className={cn(
+                  'absolute -bottom-px start-0 end-0 h-[2px] rounded-full transition-all duration-300',
+                  activeTab === 'products' ? 'bg-hero opacity-100' : 'bg-transparent opacity-0'
+                )}
+              />
             </button>
             <button
               type="button"
               onClick={() => setActiveTab('stores')}
+              aria-pressed={activeTab === 'stores'}
               className={cn(
-                'flex-1 flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold transition-all duration-300',
-                activeTab === 'stores'
-                  ? 'bg-white text-hero shadow-md'
-                  : 'text-ink/50 hover:text-ink/70'
+                'relative flex items-center gap-2 pb-2.5 text-sm font-semibold transition-colors',
+                activeTab === 'stores' ? 'text-ink' : 'text-ink/40 hover:text-ink/70'
               )}
             >
               <StoreIcon className="size-4" />
               {t({ en: 'Stores', ar: 'متاجر' })}
+              <span
+                className={cn(
+                  'absolute -bottom-px start-0 end-0 h-[2px] rounded-full transition-all duration-300',
+                  activeTab === 'stores' ? 'bg-hero opacity-100' : 'bg-transparent opacity-0'
+                )}
+              />
             </button>
           </div>
 

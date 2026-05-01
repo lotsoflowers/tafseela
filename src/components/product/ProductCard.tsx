@@ -47,10 +47,12 @@ export default function ProductCard({ product, className }: ProductCardProps) {
     <Link
       href={`/product/${product.id}`}
       className={cn(
-        'group block overflow-hidden rounded-2xl bg-white shadow-md',
-        'transition-all duration-300 ease-out',
-        'hover:shadow-xl hover:-translate-y-1',
-        'border border-transparent hover:border-hero/20',
+        'group block overflow-hidden rounded-2xl bg-white',
+        // Layered, soft brand-tinted shadow — modern fashion-app feel
+        'shadow-[0_1px_2px_rgba(92,10,61,0.04),0_4px_16px_rgba(92,10,61,0.06)]',
+        'transition-[transform,box-shadow,border-color] duration-300 ease-out',
+        'hover:-translate-y-1 hover:shadow-[0_2px_4px_rgba(191,6,106,0.06),0_12px_28px_rgba(191,6,106,0.10)]',
+        'border border-transparent hover:border-hero/15',
         'animate-fade-in-up',
         className
       )}
@@ -127,26 +129,28 @@ export default function ProductCard({ product, className }: ProductCardProps) {
         )}
       </div>
 
-      {/* Info area */}
+      {/* Info area — refined editorial type hierarchy */}
       <div className="space-y-1.5 p-3.5">
-        {/* Store name with dot separator */}
+        {/* Store name — uppercase tracking, sparser */}
         {store && (
-          <p className="flex items-center gap-1.5 text-xs text-soft">
-            <span className="inline-block size-1 rounded-full bg-hero/50" />
+          <p className="truncate text-[10px] font-semibold uppercase tracking-[0.12em] text-hero/80">
             {t(store.name)}
           </p>
         )}
 
-        {/* Product name */}
-        <p className="line-clamp-1 text-sm font-semibold text-ink">
+        {/* Product name — tighter line height, bolder */}
+        <p className="line-clamp-2 min-h-[2.4em] text-sm font-semibold leading-[1.2] text-ink">
           {t(product.name)}
         </p>
 
-        {/* Price - prominent hero color */}
-        <PriceTag amount={product.price} className="[&>span:first-child]:text-hero [&>span:first-child]:text-base" />
-
-        {/* Fit badge */}
-        {product.fit && <FitBadge fit={product.fit} />}
+        {/* Price + fit row */}
+        <div className="flex items-center justify-between gap-2 pt-0.5">
+          <PriceTag
+            amount={product.price}
+            className="[&>span:first-child]:text-hero [&>span:first-child]:text-base [&>span:first-child]:font-bold"
+          />
+          {product.fit && <FitBadge fit={product.fit} className="shrink-0" />}
+        </div>
       </div>
     </Link>
   );
