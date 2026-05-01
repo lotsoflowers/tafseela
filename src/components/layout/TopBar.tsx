@@ -6,7 +6,6 @@ import { ArrowLeft, ArrowRight, Search, ShoppingBag } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useCart } from '@/contexts/CartContext';
 import LanguageToggle from '@/components/shared/LanguageToggle';
-import ThemeToggle from '@/components/shared/ThemeToggle';
 import { cn } from '@/lib/utils';
 
 export default function TopBar({ className }: { className?: string }) {
@@ -56,9 +55,8 @@ export default function TopBar({ className }: { className?: string }) {
         </button>
       )}
 
-      {/* Action cluster — same shape, color treatment, and tap target across all four */}
+      {/* Action cluster — language + search + cart. Theme moved to Profile → Preferences. */}
       <div className="flex items-center gap-0.5">
-        <ThemeToggle />
         <LanguageToggle />
 
         <Link

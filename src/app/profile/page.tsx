@@ -1,8 +1,10 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { useTheme } from 'next-themes';
 import {
-  Package, MapPin, Heart, Bell, Globe, FileText,
+  Package, MapPin, Heart, Bell, Globe, FileText, Moon,
   MessageCircle, LogOut, ChevronRight, ChevronLeft, User,
 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -13,7 +15,7 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import type { BilingualText } from '@/types';
 
-type IconTint = 'hero' | 'plum' | 'soft' | 'amber' | 'green' | 'red' | 'blue';
+type IconTint = 'hero' | 'plum' | 'soft' | 'amber' | 'green' | 'red' | 'blue' | 'indigo';
 
 interface MenuItem {
   icon: React.ReactNode;
@@ -33,19 +35,25 @@ interface MenuSection {
 
 // iOS-style tinted icon background — colored fill + white icon, rounded square.
 const tintBg: Record<IconTint, string> = {
-  hero:  'bg-hero',
-  plum:  'bg-plum',
-  soft:  'bg-soft',
-  amber: 'bg-amber-500',
-  green: 'bg-emerald-500',
-  red:   'bg-red-500',
-  blue:  'bg-sky-500',
+  hero:   'bg-hero',
+  plum:   'bg-plum',
+  soft:   'bg-soft',
+  amber:  'bg-amber-500',
+  green:  'bg-emerald-500',
+  red:    'bg-red-500',
+  blue:   'bg-sky-500',
+  indigo: 'bg-indigo-500',
 };
 
 export default function ProfilePage() {
   const { t, language, direction, toggleLanguage } = useLanguage();
   const { user, isAuthenticated, logout } = useAuth();
   const { items: wishlistItems } = useWishlist();
+  const { resolvedTheme, setTheme } = useTheme();
+  const [themeMounted, setThemeMounted] = useState(false);
+  useEffect(() => setThemeMounted(true), []);
+  const isDark = themeMounted && resolvedTheme === 'dark';
+  const toggleTheme = () => setTheme(isDark ? 'light' : 'dark');
 
   const Chevron = direction === 'rtl' ? ChevronLeft : ChevronRight;
 
@@ -81,6 +89,21 @@ export default function ProfilePage() {
           iconTint: 'amber',
           label: { en: 'Notifications', ar: 'الإشعارات' },
           href: '/notifications',
+        },
+        {
+          icon: <Moon className="size-[18px]" strokeWidth={2.25} />,
+          iconTint: 'indigo',
+          label: { en: 'Appearance', ar: 'المظهر' },
+          action: toggleTheme,
+          trailing: (
+            <span className="text-[13px] text-ink/45 dark:text-foreground/45">
+              {!themeMounted
+                ? ''
+                : isDark
+                  ? t({ en: 'Dark', ar: 'داكن' })
+                  : t({ en: 'Light', ar: 'فاتح' })}
+            </span>
+          ),
         },
         {
           icon: <Globe className="size-[18px]" strokeWidth={2.25} />,

@@ -99,8 +99,13 @@ export default function HomePage() {
                 ar: 'مجموعات منتقاة من أفضل بوتيكات الكويت',
               })}
             </p>
-            <Link
-              href="/search"
+            <button
+              type="button"
+              onClick={() => {
+                document
+                  .getElementById('home-products')
+                  ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
               className="mt-4 inline-flex w-fit items-center gap-2 rounded-full bg-white dark:bg-card px-5 py-3 text-sm font-bold text-plum dark:text-soft shadow-lg transition-transform active:scale-[0.97] hover:bg-blush"
             >
               {t({ en: 'Shop new arrivals', ar: 'تصفحي الجديد' })}
@@ -109,7 +114,7 @@ export default function HomePage() {
               ) : (
                 <ArrowRight className="size-4" strokeWidth={2.5} />
               )}
-            </Link>
+            </button>
           </div>
         </div>
 
@@ -156,8 +161,8 @@ export default function HomePage() {
           </section>
         )}
 
-        {/* Category filter */}
-        <div className="px-4">
+        {/* Category filter — anchored so the hero CTA can scroll the user here */}
+        <div id="home-products" className="px-4 scroll-mt-4">
           <CategoryFilter
             categories={categories}
             selectedId={selectedCategory}
