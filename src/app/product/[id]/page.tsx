@@ -24,6 +24,7 @@ import StarRating from '@/components/review/StarRating';
 import ReviewCard from '@/components/review/ReviewCard';
 import FitQuestionnaire from '@/components/fit/FitQuestionnaire';
 import FitResult from '@/components/fit/FitResult';
+import SizeChartDialog from '@/components/product/SizeChartDialog';
 import AuthModal from '@/components/auth/AuthModal';
 import { Separator } from '@/components/ui/separator';
 import type { ProductSize, FitRecommendation } from '@/types';
@@ -169,9 +170,17 @@ export default function ProductPage({ params }: ProductPageProps) {
         {/* Size selector */}
         {!product.isOutOfStock && (
           <div>
-            <p className="mb-2 text-sm font-medium text-ink">
-              {language === 'ar' ? 'اختاري المقاس' : 'Select size'}
-            </p>
+            <div className="mb-2 flex items-center justify-between">
+              <p className="text-sm font-medium text-ink">
+                {language === 'ar' ? 'اختاري المقاس' : 'Select size'}
+              </p>
+              {store?.sizeChart && (
+                <SizeChartDialog
+                  chart={store.sizeChart}
+                  storeName={t(store.name)}
+                />
+              )}
+            </div>
             <SizeSelector
               sizes={product.sizes}
               availableSizes={product.availableSizes}

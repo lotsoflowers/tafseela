@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import Image from 'next/image';
 import {
   Carousel,
   CarouselContent,
@@ -21,6 +22,10 @@ const SLIDE_COLORS = [
   'bg-blush',
   'bg-plum/10',
 ];
+
+function isExternalImage(src: string): boolean {
+  return /^https?:\/\//.test(src);
+}
 
 export default function ProductCarousel({
   images,
@@ -46,18 +51,31 @@ export default function ProductCarousel({
         className="w-full"
       >
         <CarouselContent>
-          {images.map((_, index) => (
+          {images.map((src, index) => (
             <CarouselItem key={index}>
-              <div
-                className={cn(
-                  'flex aspect-[3/4] items-center justify-center rounded-lg',
-                  SLIDE_COLORS[index % SLIDE_COLORS.length]
-                )}
-              >
-                <span className="px-6 text-center text-lg font-semibold text-ink/60">
-                  {productName}
-                </span>
-              </div>
+              {isExternalImage(src) ? (
+                <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-blush/30">
+                  <Image
+                    src={src}
+                    alt={productName}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority={index === 0}
+                    className="object-cover"
+                  />
+                </div>
+              ) : (
+                <div
+                  className={cn(
+                    'flex aspect-[3/4] items-center justify-center rounded-lg',
+                    SLIDE_COLORS[index % SLIDE_COLORS.length]
+                  )}
+                >
+                  <span className="px-6 text-center text-lg font-semibold text-ink/60">
+                    {productName}
+                  </span>
+                </div>
+              )}
             </CarouselItem>
           ))}
         </CarouselContent>

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
 import type { Product } from '@/types';
@@ -8,6 +9,10 @@ import WishlistButton from '@/components/shared/WishlistButton';
 import PriceTag from '@/components/shared/PriceTag';
 import FitBadge from '@/components/product/FitBadge';
 import { stores } from '@/data/stores';
+
+function isExternalImage(src: string | undefined): src is string {
+  return !!src && /^https?:\/\//.test(src);
+}
 
 interface ProductCardProps {
   product: Product;
@@ -50,42 +55,51 @@ export default function ProductCard({ product, className }: ProductCardProps) {
         className
       )}
     >
-      {/* Image area with gradient + pattern */}
+      {/* Image area — real photo when an external URL is provided, gradient otherwise */}
       <div className="relative overflow-hidden">
         <div
           className={cn(
-            'flex aspect-[3/4] items-center justify-center',
-            'bg-gradient-to-br',
-            gradient,
-            'relative'
+            'flex aspect-[3/4] items-center justify-center relative',
+            isExternalImage(product.images[0]) ? 'bg-blush/40' : ['bg-gradient-to-br', gradient]
           )}
         >
-          {/* Pattern overlay */}
-          <div className="pattern-dots absolute inset-0" />
-          <div className="pattern-diagonal absolute inset-0" />
+          {isExternalImage(product.images[0]) ? (
+            <Image
+              src={product.images[0]}
+              alt={t(product.name)}
+              fill
+              sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          ) : (
+            <>
+              {/* Pattern overlay */}
+              <div className="pattern-dots absolute inset-0" />
+              <div className="pattern-diagonal absolute inset-0" />
 
-          {/* Decorative motifs */}
-          <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none">
-            <span className="absolute top-3 start-3 text-white/10 text-2xl">{motif}</span>
-            <span className="absolute bottom-4 end-4 text-white/10 text-3xl rotate-12">{motif}</span>
-            <span className="absolute top-1/3 end-6 text-white/[0.07] text-xl -rotate-12">{motif}</span>
-          </div>
+              {/* Decorative motifs */}
+              <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none">
+                <span className="absolute top-3 start-3 text-white/10 text-2xl">{motif}</span>
+                <span className="absolute bottom-4 end-4 text-white/10 text-3xl rotate-12">{motif}</span>
+                <span className="absolute top-1/3 end-6 text-white/[0.07] text-xl -rotate-12">{motif}</span>
+              </div>
 
-          {/* Product name display */}
-          <div className="relative z-10 px-4 text-center">
-            <span className="text-base font-semibold text-white/90 leading-snug drop-shadow-sm">
-              {t(product.name)}
-            </span>
-          </div>
+              {/* Product name display */}
+              <div className="relative z-10 px-4 text-center">
+                <span className="text-base font-semibold text-white/90 leading-snug drop-shadow-sm">
+                  {t(product.name)}
+                </span>
+              </div>
+            </>
+          )}
 
           {/* Hover shine effect */}
           <div
             className={cn(
-              'absolute inset-0 opacity-0 group-hover:opacity-100',
-              'transition-opacity duration-500',
+              'absolute inset-0 opacity-0 group-hover:opacity-100 z-10 pointer-events-none',
               'bg-gradient-to-r from-transparent via-white/20 to-transparent',
               'translate-x-[-100%] group-hover:translate-x-[100%]',
-              'transition-transform duration-700 ease-in-out'
+              'transition-all duration-700 ease-in-out'
             )}
           />
         </div>

@@ -9,7 +9,7 @@ export const stores: Store[] = [
       ar: 'أزياء نسائية عصرية — قصات نظيفة، وصول جديد كل أسبوع',
     },
     logo: '/images/stores/modish-logo.png',
-    banner: '/images/stores/modish-banner.jpg',
+    banner: 'https://modish.com.kw/cdn/shop/files/new_arrivals_website_banner-01.jpg?v=1776580223&width=1600',
     rating: 4.9,
     productCount: 380,
     reviewCount: 842,

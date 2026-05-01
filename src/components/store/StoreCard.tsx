@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Star, ShoppingBag } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
@@ -11,10 +12,15 @@ interface StoreCardProps {
   className?: string;
 }
 
+function isExternalImage(src: string | undefined): src is string {
+  return !!src && /^https?:\/\//.test(src);
+}
+
 export default function StoreCard({ store, className }: StoreCardProps) {
   const { t } = useLanguage();
 
   const initial = t(store.name).charAt(0).toUpperCase();
+  const hasRealBanner = isExternalImage(store.banner);
 
   return (
     <Link
@@ -27,22 +33,34 @@ export default function StoreCard({ store, className }: StoreCardProps) {
         className
       )}
     >
-      {/* Banner with gradient + pattern */}
+      {/* Banner — real photo when available, gradient otherwise */}
       <div className="relative">
-        <div className="relative flex aspect-[16/7] items-center justify-center bg-gradient-to-br from-plum via-hero/80 to-plum overflow-hidden">
-          {/* Pattern overlay */}
-          <div className="pattern-dots absolute inset-0" />
-          <div className="pattern-diagonal absolute inset-0" />
+        <div className="relative flex aspect-[16/7] items-center justify-center overflow-hidden bg-gradient-to-br from-plum via-hero/80 to-plum">
+          {hasRealBanner ? (
+            <Image
+              src={store.banner}
+              alt={t(store.name)}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+            />
+          ) : (
+            <>
+              {/* Pattern overlay */}
+              <div className="pattern-dots absolute inset-0" />
+              <div className="pattern-diagonal absolute inset-0" />
 
-          {/* Store name watermark */}
-          <span className="text-lg font-bold text-white/15 tracking-widest uppercase select-none">
-            {t(store.name)}
-          </span>
+              {/* Store name watermark */}
+              <span className="text-lg font-bold text-white/15 tracking-widest uppercase select-none">
+                {t(store.name)}
+              </span>
+            </>
+          )}
 
           {/* Hover shine */}
           <div
             className={cn(
-              'absolute inset-0 opacity-0 group-hover:opacity-100',
+              'absolute inset-0 opacity-0 group-hover:opacity-100 z-10 pointer-events-none',
               'bg-gradient-to-r from-transparent via-white/15 to-transparent',
               'translate-x-[-100%] group-hover:translate-x-[100%]',
               'transition-all duration-700 ease-in-out'
