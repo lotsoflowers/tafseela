@@ -50,6 +50,39 @@
     --sidebar-border: #ED93B1;
     --sidebar-ring: #BF066A;
   }
+
+  /* ===== Dark mode palette =====
+     Surfaces invert to a warm near-black with cream foregrounds.
+     Brand accents (Hero/Soft) shift slightly toward Soft pink so
+     they read warmer on dark surfaces without losing identity. */
+  .dark {
+    --background: #14100E;
+    --foreground: #F5E9DE;
+    --card: #211B17;
+    --card-foreground: #F5E9DE;
+    --popover: #211B17;
+    --popover-foreground: #F5E9DE;
+    --primary: #ED93B1;
+    --primary-foreground: #14100E;
+    --secondary: #2A221E;
+    --secondary-foreground: #F5E9DE;
+    --muted: #2A221E;
+    --muted-foreground: #B8AAA0;
+    --accent: #BF066A;
+    --accent-foreground: #FFFFFF;
+    --destructive: #F87171;
+    --border: #3A2F2A;
+    --input: #3A2F2A;
+    --ring: #ED93B1;
+    --sidebar: #14100E;
+    --sidebar-foreground: #F5E9DE;
+    --sidebar-primary: #ED93B1;
+    --sidebar-primary-foreground: #14100E;
+    --sidebar-accent: #2A221E;
+    --sidebar-accent-foreground: #F5E9DE;
+    --sidebar-border: #3A2F2A;
+    --sidebar-ring: #ED93B1;
+  }
   * {
     @apply border-border;
   }
@@ -245,6 +278,16 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.dark .glass {
+  background: rgba(33, 27, 23, 0.65);
+  border-color: rgba(245, 233, 222, 0.08);
+}
+
+.dark .glass-strong {
+  background: rgba(20, 16, 14, 0.85);
+  border-color: rgba(245, 233, 222, 0.10);
 }
 
 /* ===== Shine Effect ===== */

@@ -33,10 +33,10 @@ export default function HomePage() {
   };
 
   return (
-    <PageShell className="bg-cream">
+    <PageShell className="bg-cream dark:bg-background">
       <div className="animate-fade-in space-y-5 pb-4">
         {/* Hero — editorial, not poster. Soft blush-to-cream gradient, oversized display type, single hero accent line. */}
-        <div className="relative overflow-hidden bg-gradient-to-b from-blush/50 via-cream to-cream px-5 pt-7 pb-6">
+        <div className="relative overflow-hidden bg-gradient-to-b from-blush/50 via-cream to-cream dark:from-card dark:via-background dark:to-background px-5 pt-7 pb-6">
           {/* Subtle floating mark, off to one side */}
           <span
             className="absolute top-4 end-5 text-hero/15 text-5xl select-none animate-float"
@@ -49,14 +49,14 @@ export default function HomePage() {
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-hero">
               {t({ en: 'Tafseela', ar: 'تفصيلة' })}
             </p>
-            <h1 className="text-3xl font-bold leading-[1.1] tracking-tight text-plum">
+            <h1 className="text-3xl font-bold leading-[1.1] tracking-tight text-plum dark:text-soft">
               {language === 'ar' ? (
                 <>اكتشفي أحدث<br />الموضة</>
               ) : (
                 <>Discover the<br />latest fashion</>
               )}
             </h1>
-            <p className="max-w-[28ch] text-sm leading-relaxed text-ink/60">
+            <p className="max-w-[28ch] text-sm leading-relaxed text-ink/60 dark:text-foreground/60">
               {t({
                 en: 'Curated collections from Kuwait’s best boutiques',
                 ar: 'مجموعات منتقاة من أفضل بوتيكات الكويت',
@@ -76,7 +76,7 @@ export default function HomePage() {
         {featuredProducts.length > 0 && (
           <section className="space-y-3">
             <div className="flex items-center justify-between px-4">
-              <h2 className="flex items-center gap-1.5 text-base font-bold text-ink">
+              <h2 className="flex items-center gap-1.5 text-base font-bold text-ink dark:text-foreground">
                 <Sparkles className="size-4 text-hero" />
                 {t({ en: 'Featured', ar: 'مميز' })}
               </h2>
@@ -84,14 +84,14 @@ export default function HomePage() {
                 <button
                   type="button"
                   onClick={() => scrollFeatured('left')}
-                  className="rounded-full p-1 text-ink/40 hover:text-ink hover:bg-blush transition-colors"
+                  className="rounded-full p-1 text-ink/40 hover:text-ink hover:bg-blush transition-colors dark:text-foreground/40 dark:hover:text-foreground dark:hover:bg-card"
                 >
                   <ChevronLeft className="size-4" />
                 </button>
                 <button
                   type="button"
                   onClick={() => scrollFeatured('right')}
-                  className="rounded-full p-1 text-ink/40 hover:text-ink hover:bg-blush transition-colors"
+                  className="rounded-full p-1 text-ink/40 hover:text-ink hover:bg-blush transition-colors dark:text-foreground/40 dark:hover:text-foreground dark:hover:bg-card"
                 >
                   <ChevronRight className="size-4" />
                 </button>
@@ -121,14 +121,14 @@ export default function HomePage() {
 
         {/* Tabs — minimal underline style */}
         <div className="px-4 space-y-4">
-          <div className="flex items-center gap-6 border-b border-soft/30">
+          <div className="flex items-center gap-6 border-b border-soft/30 dark:border-border">
             <button
               type="button"
               onClick={() => setActiveTab('products')}
               aria-pressed={activeTab === 'products'}
               className={cn(
                 'relative flex items-center gap-2 pb-2.5 text-sm font-semibold transition-colors',
-                activeTab === 'products' ? 'text-ink' : 'text-ink/40 hover:text-ink/70'
+                activeTab === 'products' ? 'text-ink dark:text-foreground' : 'text-ink/40 hover:text-ink/70 dark:text-foreground/40 dark:hover:text-foreground/70'
               )}
             >
               <Sparkles className="size-4" />
@@ -146,7 +146,7 @@ export default function HomePage() {
               aria-pressed={activeTab === 'stores'}
               className={cn(
                 'relative flex items-center gap-2 pb-2.5 text-sm font-semibold transition-colors',
-                activeTab === 'stores' ? 'text-ink' : 'text-ink/40 hover:text-ink/70'
+                activeTab === 'stores' ? 'text-ink dark:text-foreground' : 'text-ink/40 hover:text-ink/70 dark:text-foreground/40 dark:hover:text-foreground/70'
               )}
             >
               <StoreIcon className="size-4" />

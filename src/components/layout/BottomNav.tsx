@@ -37,8 +37,8 @@ export default function BottomNav() {
                   'group/tab relative flex min-w-[44px] flex-col items-center justify-center gap-0.5 rounded-2xl px-3 py-2 text-[10px] font-medium',
                   'transition-[color,background-color] duration-300',
                   isActive
-                    ? 'bg-hero/10 text-hero'
-                    : 'text-ink/45 hover:text-ink/70 hover:bg-blush/40'
+                    ? 'bg-hero/10 text-hero dark:bg-hero/15'
+                    : 'text-ink/45 hover:text-ink/70 hover:bg-blush/40 dark:text-foreground/40 dark:hover:text-foreground/70 dark:hover:bg-foreground/5'
                 )}
               >
                 <span className="relative">

@@ -48,19 +48,19 @@ export default function FitQuestionnaire({
   };
 
   return (
-    <div className={cn('rounded-xl border border-soft/50 bg-cream/50', className)}>
+    <div className={cn('rounded-xl border border-soft/50 dark:border-border bg-cream/50 dark:bg-secondary/40', className)}>
       {/* Toggle header */}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
         className="flex w-full items-center justify-between p-4"
       >
-        <span className="font-semibold text-plum">
+        <span className="font-semibold text-plum dark:text-soft">
           {language === 'ar' ? 'مو متأكدة من مقاسك؟' : 'Not sure about your size?'}
         </span>
         <ChevronDown
           className={cn(
-            'size-5 text-plum transition-transform',
+            'size-5 text-plum dark:text-soft transition-transform',
             isOpen && 'rotate-180'
           )}
         />
@@ -72,7 +72,7 @@ export default function FitQuestionnaire({
           {/* Height slider */}
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <Label className="text-sm font-medium text-ink">
+              <Label className="text-sm font-medium text-ink dark:text-foreground">
                 {language === 'ar' ? 'الطول' : 'Height'}
               </Label>
               <span className="text-sm font-semibold text-hero">
@@ -87,7 +87,7 @@ export default function FitQuestionnaire({
               onChange={(e) => setHeight(Number(e.target.value))}
               className="w-full accent-hero"
             />
-            <div className="flex justify-between text-xs text-ink/40">
+            <div className="flex justify-between text-xs text-ink/40 dark:text-foreground/40">
               <span>150 cm</span>
               <span>185 cm</span>
             </div>
@@ -96,7 +96,7 @@ export default function FitQuestionnaire({
           {/* Weight slider */}
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <Label className="text-sm font-medium text-ink">
+              <Label className="text-sm font-medium text-ink dark:text-foreground">
                 {language === 'ar' ? 'الوزن' : 'Weight'}
               </Label>
               <span className="text-sm font-semibold text-hero">
@@ -111,7 +111,7 @@ export default function FitQuestionnaire({
               onChange={(e) => setWeight(Number(e.target.value))}
               className="w-full accent-hero"
             />
-            <div className="flex justify-between text-xs text-ink/40">
+            <div className="flex justify-between text-xs text-ink/40 dark:text-foreground/40">
               <span>40 kg</span>
               <span>120 kg</span>
             </div>
@@ -120,10 +120,10 @@ export default function FitQuestionnaire({
           {/* Usual size (optional) */}
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <Label className="block text-sm font-medium text-ink">
+              <Label className="block text-sm font-medium text-ink dark:text-foreground">
                 {language === 'ar' ? 'مقاسك المعتاد' : 'Your usual size'}
               </Label>
-              <span className="text-xs text-ink/40">
+              <span className="text-xs text-ink/40 dark:text-foreground/40">
                 {language === 'ar' ? 'اختياري — للدقة' : 'Optional — for accuracy'}
               </span>
             </div>
@@ -142,7 +142,7 @@ export default function FitQuestionnaire({
                       'focus:outline-none focus-visible:ring-2 focus-visible:ring-hero/40',
                       active
                         ? 'border-hero bg-hero text-white shadow-sm shadow-hero/20'
-                        : 'border-soft/50 bg-white text-ink hover:border-hero/40 hover:text-hero'
+                        : 'border-soft/50 bg-white text-ink hover:border-hero/40 hover:text-hero dark:border-border dark:bg-card dark:text-foreground'
                     )}
                   >
                     {size}
@@ -154,7 +154,7 @@ export default function FitQuestionnaire({
 
           {/* Fit preference */}
           <div>
-            <Label className="mb-2 block text-sm font-medium text-ink">
+            <Label className="mb-2 block text-sm font-medium text-ink dark:text-foreground">
               {language === 'ar' ? 'تفضيلك للقصة' : 'Fit preference'}
             </Label>
             <div role="radiogroup" className="flex flex-wrap gap-2">
@@ -172,7 +172,7 @@ export default function FitQuestionnaire({
                       'focus:outline-none focus-visible:ring-2 focus-visible:ring-hero/40',
                       active
                         ? 'border-hero bg-hero text-white shadow-sm shadow-hero/20'
-                        : 'border-soft/50 bg-white text-ink hover:border-hero/40 hover:text-hero'
+                        : 'border-soft/50 bg-white text-ink hover:border-hero/40 hover:text-hero dark:border-border dark:bg-card dark:text-foreground'
                     )}
                   >
                     {t(pref.label)}

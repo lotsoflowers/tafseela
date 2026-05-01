@@ -47,11 +47,13 @@ export default function ProductCard({ product, className }: ProductCardProps) {
     <Link
       href={`/product/${product.id}`}
       className={cn(
-        'group block overflow-hidden rounded-2xl bg-white',
+        'group block overflow-hidden rounded-2xl bg-white dark:bg-card',
         // Layered, soft brand-tinted shadow — modern fashion-app feel
         'shadow-[0_1px_2px_rgba(92,10,61,0.04),0_4px_16px_rgba(92,10,61,0.06)]',
+        'dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),0_4px_16px_rgba(0,0,0,0.4)]',
         'transition-[transform,box-shadow,border-color] duration-300 ease-out',
         'hover:-translate-y-1 hover:shadow-[0_2px_4px_rgba(191,6,106,0.06),0_12px_28px_rgba(191,6,106,0.10)]',
+        'dark:hover:shadow-[0_2px_4px_rgba(237,147,177,0.12),0_12px_28px_rgba(237,147,177,0.18)]',
         'border border-transparent hover:border-hero/15',
         'animate-fade-in-up',
         className
@@ -139,7 +141,7 @@ export default function ProductCard({ product, className }: ProductCardProps) {
         )}
 
         {/* Product name — tighter line height, bolder */}
-        <p className="line-clamp-2 min-h-[2.4em] text-sm font-semibold leading-[1.2] text-ink">
+        <p className="line-clamp-2 min-h-[2.4em] text-sm font-semibold leading-[1.2] text-ink dark:text-foreground">
           {t(product.name)}
         </p>
 

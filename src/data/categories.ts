@@ -10,4 +10,5 @@ export const categories: Category[] = [
   { id: 'dresses', name: { en: 'Dresses', ar: 'فساتين' }, slug: 'dresses' },
   { id: 'skirts', name: { en: 'Skirts', ar: 'تنانير' }, slug: 'skirts' },
   { id: 'vests', name: { en: 'Vests', ar: 'صديريات' }, slug: 'vests' },
+  { id: 'outerwear', name: { en: 'Outerwear', ar: 'ملابس خارجية' }, slug: 'outerwear' },
 ];

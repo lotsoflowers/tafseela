@@ -26,7 +26,7 @@ export default function StoreCard({ store, className }: StoreCardProps) {
     <Link
       href={`/store/${store.id}`}
       className={cn(
-        'group block overflow-hidden rounded-2xl bg-white shadow-md',
+        'group block overflow-hidden rounded-2xl bg-white dark:bg-card shadow-md dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),0_4px_16px_rgba(0,0,0,0.4)]',
         'transition-all duration-300 ease-out',
         'hover:shadow-xl hover:-translate-y-1',
         'border border-transparent hover:border-hero/20',
@@ -83,20 +83,20 @@ export default function StoreCard({ store, className }: StoreCardProps) {
 
       {/* Info area with glass effect */}
       <div className="px-4 pb-5 pt-10 text-center">
-        <h3 className="text-lg font-bold text-ink group-hover:text-hero transition-colors">
+        <h3 className="text-lg font-bold text-ink dark:text-foreground group-hover:text-hero transition-colors">
           {t(store.name)}
         </h3>
-        <p className="mt-1.5 text-sm text-ink/60 line-clamp-2 leading-relaxed">
+        <p className="mt-1.5 text-sm text-ink/60 dark:text-foreground/60 line-clamp-2 leading-relaxed">
           {t(store.description)}
         </p>
 
         {/* Stats as pills */}
         <div className="mt-3 flex items-center justify-center gap-2">
-          <span className="inline-flex items-center gap-1 rounded-full bg-blush/60 px-3 py-1 text-xs font-medium text-plum">
+          <span className="inline-flex items-center gap-1 rounded-full bg-blush/60 dark:bg-soft/15 px-3 py-1 text-xs font-medium text-plum dark:text-soft">
             <ShoppingBag className="size-3" />
             {store.productCount} {t({ en: 'products', ar: 'منتج' })}
           </span>
-          <span className="inline-flex items-center gap-1 rounded-full bg-cream px-3 py-1 text-xs font-medium text-ink/70">
+          <span className="inline-flex items-center gap-1 rounded-full bg-cream dark:bg-secondary px-3 py-1 text-xs font-medium text-ink/70 dark:text-foreground/70">
             <Star className="size-3 fill-amber-400 text-amber-400" />
             {store.rating}
           </span>

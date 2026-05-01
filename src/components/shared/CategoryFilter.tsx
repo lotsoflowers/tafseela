@@ -38,8 +38,8 @@ export default function CategoryFilter({
               'shrink-0 rounded-full px-4 py-1.5 text-[13px] font-semibold whitespace-nowrap',
               'transition-[background-color,color,border-color] duration-200',
               isActive
-                ? 'bg-ink text-white'
-                : 'border border-soft/40 bg-white/70 text-ink/65 hover:border-ink/30 hover:text-ink'
+                ? 'bg-ink text-white dark:bg-foreground dark:text-background'
+                : 'border border-soft/40 bg-white/70 text-ink/65 hover:border-ink/30 hover:text-ink dark:border-border dark:bg-card/70 dark:text-foreground/70 dark:hover:border-foreground/40 dark:hover:text-foreground'
             )}
           >
             {t(category.name)}
