@@ -64,11 +64,8 @@ export default function NotificationsPage() {
 
   return (
     <PageShell>
-      <div className="min-h-screen bg-cream dark:bg-background px-4 pt-4 pb-6 animate-fade-in">
-        <h1 className="text-xl font-bold text-ink dark:text-foreground mb-4">
-          {t({ en: 'Notification Settings', ar: 'إعدادات الإشعارات' })}
-        </h1>
-
+      <div className="min-h-screen bg-cream dark:bg-background px-4 pt-2 pb-6 animate-fade-in">
+        {/* Title sits in the TopBar — no duplicate H1 here */}
         <div className="space-y-2">
           {NOTIFICATION_SETTINGS.map((setting) => (
             <div

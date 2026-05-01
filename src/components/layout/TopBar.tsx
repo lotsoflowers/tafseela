@@ -2,11 +2,37 @@
 
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
-import { ArrowLeft, ArrowRight, Search, ShoppingBag } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Search, ShoppingBag } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useCart } from '@/contexts/CartContext';
 import LanguageToggle from '@/components/shared/LanguageToggle';
 import { cn } from '@/lib/utils';
+import type { BilingualText } from '@/types';
+
+// Centered nav-bar title per route — iOS UINavigationBar pattern.
+// Dynamic routes (/product/[id], /store/[id]) get a static placeholder
+// since the actual product/store name is rendered by the page itself.
+const ROUTE_TITLES: Record<string, BilingualText> = {
+  '/cart':                  { en: 'My Cart',         ar: 'سلتي' },
+  '/checkout':              { en: 'Checkout',        ar: 'إتمام الطلب' },
+  '/wishlist':              { en: 'Wishlist',        ar: 'المفضلة' },
+  '/profile':               { en: 'Profile',         ar: 'حسابي' },
+  '/search':                { en: 'Search',          ar: 'البحث' },
+  '/auth':                  { en: 'Sign in',         ar: 'تسجيل الدخول' },
+  '/notifications':         { en: 'Notifications',   ar: 'الإشعارات' },
+  '/returns':               { en: 'Returns',         ar: 'الإرجاع' },
+  '/payment-confirmation':  { en: 'Order placed',    ar: 'تم الطلب' },
+};
+
+function titleFor(pathname: string): BilingualText | null {
+  if (ROUTE_TITLES[pathname]) return ROUTE_TITLES[pathname];
+  if (pathname.startsWith('/product/'))      return { en: 'Product',  ar: 'المنتج' };
+  if (pathname.startsWith('/store/'))        return { en: 'Store',    ar: 'المتجر' };
+  if (pathname.startsWith('/order/track/'))  return { en: 'Tracking', ar: 'تتبع الطلب' };
+  if (pathname.startsWith('/order/'))        return { en: 'Order',    ar: 'الطلب' };
+  if (pathname.startsWith('/review/'))       return { en: 'Review',   ar: 'تقييم' };
+  return null;
+}
 
 export default function TopBar({ className }: { className?: string }) {
   const router = useRouter();
@@ -14,49 +40,63 @@ export default function TopBar({ className }: { className?: string }) {
   const { t, direction } = useLanguage();
   const { itemCount } = useCart();
 
-  // /home is the only screen where the wordmark stays — every other route
-  // gets a back arrow in the wordmark slot, since users actually arrive at
-  // those routes via navigation and need a way out.
   const isHome = pathname === '/home';
-  const BackIcon = direction === 'rtl' ? ArrowRight : ArrowLeft;
+  const ChevronBack = direction === 'rtl' ? ChevronRight : ChevronLeft;
+  const title = !isHome ? titleFor(pathname) : null;
 
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 flex items-center justify-between px-4 py-3',
+        // Three-column grid lets the title stay centered regardless of how
+        // many actions sit on the trailing side. Slim vertical padding so
+        // the bar reads as a slice of nav, not a full panel.
+        'sticky top-0 z-50 grid grid-cols-[auto_1fr_auto] items-center gap-2',
+        'px-3 py-2',
         'glass-strong',
-        'border-b border-soft/15 dark:border-foreground/[0.06]',
         className
       )}
     >
-      {/* Leading slot — back arrow on inner pages, wordmark on /home */}
-      {isHome ? (
-        <Link href="/home" className="group inline-flex items-center gap-2">
-          <span
-            aria-hidden
-            className="size-2 rounded-full bg-gradient-to-br from-hero to-plum opacity-90 group-hover:opacity-100 transition-opacity"
-          />
-          <span className="gradient-text text-[19px] font-extrabold tracking-tight">
-            {t({ en: 'Tafseela', ar: 'تفصيلة' })}
-          </span>
-        </Link>
-      ) : (
-        <button
-          type="button"
-          onClick={() => router.back()}
-          aria-label={t({ en: 'Go back', ar: 'رجوع' })}
-          className={cn(
-            'inline-flex size-9 items-center justify-center rounded-full',
-            'text-ink/70 dark:text-foreground/75 transition-colors',
-            'hover:bg-hero/10 hover:text-hero dark:hover:bg-foreground/10'
-          )}
-        >
-          <BackIcon className="size-[18px]" strokeWidth={2.25} />
-        </button>
-      )}
+      {/* Leading slot — wordmark on /home, chevron on inner pages */}
+      <div className="flex items-center justify-start min-w-9">
+        {isHome ? (
+          <Link href="/home" className="group inline-flex items-center gap-2 ps-1">
+            <span
+              aria-hidden
+              className="size-2 rounded-full bg-gradient-to-br from-hero to-plum opacity-90 group-hover:opacity-100 transition-opacity"
+            />
+            <span className="gradient-text text-[19px] font-extrabold tracking-tight">
+              {t({ en: 'Tafseela', ar: 'تفصيلة' })}
+            </span>
+          </Link>
+        ) : (
+          <button
+            type="button"
+            onClick={() => router.back()}
+            aria-label={t({ en: 'Go back', ar: 'رجوع' })}
+            className={cn(
+              'inline-flex h-9 items-center justify-center rounded-full',
+              'pe-2 ps-1 -ms-1',
+              'text-hero dark:text-soft transition-colors',
+              'hover:bg-hero/10 dark:hover:bg-foreground/10',
+              'active:scale-[0.96]'
+            )}
+          >
+            <ChevronBack className="size-6" strokeWidth={2.5} />
+          </button>
+        )}
+      </div>
 
-      {/* Action cluster — language + search + cart. Theme moved to Profile → Preferences. */}
-      <div className="flex items-center gap-0.5">
+      {/* Centered title — iOS UINavigationBar pattern */}
+      <div className="flex justify-center">
+        {title && (
+          <h1 className="truncate text-[16px] font-semibold tracking-tight text-ink dark:text-foreground">
+            {t(title)}
+          </h1>
+        )}
+      </div>
+
+      {/* Trailing actions — packed tight, no internal padding between */}
+      <div className="flex items-center justify-end -me-1">
         <LanguageToggle />
 
         <Link
@@ -64,8 +104,9 @@ export default function TopBar({ className }: { className?: string }) {
           aria-label={t({ en: 'Search', ar: 'البحث' })}
           className={cn(
             'inline-flex size-9 items-center justify-center rounded-full',
-            'text-ink/70 dark:text-foreground/75 transition-colors',
-            'hover:bg-hero/10 hover:text-hero dark:hover:bg-foreground/10'
+            'text-ink/75 dark:text-foreground/75 transition-colors',
+            'hover:bg-hero/10 hover:text-hero dark:hover:bg-foreground/10',
+            'active:scale-[0.96]'
           )}
         >
           <Search className="size-[18px]" strokeWidth={2} />
@@ -76,8 +117,9 @@ export default function TopBar({ className }: { className?: string }) {
           aria-label={t({ en: 'Cart', ar: 'سلة التسوق' })}
           className={cn(
             'relative inline-flex size-9 items-center justify-center rounded-full',
-            'text-ink/70 dark:text-foreground/75 transition-colors',
-            'hover:bg-hero/10 hover:text-hero dark:hover:bg-foreground/10'
+            'text-ink/75 dark:text-foreground/75 transition-colors',
+            'hover:bg-hero/10 hover:text-hero dark:hover:bg-foreground/10',
+            'active:scale-[0.96]'
           )}
         >
           <ShoppingBag className="size-[18px]" strokeWidth={2} />

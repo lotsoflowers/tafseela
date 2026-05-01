@@ -25,11 +25,7 @@ export default function CartPage() {
   return (
     <PageShell className="bg-cream dark:bg-background">
       <div className="max-w-lg mx-auto px-4 py-6">
-        {/* Header */}
-        <h1 className="text-xl font-bold text-ink dark:text-foreground mb-6">
-          {language === 'ar' ? 'سلتي' : 'My Cart'}
-        </h1>
-
+        {/* Title sits in the TopBar — no duplicate H1 here */}
         {isEmpty ? (
           /* Empty state */
           <div className="flex flex-col items-center justify-center py-20 text-center">

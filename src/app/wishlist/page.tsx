@@ -18,11 +18,8 @@ export default function WishlistPage() {
 
   return (
     <PageShell>
-      <div className="min-h-screen bg-cream dark:bg-background px-4 pt-4 pb-6 animate-fade-in">
-        <h1 className="text-xl font-bold text-ink dark:text-foreground mb-4">
-          {t({ en: 'Wishlist', ar: 'المفضلة' })}
-        </h1>
-
+      <div className="min-h-screen bg-cream dark:bg-background px-4 pt-2 pb-6 animate-fade-in">
+        {/* Title sits in the TopBar — no duplicate H1 here */}
         {wishlisted.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <div className="w-20 h-20 rounded-full bg-blush dark:bg-secondary flex items-center justify-center mb-4">
