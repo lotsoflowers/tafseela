@@ -60,7 +60,7 @@ export default function HomePage() {
           {heroOutfit && (
             <Link
               href={`/outfit/${heroOutfit.id}`}
-              className="relative mx-4 mt-4 block aspect-[3/4] overflow-hidden rounded-3xl bg-gradient-to-br from-blush via-soft/60 to-cream shadow-[0_8px_24px_rgba(92,10,61,0.12)] sm:aspect-[16/10]"
+              className="group relative mx-4 mt-4 block aspect-[3/4] overflow-hidden rounded-3xl bg-gradient-to-br from-blush via-soft/60 to-cream shadow-card-hover transition-transform duration-300 ease-out hover:-translate-y-1 active:scale-[0.99] animate-lift-in sm:aspect-[16/10]"
             >
               {isLoadableImage(heroOutfit.lifestylePhoto) && (
                 <Image
@@ -69,7 +69,7 @@ export default function HomePage() {
                   fill
                   sizes="(max-width: 768px) 100vw, 720px"
                   priority
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
               )}
               <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/65 via-black/25 to-transparent" />

@@ -41,13 +41,7 @@ export default function ProductCard({ product, className }: ProductCardProps) {
     <Link
       href={`/product/${product.id}`}
       className={cn(
-        'group block overflow-hidden rounded-3xl bg-white dark:bg-card',
-        // Layered, soft brand-tinted shadow
-        'shadow-[0_1px_2px_rgba(92,10,61,0.04),0_8px_24px_rgba(92,10,61,0.07)]',
-        'dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),0_8px_24px_rgba(0,0,0,0.5)]',
-        'transition-[transform,box-shadow] duration-300 ease-out',
-        'hover:-translate-y-1 hover:shadow-[0_2px_4px_rgba(191,6,106,0.08),0_16px_36px_rgba(191,6,106,0.14)]',
-        'animate-fade-in-up',
+        'group block overflow-hidden rounded-3xl bg-white shadow-card transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:shadow-card-hover active:scale-[0.98] animate-fade-in-up dark:bg-card',
         className
       )}
     >

@@ -27,10 +27,7 @@ export default function VibeCard({ vibe, photo, className }: VibeCardProps) {
     <Link
       href={`/catalog/vibe/${vibe}`}
       className={cn(
-        'group relative block aspect-[3/4] overflow-hidden rounded-3xl bg-gradient-to-br from-blush via-soft/60 to-cream',
-        'shadow-[0_1px_2px_rgba(92,10,61,0.04),0_8px_24px_rgba(92,10,61,0.07)]',
-        'dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),0_8px_24px_rgba(0,0,0,0.5)]',
-        'transition-transform duration-300 ease-out hover:-translate-y-1',
+        'group relative block aspect-[3/4] overflow-hidden rounded-3xl bg-gradient-to-br from-blush via-soft/60 to-cream shadow-card transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:shadow-card-hover active:scale-[0.98] animate-fade-in-up',
         className
       )}
     >

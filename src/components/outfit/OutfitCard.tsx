@@ -36,12 +36,7 @@ export default function OutfitCard({ outfit, className, size = 'md' }: OutfitCar
     <Link
       href={`/outfit/${outfit.id}`}
       className={cn(
-        'group relative block overflow-hidden rounded-3xl bg-white dark:bg-card',
-        'shadow-[0_1px_2px_rgba(92,10,61,0.04),0_8px_24px_rgba(92,10,61,0.07)]',
-        'dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),0_8px_24px_rgba(0,0,0,0.5)]',
-        'transition-[transform,box-shadow] duration-300 ease-out',
-        'hover:-translate-y-1',
-        'animate-fade-in-up',
+        'group relative block overflow-hidden rounded-3xl bg-white shadow-card transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:shadow-card-hover active:scale-[0.98] animate-fade-in-up dark:bg-card',
         className
       )}
     >

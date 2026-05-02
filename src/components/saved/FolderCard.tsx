@@ -41,7 +41,7 @@ export default function FolderCard({ folder }: FolderCardProps) {
   };
 
   return (
-    <div className="overflow-hidden rounded-3xl bg-white shadow-[0_1px_2px_rgba(92,10,61,0.04),0_8px_24px_rgba(92,10,61,0.05)] dark:bg-card dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),0_8px_24px_rgba(0,0,0,0.5)]">
+    <div className="overflow-hidden rounded-3xl bg-white shadow-card transition-shadow duration-300 hover:shadow-card-hover dark:bg-card animate-fade-in-up">
       <Link href={`/wishlist/folder/${folder.id}`} className="block">
         <div className="grid grid-cols-2 gap-px bg-blush/40">
           {previews.map((src, i) => (
