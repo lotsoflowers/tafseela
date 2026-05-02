@@ -82,14 +82,17 @@ export default function SavedItemRow({ product }: SavedItemRowProps) {
 
         <div className="flex shrink-0 flex-col items-end gap-1.5">
           {oos ? (
-            <span className="text-[12px] font-semibold text-hero">
+            <button
+              type="button"
+              className="min-h-[36px] rounded-full px-3 text-[12px] font-semibold text-hero active:scale-95"
+            >
               {t({ en: 'Notify me', ar: 'أشعريني' })}
-            </span>
+            </button>
           ) : (
             <button
               type="button"
               onClick={handleAddToBag}
-              className="rounded-full bg-hero px-3.5 py-1.5 text-[12px] font-bold text-white transition-colors hover:bg-hero/90"
+              className="min-h-[40px] rounded-full bg-hero px-4 py-2 text-[13px] font-bold text-white transition-[background-color,transform] hover:bg-hero/90 active:scale-95 shadow-cta"
             >
               {t({ en: 'Add to Bag', ar: 'للحقيبة' })}
             </button>
@@ -99,9 +102,9 @@ export default function SavedItemRow({ product }: SavedItemRowProps) {
             type="button"
             onClick={() => setMenuOpen(v => !v)}
             aria-label={t({ en: 'More', ar: 'المزيد' })}
-            className="flex size-7 items-center justify-center rounded-full text-muted-foreground hover:bg-cream dark:hover:bg-secondary"
+            className="flex size-9 items-center justify-center rounded-full text-muted-foreground transition-[background-color,transform] hover:bg-cream active:scale-90 dark:hover:bg-secondary"
           >
-            <MoreHorizontal className="size-4" strokeWidth={2} />
+            <MoreHorizontal className="size-5" strokeWidth={2} />
           </button>
         </div>
       </div>

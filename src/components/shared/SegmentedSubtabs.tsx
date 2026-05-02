@@ -50,7 +50,7 @@ export default function SegmentedSubtabs<T extends string = string>({
             onClick={() => onChange(item.id)}
             className={cn(
               'shrink-0 rounded-full transition-[background-color,box-shadow,color]',
-              size === 'md' ? 'px-5 py-2 text-[14px]' : 'px-3 py-1 text-[12px]',
+              size === 'md' ? 'min-h-[44px] px-5 py-2.5 text-[14px]' : 'min-h-[36px] px-3 py-1.5 text-[12px]',
               isActive
                 ? 'bg-white font-bold text-ink shadow-[0_2px_8px_rgba(92,10,61,0.08),0_1px_2px_rgba(92,10,61,0.06)] dark:bg-card dark:text-foreground dark:shadow-[0_2px_8px_rgba(0,0,0,0.4)]'
                 : 'font-semibold text-ink/70 hover:text-ink dark:text-foreground/65 dark:hover:text-foreground'

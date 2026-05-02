@@ -70,9 +70,9 @@ export default function CartItemRow({ product, cartItem, variant = 'normal' }: C
             type="button"
             onClick={remove}
             aria-label={t({ en: 'Remove', ar: 'إزالة' })}
-            className="-mt-1 flex size-7 shrink-0 items-center justify-center rounded-full text-muted-foreground hover:bg-cream dark:hover:bg-secondary"
+            className="-mt-1 flex size-9 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-[background-color,transform] hover:bg-cream active:scale-90 dark:hover:bg-secondary"
           >
-            <X className="size-4" />
+            <X className="size-5" />
           </button>
         </div>
 
@@ -99,26 +99,26 @@ export default function CartItemRow({ product, cartItem, variant = 'normal' }: C
               {t({ en: 'Pick a size', ar: 'اختاري مقاس' })}
             </span>
           ) : (
-            <div className="flex items-center gap-2 rounded-full border border-soft/40 bg-white px-2 py-1 dark:border-border dark:bg-card">
+            <div className="flex items-center gap-1 rounded-full border border-soft/40 bg-white px-1.5 py-1 dark:border-border dark:bg-card">
               <button
                 type="button"
                 onClick={decQty}
                 aria-label={t({ en: 'Decrease', ar: 'إنقاص' })}
                 disabled={cartItem.quantity <= 1}
-                className="flex size-6 items-center justify-center rounded-full text-ink hover:bg-cream disabled:opacity-30 dark:text-foreground dark:hover:bg-secondary"
+                className="flex size-9 items-center justify-center rounded-full text-ink transition-[background-color,transform] hover:bg-cream active:scale-90 disabled:opacity-30 dark:text-foreground dark:hover:bg-secondary"
               >
-                <Minus className="size-3.5" strokeWidth={2.5} />
+                <Minus className="size-4" strokeWidth={2.5} />
               </button>
-              <span className="min-w-4 text-center text-[13px] font-bold tabular-nums text-ink dark:text-foreground">
+              <span className="min-w-5 text-center text-[14px] font-bold tabular-nums text-ink dark:text-foreground">
                 {cartItem.quantity}
               </span>
               <button
                 type="button"
                 onClick={incQty}
                 aria-label={t({ en: 'Increase', ar: 'زيادة' })}
-                className="flex size-6 items-center justify-center rounded-full text-ink hover:bg-cream dark:text-foreground dark:hover:bg-secondary"
+                className="flex size-9 items-center justify-center rounded-full text-ink transition-[background-color,transform] hover:bg-cream active:scale-90 dark:text-foreground dark:hover:bg-secondary"
               >
-                <Plus className="size-3.5" strokeWidth={2.5} />
+                <Plus className="size-4" strokeWidth={2.5} />
               </button>
             </div>
           )}

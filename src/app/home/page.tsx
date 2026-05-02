@@ -60,7 +60,7 @@ export default function HomePage() {
           {heroOutfit && (
             <Link
               href={`/outfit/${heroOutfit.id}`}
-              className="group relative mx-4 mt-4 block aspect-[3/4] overflow-hidden rounded-3xl bg-gradient-to-br from-blush via-soft/60 to-cream shadow-card-hover transition-transform duration-300 ease-out hover:-translate-y-1 active:scale-[0.99] animate-lift-in sm:aspect-[16/10]"
+              className="group relative mx-4 mt-4 block aspect-[16/10] overflow-hidden rounded-3xl bg-gradient-to-br from-blush via-soft/60 to-cream shadow-card-hover transition-transform duration-300 ease-out hover:-translate-y-1 active:scale-[0.99] animate-lift-in"
             >
               {isLoadableImage(heroOutfit.lifestylePhoto) && (
                 <Image
@@ -73,18 +73,18 @@ export default function HomePage() {
                 />
               )}
               <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/65 via-black/25 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 text-white">
+              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4 text-white">
                 <div className="min-w-0">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.2em] opacity-90">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] opacity-90">
                     {t({ en: 'New collection', ar: 'مجموعة جديدة' })}
                   </p>
-                  <h1 className="mt-1.5 text-[32px] font-bold uppercase leading-none tracking-tight drop-shadow-sm">
+                  <h1 className="mt-1 text-[24px] font-bold uppercase leading-none tracking-tight drop-shadow-sm">
                     {t({ en: 'Bloom Time', ar: 'موسم التفصيلة' })}
                   </h1>
                 </div>
-                <span className="inline-flex shrink-0 items-center gap-0.5 pb-1 text-[14px] font-semibold">
+                <span className="inline-flex shrink-0 items-center gap-0.5 pb-0.5 text-[13px] font-semibold">
                   {t({ en: 'Explore', ar: 'استكشفي' })}
-                  <Arrow className="size-5" strokeWidth={2.25} />
+                  <Arrow className="size-4" strokeWidth={2.25} />
                 </span>
               </div>
             </Link>

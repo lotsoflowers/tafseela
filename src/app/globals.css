@@ -91,9 +91,19 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* Touch-first: kill the 300ms tap delay on iOS Safari, prevent
+       double-tap zoom from interfering with quick interactions, and
+       allow standard scroll/pan only. */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
   html {
     @apply font-sans;
+  }
+  /* Buttons and links inherit touch-action so explicit interactive
+     elements never get the slower default. */
+  button, a, [role="button"], [role="tab"] {
+    touch-action: manipulation;
   }
 }
 

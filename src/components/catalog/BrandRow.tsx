@@ -54,10 +54,10 @@ export default function BrandRow({ store, className }: BrandRowProps) {
         type="button"
         onClick={() => toggleFollow(store.id)}
         className={cn(
-          'shrink-0 rounded-full px-4 py-1.5 text-[12px] font-semibold transition-colors',
+          'shrink-0 rounded-full px-4 min-h-[36px] py-2 text-[13px] font-semibold transition-[background-color,transform] active:scale-95',
           followed
             ? 'border border-soft/60 bg-transparent text-ink dark:border-foreground/20 dark:text-foreground'
-            : 'bg-hero text-white hover:bg-hero/90'
+            : 'bg-hero text-white shadow-pill hover:bg-hero/90'
         )}
       >
         {followed
