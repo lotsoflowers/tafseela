@@ -10,10 +10,12 @@ import SearchBar from '@/components/shared/SearchBar';
 import CategoryFilter from '@/components/shared/CategoryFilter';
 import HeroOverlayActions from '@/components/shared/HeroOverlayActions';
 import ProductCard from '@/components/product/ProductCard';
+import OutfitCard from '@/components/outfit/OutfitCard';
 import StoreCard from '@/components/store/StoreCard';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useOnboarding } from '@/contexts/OnboardingContext';
 import { products } from '@/data/products';
+import { outfits } from '@/data/outfits';
 import { stores } from '@/data/stores';
 import { categories } from '@/data/categories';
 import { cn } from '@/lib/utils';
@@ -40,6 +42,7 @@ export default function HomePage() {
       : products.filter((p) => p.categoryId === selectedCategory);
 
   const featuredProducts = products.filter((p) => p.isFeatured);
+  const featuredOutfits = outfits.filter((o) => o.isFeatured);
 
   const scrollFeatured = (dir: 'left' | 'right') => {
     if (!featuredScrollRef.current) return;
@@ -48,7 +51,7 @@ export default function HomePage() {
   };
 
   return (
-    <PageShell showTopBar={false} className="bg-cream dark:bg-background">
+    <PageShell showTopBar={false}>
       <div className="animate-fade-in space-y-5 pb-4">
         {/* Hero — bleeds to the very top of the screen, no header above it.
             Real product image as backdrop, dramatic dark gradient for
@@ -165,6 +168,31 @@ export default function HomePage() {
               {featuredProducts.map((product) => (
                 <div key={product.id} className="w-40 shrink-0 snap-start">
                   <ProductCard product={product} />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Featured outfits — Plum's signature pattern */}
+        {featuredOutfits.length > 0 && (
+          <section className="space-y-3">
+            <div className="flex items-center justify-between px-4">
+              <h2 className="flex items-center gap-1.5 text-base font-bold text-ink dark:text-foreground">
+                <Sparkles className="size-4 text-hero" />
+                {t({ en: 'Selected outfits', ar: 'إطلالات مختارة' })}
+              </h2>
+              <Link
+                href="/catalog"
+                className="text-[12px] font-semibold text-hero"
+              >
+                {t({ en: 'See all', ar: 'الكل' })}
+              </Link>
+            </div>
+            <div className="flex gap-3 overflow-x-auto hide-scrollbar px-4 snap-x snap-mandatory">
+              {featuredOutfits.map((outfit) => (
+                <div key={outfit.id} className="w-44 shrink-0 snap-start">
+                  <OutfitCard outfit={outfit} />
                 </div>
               ))}
             </div>
