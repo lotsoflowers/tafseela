@@ -9,6 +9,7 @@ interface SizeSelectorProps {
   selectedSize: ProductSize | null;
   onSelect: (size: ProductSize) => void;
   className?: string;
+  allowUnavailableSelection?: boolean;
 }
 
 export default function SizeSelector({
@@ -17,6 +18,7 @@ export default function SizeSelector({
   selectedSize,
   onSelect,
   className,
+  allowUnavailableSelection = false,
 }: SizeSelectorProps) {
   return (
     <div className={cn('flex flex-wrap gap-2', className)}>
@@ -28,7 +30,7 @@ export default function SizeSelector({
           <button
             key={size}
             type="button"
-            disabled={!isAvailable}
+            disabled={!isAvailable && !allowUnavailableSelection}
             onClick={() => onSelect(size)}
             className={cn(
               'flex size-10 items-center justify-center rounded-full text-[13px] font-semibold transition-all',
@@ -37,7 +39,9 @@ export default function SizeSelector({
                 ? 'bg-ink text-white dark:bg-foreground dark:text-background'
                 : isAvailable
                   ? 'border border-soft/60 dark:border-border bg-white dark:bg-card text-ink dark:text-foreground hover:border-ink/50'
-                  : 'bg-soft/20 dark:bg-secondary text-ink/30 dark:text-foreground/30 line-through cursor-not-allowed'
+                  : allowUnavailableSelection
+                    ? 'bg-cream dark:bg-secondary text-ink/40 dark:text-foreground/40 line-through hover:border-ink/30 border border-soft/40 dark:border-border'
+                    : 'bg-soft/20 dark:bg-secondary text-ink/30 dark:text-foreground/30 line-through cursor-not-allowed'
             )}
           >
             {size}
