@@ -7,12 +7,8 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useCart } from '@/contexts/CartContext';
 import { stores } from '@/data/stores';
 import { formatPrice } from '@/lib/format';
-import { cn } from '@/lib/utils';
+import { cn, isLoadableImage } from '@/lib/utils';
 import type { Product, CartItem } from '@/types';
-
-function isExternal(src: string | undefined): src is string {
-  return !!src && /^https?:\/\//.test(src);
-}
 
 type Variant = 'normal' | 'action-needed' | 'unavailable';
 
@@ -26,7 +22,7 @@ export default function CartItemRow({ product, cartItem, variant = 'normal' }: C
   const { t } = useLanguage();
   const { updateQuantity, removeItem } = useCart();
   const store = stores.find(s => s.id === product.storeId);
-  const hasPhoto = isExternal(product.images[0]);
+  const hasPhoto = isLoadableImage(product.images[0]);
   const grayscale = variant === 'unavailable';
 
   const incQty = () => updateQuantity(product.id, cartItem.size, cartItem.quantity + 1);

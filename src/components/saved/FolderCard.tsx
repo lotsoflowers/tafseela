@@ -8,7 +8,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useFolders } from '@/contexts/FoldersContext';
 import { products } from '@/data/products';
 import { outfits } from '@/data/outfits';
-import { cn } from '@/lib/utils';
+import { cn, isLoadableImage } from '@/lib/utils';
 import type { Folder } from '@/types';
 
 interface FolderCardProps {
@@ -46,7 +46,7 @@ export default function FolderCard({ folder }: FolderCardProps) {
         <div className="grid grid-cols-2 gap-px bg-blush/40">
           {previews.map((src, i) => (
             <div key={i} className="relative aspect-square overflow-hidden bg-cream dark:bg-secondary">
-              {src && (
+              {isLoadableImage(src) && (
                 <Image
                   src={src}
                   alt=""

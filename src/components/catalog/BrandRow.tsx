@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useBrandFollow } from '@/contexts/BrandFollowContext';
-import { cn } from '@/lib/utils';
+import { cn, isLoadableImage } from '@/lib/utils';
 import type { Store } from '@/types';
 
 interface BrandRowProps {
@@ -18,7 +18,7 @@ export default function BrandRow({ store, className }: BrandRowProps) {
   const { isFollowing, toggleFollow } = useBrandFollow();
   const followed = isFollowing(store.id);
   const Chevron = direction === 'rtl' ? ChevronLeft : ChevronRight;
-  const hasLogo = !!store.logo && /^(https?:\/\/|\/)/.test(store.logo);
+  const hasLogo = isLoadableImage(store.logo);
 
   return (
     <div

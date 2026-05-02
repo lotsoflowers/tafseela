@@ -10,13 +10,9 @@ import { useWishlist } from '@/contexts/WishlistContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { stores } from '@/data/stores';
 import { formatPrice } from '@/lib/format';
-import { cn } from '@/lib/utils';
+import { cn, isLoadableImage } from '@/lib/utils';
 import type { Product } from '@/types';
 import AddToFolderMenu from './AddToFolderMenu';
-
-function isExternal(src: string | undefined): src is string {
-  return !!src && /^https?:\/\//.test(src);
-}
 
 interface SavedItemRowProps {
   product: Product;
@@ -31,7 +27,7 @@ export default function SavedItemRow({ product }: SavedItemRowProps) {
   const [folderMenuOpen, setFolderMenuOpen] = useState(false);
 
   const store = stores.find(s => s.id === product.storeId);
-  const hasPhoto = isExternal(product.images[0]);
+  const hasPhoto = isLoadableImage(product.images[0]);
   const oos = product.isOutOfStock || product.availableSizes.length === 0;
   const firstAvailableSize = product.availableSizes[0];
 

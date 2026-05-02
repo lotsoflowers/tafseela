@@ -1,6 +1,6 @@
 'use client';
 
-import { use, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -11,7 +11,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useOrders } from '@/contexts/OrdersContext';
 import { products } from '@/data/products';
 import { formatPrice } from '@/lib/format';
-import { cn } from '@/lib/utils';
+import { cn, isLoadableImage } from '@/lib/utils';
 import type { ReturnReason, BilingualText, ProductSize } from '@/types';
 
 type Step = 1 | 2 | 3;
@@ -25,8 +25,8 @@ const REASONS: { id: ReturnReason; label: BilingualText }[] = [
   { id: 'other', label: { en: 'Other', ar: 'سبب آخر' } },
 ];
 
-export default function PlaceReturnPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params);
+export default function PlaceReturnPage({ params }: { params: { id: string } }) {
+  const { id } = params;
   const router = useRouter();
   const { t, direction } = useLanguage();
   const { getOrder, getReturnsForOrder, placeReturn } = useOrders();
@@ -124,7 +124,7 @@ export default function PlaceReturnPage({ params }: { params: Promise<{ id: stri
                 if (!product) return null;
                 const key = `${item.productId}|${item.size}`;
                 const checked = selected.has(key);
-                const hasPhoto = /^https?:\/\//.test(product.images[0] ?? '');
+                const hasPhoto = isLoadableImage(product.images[0]);
                 return (
                   <button
                     type="button"
@@ -210,7 +210,7 @@ export default function PlaceReturnPage({ params }: { params: Promise<{ id: stri
                 const [productId, size] = key.split('|');
                 const product = products.find(p => p.id === productId);
                 if (!product) return null;
-                const hasPhoto = /^https?:\/\//.test(product.images[0] ?? '');
+                const hasPhoto = isLoadableImage(product.images[0]);
                 return (
                   <div key={key} className="overflow-hidden rounded-3xl bg-white p-4 dark:bg-card">
                     <div className="flex items-center gap-3">

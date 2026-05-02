@@ -17,7 +17,7 @@ import { useBrandFollow } from '@/contexts/BrandFollowContext';
 import { products } from '@/data/products';
 import { outfits } from '@/data/outfits';
 import { stores } from '@/data/stores';
-import { cn } from '@/lib/utils';
+import { cn, isLoadableImage } from '@/lib/utils';
 
 type Subtab = 'outfits' | 'items' | 'folders' | 'brands';
 
@@ -210,7 +210,7 @@ function FollowedBrandSection({ storeId }: { storeId: string }) {
   const store = stores.find(s => s.id === storeId);
   if (!store) return null;
   const newArrivals = products.filter(p => p.storeId === storeId).slice(0, 6);
-  const hasLogo = !!store.logo && /^(https?:\/\/|\/)/.test(store.logo);
+  const hasLogo = isLoadableImage(store.logo);
 
   return (
     <div>
@@ -236,9 +236,9 @@ function FollowedBrandSection({ storeId }: { storeId: string }) {
           <Link
             key={p.id}
             href={`/product/${p.id}`}
-            className="relative aspect-[3/4] w-32 shrink-0 overflow-hidden rounded-2xl bg-blush/40"
+            className="relative aspect-[3/4] w-32 shrink-0 overflow-hidden rounded-2xl bg-gradient-to-br from-blush via-soft/60 to-cream"
           >
-            {/^https?:\/\//.test(p.images[0] ?? '') && (
+            {isLoadableImage(p.images[0]) && (
               <Image
                 src={p.images[0]}
                 alt={t(p.name)}

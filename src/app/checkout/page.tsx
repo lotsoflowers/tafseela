@@ -21,7 +21,7 @@ import { products } from '@/data/products';
 import { stores } from '@/data/stores';
 import { countries, defaultCountry } from '@/data/countries';
 import { formatPrice } from '@/lib/format';
-import { cn } from '@/lib/utils';
+import { cn, isLoadableImage } from '@/lib/utils';
 import type { Order } from '@/types';
 
 type DeliveryMethod = 'postal' | 'pickup';
@@ -162,7 +162,7 @@ export default function CheckoutPage() {
                 {items.map(item => {
                   const product = products.find(p => p.id === item.productId);
                   if (!product) return null;
-                  const hasPhoto = /^https?:\/\//.test(product.images[0] ?? '');
+                  const hasPhoto = isLoadableImage(product.images[0]);
                   return (
                     <li key={`${item.productId}-${item.size}`} className="flex items-center gap-3">
                       <div className="relative size-14 shrink-0 overflow-hidden rounded-xl bg-blush/40">

@@ -6,7 +6,7 @@ import { Sparkle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { stores } from '@/data/stores';
 import { getOutfitTotalPrice } from '@/data/outfits';
-import { cn } from '@/lib/utils';
+import { cn, isLoadableImage } from '@/lib/utils';
 import type { Outfit } from '@/types';
 import WishlistButton from '@/components/shared/WishlistButton';
 
@@ -45,8 +45,8 @@ export default function OutfitCard({ outfit, className, size = 'md' }: OutfitCar
         className
       )}
     >
-      <div className={cn('relative w-full overflow-hidden bg-blush/40', sizeAspect[size])}>
-        {outfit.lifestylePhoto && (
+      <div className={cn('relative w-full overflow-hidden bg-gradient-to-br from-blush via-soft/60 to-cream', sizeAspect[size])}>
+        {isLoadableImage(outfit.lifestylePhoto) && (
           <Image
             src={outfit.lifestylePhoto}
             alt={t(outfit.name)}

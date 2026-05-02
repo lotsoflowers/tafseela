@@ -1,6 +1,6 @@
 'use client';
 
-import { use, useState, Suspense } from 'react';
+import { useState, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -9,7 +9,7 @@ import PageShell from '@/components/layout/PageShell';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useReviews } from '@/contexts/ReviewsContext';
 import { products } from '@/data/products';
-import { cn } from '@/lib/utils';
+import { cn, isLoadableImage } from '@/lib/utils';
 
 const MAX_PHOTOS = 10;
 const MAX_BODY = 500;
@@ -29,7 +29,7 @@ function WriteReviewContent({ id }: { id: string }) {
 
   const Back = direction === 'rtl' ? ChevronRight : ChevronLeft;
   const valid = rating > 0;
-  const hasPhoto = /^https?:\/\//.test(product.images[0] ?? '');
+  const hasPhoto = isLoadableImage(product.images[0]);
 
   const handlePhotoPick = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files ?? []);
@@ -200,11 +200,10 @@ function WriteReviewContent({ id }: { id: string }) {
   );
 }
 
-export default function WriteReviewPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params);
+export default function WriteReviewPage({ params }: { params: { id: string } }) {
   return (
     <Suspense>
-      <WriteReviewContent id={id} />
+      <WriteReviewContent id={params.id} />
     </Suspense>
   );
 }

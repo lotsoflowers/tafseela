@@ -10,7 +10,7 @@ import SegmentedSubtabs from '@/components/shared/SegmentedSubtabs';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useOrders } from '@/contexts/OrdersContext';
 import { products } from '@/data/products';
-import { cn } from '@/lib/utils';
+import { cn, isLoadableImage } from '@/lib/utils';
 import type { Order } from '@/types';
 
 type Tab = 'active' | 'past';
@@ -114,7 +114,7 @@ function OrderRow({ order }: { order: Order }) {
         <div className="flex flex-1 gap-2 overflow-x-auto hide-scrollbar">
           {order.items.slice(0, 5).map((item, i) => {
             const product = products.find(p => p.id === item.productId);
-            const hasPhoto = product && /^https?:\/\//.test(product.images[0] ?? '');
+            const hasPhoto = !!product && isLoadableImage(product.images[0]);
             return (
               <div
                 key={`${item.productId}-${item.size}-${i}`}

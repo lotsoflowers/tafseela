@@ -1,6 +1,6 @@
 'use client';
 
-import { use, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import {
@@ -40,9 +40,9 @@ import type { ProductSize, FitRecommendation } from '@/types';
 export default function ProductPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) {
-  const { id } = use(params);
+  const { id } = params;
   const router = useRouter();
   const { language, direction, t } = useLanguage();
   const { isAuthenticated, openAuthModal } = useAuth();

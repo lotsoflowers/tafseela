@@ -1,6 +1,6 @@
 'use client';
 
-import { use, useEffect, useState, Suspense } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
@@ -12,7 +12,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useOrders } from '@/contexts/OrdersContext';
 import { products } from '@/data/products';
 import { formatPrice } from '@/lib/format';
-import { cn } from '@/lib/utils';
+import { cn, isLoadableImage } from '@/lib/utils';
 import {
   Accordion,
   AccordionContent,
@@ -119,7 +119,7 @@ function OrderDetailContent({ id }: { id: string }) {
                 {order.items.map(item => {
                   const product = products.find(p => p.id === item.productId);
                   if (!product) return null;
-                  const hasPhoto = /^https?:\/\//.test(product.images[0] ?? '');
+                  const hasPhoto = isLoadableImage(product.images[0]);
                   return (
                     <li key={`${item.productId}-${item.size}`} className="flex items-center gap-3">
                       <div className="relative size-14 shrink-0 overflow-hidden rounded-xl bg-blush/40">
@@ -249,11 +249,10 @@ function Row({ label, value, muted, bold }: { label: { en: string; ar: string };
   );
 }
 
-export default function OrderDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params);
+export default function OrderDetailPage({ params }: { params: { id: string } }) {
   return (
     <Suspense>
-      <OrderDetailContent id={id} />
+      <OrderDetailContent id={params.id} />
     </Suspense>
   );
 }

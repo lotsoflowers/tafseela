@@ -1,6 +1,5 @@
 'use client';
 
-import { use } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ChevronLeft, ChevronRight, Trash2 } from 'lucide-react';
@@ -15,9 +14,9 @@ import { outfits } from '@/data/outfits';
 export default function FolderDetailPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) {
-  const { id } = use(params);
+  const { id } = params;
   const { t, direction } = useLanguage();
   const { getFolder, removeFromFolder } = useFolders();
 

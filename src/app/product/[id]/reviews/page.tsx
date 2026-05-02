@@ -1,6 +1,6 @@
 'use client';
 
-import { use, useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -11,14 +11,14 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useReviews } from '@/contexts/ReviewsContext';
 import { products } from '@/data/products';
 import { reviews as staticReviews } from '@/data/reviews';
-import { cn } from '@/lib/utils';
+import { cn, isLoadableImage } from '@/lib/utils';
 import type { Review, ProductSize } from '@/types';
 
 const RATINGS = [5, 4, 3, 2, 1] as const;
 const SIZES: ProductSize[] = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
-export default function ReviewsListPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params);
+export default function ReviewsListPage({ params }: { params: { id: string } }) {
+  const { id } = params;
   const { t, direction, language } = useLanguage();
   const { getReviews } = useReviews();
   const product = products.find(p => p.id === id);
@@ -62,7 +62,7 @@ export default function ReviewsListPage({ params }: { params: Promise<{ id: stri
       <div className="px-4 pt-4">
         <div className="flex items-center gap-3 rounded-3xl bg-white p-4 dark:bg-card">
           <div className="relative size-14 shrink-0 overflow-hidden rounded-xl bg-blush/40">
-            {/^https?:\/\//.test(product.images[0] ?? '') && (
+            {isLoadableImage(product.images[0]) && (
               <Image src={product.images[0]} alt={t(product.name)} fill sizes="56px" className="object-cover" />
             )}
           </div>
@@ -140,7 +140,9 @@ function ReviewItem({ review }: { review: Review }) {
         <div className="mt-3 flex gap-2 overflow-x-auto hide-scrollbar">
           {review.images.map((src, i) => (
             <div key={i} className="relative size-16 shrink-0 overflow-hidden rounded-xl bg-blush/40">
-              <Image src={src} alt="" fill sizes="64px" className="object-cover" unoptimized={src.startsWith('blob:')} />
+              {isLoadableImage(src) && (
+                <Image src={src} alt="" fill sizes="64px" className="object-cover" unoptimized={src.startsWith('blob:')} />
+              )}
             </div>
           ))}
         </div>

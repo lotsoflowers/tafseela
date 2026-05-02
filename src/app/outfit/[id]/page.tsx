@@ -1,6 +1,5 @@
 'use client';
 
-import { use } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -13,14 +12,14 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { getOutfit, getOutfitTotalPrice, getRelatedOutfits } from '@/data/outfits';
 import { products } from '@/data/products';
 import { stores } from '@/data/stores';
-import { cn } from '@/lib/utils';
+import { cn, isLoadableImage } from '@/lib/utils';
 
 export default function OutfitDetailPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) {
-  const { id } = use(params);
+  const { id } = params;
   const outfit = getOutfit(id);
   const { t, language, direction } = useLanguage();
 
@@ -57,8 +56,8 @@ export default function OutfitDetailPage({
       </div>
 
       {/* Lifestyle hero */}
-      <div className="relative aspect-[3/4] w-full overflow-hidden bg-blush/40">
-        {outfit.lifestylePhoto && (
+      <div className="relative aspect-[3/4] w-full overflow-hidden bg-gradient-to-br from-blush via-soft/60 to-cream">
+        {isLoadableImage(outfit.lifestylePhoto) && (
           <Image
             src={outfit.lifestylePhoto}
             alt={t(outfit.name)}

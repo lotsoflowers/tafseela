@@ -1,6 +1,5 @@
 'use client';
 
-import { use } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -10,6 +9,7 @@ import OutfitCard from '@/components/outfit/OutfitCard';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { getOutfitsByVibe } from '@/data/outfits';
 import { vibeMeta } from '@/components/outfit/VibeCard';
+import { isLoadableImage } from '@/lib/utils';
 import type { OutfitVibe } from '@/types';
 
 const VALID_VIBES: OutfitVibe[] = ['daily', 'evening', 'layered', 'modest'];
@@ -17,9 +17,9 @@ const VALID_VIBES: OutfitVibe[] = ['daily', 'evening', 'layered', 'modest'];
 export default function VibeDetailPage({
   params,
 }: {
-  params: Promise<{ vibe: string }>;
+  params: { vibe: string };
 }) {
-  const { vibe } = use(params);
+  const { vibe } = params;
   const { t, direction } = useLanguage();
 
   if (!VALID_VIBES.includes(vibe as OutfitVibe)) notFound();
@@ -43,8 +43,8 @@ export default function VibeDetailPage({
       </div>
 
       {/* Blurred lifestyle hero with vibe overlay */}
-      <div className="relative aspect-[3/2] w-full overflow-hidden bg-blush/40">
-        {heroPhoto && (
+      <div className="relative aspect-[3/2] w-full overflow-hidden bg-gradient-to-br from-blush via-soft/60 to-cream">
+        {isLoadableImage(heroPhoto) && (
           <Image
             src={heroPhoto}
             alt={t(meta.label)}
