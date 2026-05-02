@@ -6,6 +6,11 @@ import { LanguageProvider } from '@/contexts/LanguageContext';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { CartProvider } from '@/contexts/CartContext';
 import { WishlistProvider } from '@/contexts/WishlistContext';
+import { BrandFollowProvider } from '@/contexts/BrandFollowContext';
+import { ReviewsProvider } from '@/contexts/ReviewsContext';
+import { OrdersProvider } from '@/contexts/OrdersContext';
+import { RestockAlertsProvider } from '@/contexts/RestockAlertsContext';
+import { OnboardingProvider } from '@/contexts/OnboardingContext';
 import './globals.css';
 
 const inter = Inter({
@@ -41,13 +46,23 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <ThemeProvider>
           <LanguageProvider>
-            <AuthProvider>
-              <CartProvider>
-                <WishlistProvider>
-                  {children}
-                </WishlistProvider>
-              </CartProvider>
-            </AuthProvider>
+            <OnboardingProvider>
+              <AuthProvider>
+                <CartProvider>
+                  <WishlistProvider>
+                    <BrandFollowProvider>
+                      <ReviewsProvider>
+                        <OrdersProvider>
+                          <RestockAlertsProvider>
+                            {children}
+                          </RestockAlertsProvider>
+                        </OrdersProvider>
+                      </ReviewsProvider>
+                    </BrandFollowProvider>
+                  </WishlistProvider>
+                </CartProvider>
+              </AuthProvider>
+            </OnboardingProvider>
           </LanguageProvider>
         </ThemeProvider>
       </body>

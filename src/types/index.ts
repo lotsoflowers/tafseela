@@ -141,3 +141,51 @@ export type FitRecommendation = {
   confidence: 'high' | 'medium' | 'low';
   note: BilingualText;
 };
+
+export type OutfitVibe = 'daily' | 'evening' | 'layered' | 'modest';
+
+export type Outfit = {
+  id: string;
+  name: BilingualText;
+  lifestylePhoto: string;
+  items: string[];
+  vibe: OutfitVibe;
+  brand?: string;
+  isFeatured?: boolean;
+};
+
+export type ReturnReason =
+  | 'not-as-described'
+  | 'wrong-size'
+  | 'damaged'
+  | 'late'
+  | 'changed-mind'
+  | 'other';
+
+export type ReturnLineItem = {
+  productId: string;
+  size: ProductSize;
+  quantity: number;
+  reason: ReturnReason;
+  reasonText?: string;
+};
+
+export type ReturnRequest = {
+  id: string;
+  orderId: string;
+  items: ReturnLineItem[];
+  status: 'pending' | 'approved' | 'in-transit' | 'received' | 'refunded';
+  createdAt: string;
+};
+
+export type RestockAlert = {
+  productId: string;
+  size: ProductSize;
+  createdAt: string;
+};
+
+export type OnboardingState = {
+  completed: boolean;
+  language: Language | null;
+  notificationsAllowed: boolean | null;
+};
