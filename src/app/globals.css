@@ -18,8 +18,8 @@
   :root {
     /* Tafseela Brand Palette
        Hero #BF066A · Plum #5C0A3D · Soft #ED93B1 · Blush #FBE0E8 · Cream #FFF4ED · Ink #2C2C2A
-       Page bg moved from Cream to Blush; Cream now plays the role of secondary surface. */
-    --background: #FBE0E8;
+       Page bg is pure white (Plum-style); Blush and Cream play secondary-surface roles. */
+    --background: #FFFFFF;
     --foreground: #2C2C2A;
     --card: #FFFFFF;
     --card-foreground: #2C2C2A;
@@ -27,11 +27,11 @@
     --popover-foreground: #2C2C2A;
     --primary: #BF066A;
     --primary-foreground: #FFFFFF;
-    --secondary: #FFF4ED;
+    --secondary: #FBE0E8;
     --secondary-foreground: #5C0A3D;
     --muted: #FFF4ED;
     --muted-foreground: #ED93B1;
-    --accent: #FFF4ED;
+    --accent: #FBE0E8;
     --accent-foreground: #5C0A3D;
     --destructive: #DC2626;
     --border: #ED93B1;
@@ -171,6 +171,27 @@
   100% { opacity: 1; transform: scale(1); }
 }
 
+@keyframes lift-in {
+  0% { opacity: 0; transform: translateY(20px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes pop-in {
+  0% { opacity: 0; transform: scale(0.6); }
+  60% { transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes nav-pill-scale {
+  0% { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
 /* ===== Animation Utility Classes ===== */
 
 .animate-heart-pop {
@@ -225,6 +246,76 @@
 
 .animate-scale-in {
   animation: scale-in 0.3s ease-out both;
+}
+
+.animate-lift-in {
+  animation: lift-in 0.5s cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+.animate-drift {
+  animation: drift 4s ease-in-out infinite;
+}
+
+.animate-pop-in {
+  animation: pop-in 0.45s cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+.animate-nav-pill {
+  animation: nav-pill-scale 0.3s cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+/* ===== Elevation tokens (Plum-style soft shadows on white) ===== */
+
+.shadow-card {
+  box-shadow:
+    0 1px 2px rgba(92, 10, 61, 0.04),
+    0 4px 16px rgba(92, 10, 61, 0.06),
+    0 16px 48px -12px rgba(92, 10, 61, 0.08);
+}
+
+.shadow-card-hover {
+  box-shadow:
+    0 2px 4px rgba(191, 6, 106, 0.08),
+    0 8px 24px rgba(191, 6, 106, 0.10),
+    0 24px 60px -12px rgba(191, 6, 106, 0.14);
+}
+
+.shadow-pill {
+  box-shadow:
+    0 1px 2px rgba(92, 10, 61, 0.06),
+    0 4px 12px rgba(92, 10, 61, 0.10);
+}
+
+.shadow-cta {
+  box-shadow:
+    0 2px 4px rgba(191, 6, 106, 0.20),
+    0 12px 32px -8px rgba(191, 6, 106, 0.30);
+}
+
+.dark .shadow-card {
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    0 16px 48px -12px rgba(0, 0, 0, 0.6);
+}
+
+.dark .shadow-card-hover {
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    0 8px 24px rgba(0, 0, 0, 0.5),
+    0 24px 60px -12px rgba(0, 0, 0, 0.7);
+}
+
+.dark .shadow-pill {
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.dark .shadow-cta {
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    0 12px 32px -8px rgba(0, 0, 0, 0.6);
 }
 
 /* ===== Staggered Grid Children ===== */
