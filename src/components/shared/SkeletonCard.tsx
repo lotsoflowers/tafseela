@@ -4,7 +4,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export default function SkeletonCard() {
   return (
-    <div className="rounded-lg overflow-hidden bg-white">
+    <div className="rounded-lg overflow-hidden bg-white dark:bg-card">
       {/* Image placeholder */}
       <Skeleton className="aspect-square w-full" />
 

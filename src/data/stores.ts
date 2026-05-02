@@ -2,6 +2,34 @@ import { Store } from '@/types';
 
 export const stores: Store[] = [
   {
+    id: 'modish',
+    name: { en: 'Modish', ar: 'موديش' },
+    description: {
+      en: 'Contemporary women\'s fashion — clean silhouettes, new arrivals weekly',
+      ar: 'أزياء نسائية عصرية — قصات نظيفة، وصول جديد كل أسبوع',
+    },
+    logo: '/images/stores/modish-logo.png',
+    banner: 'https://modish.com.kw/cdn/shop/files/new_arrivals_website_banner-01.jpg?v=1776580223&width=1600',
+    rating: 4.9,
+    productCount: 380,
+    reviewCount: 842,
+    website: 'https://modish.com.kw',
+    sizeChart: {
+      unit: 'in',
+      notes: {
+        en: 'Measurements taken from a reference garment in size S; bust grows ~2" per size up. Model is 176 cm / 55 kg in size S.',
+        ar: 'القياسات مأخوذة من قطعة مرجعية بمقاس S؛ الصدر يكبر بحوالي 2 إنش لكل مقاس. العارضة 176 سم / 55 كجم بمقاس S.',
+      },
+      measurements: [
+        { size: 'XS', bust: 38, waist: 28, hips: 38, length: 47, shoulder: 19 },
+        { size: 'S',  bust: 40, waist: 30, hips: 40, length: 48, shoulder: 20 },
+        { size: 'M',  bust: 42, waist: 32, hips: 42, length: 48, shoulder: 21 },
+        { size: 'L',  bust: 44, waist: 34, hips: 44, length: 48, shoulder: 22 },
+        { size: 'XL', bust: 46, waist: 36, hips: 46, length: 49, shoulder: 23 },
+      ],
+    },
+  },
+  {
     id: 'gozline',
     name: { en: 'Gozline', ar: 'جوزلين' },
     description: {
@@ -16,16 +44,32 @@ export const stores: Store[] = [
   },
   {
     id: 'lam-sheen',
-    name: { en: 'lam_sheen', ar: 'لمشين' },
+    name: { en: 'Lamsheen', ar: 'لامشين' },
     description: {
-      en: 'Modest workwear and professional fashion',
-      ar: 'أزياء عمل محتشمة واحترافية',
+      en: 'Elegant, feminine tailoring from Kuwait — founded by Latifah Aljasem and Shaikha Alamer',
+      ar: 'تفصيل أنيق وأنثوي من الكويت — تأسست على يد لطيفة الجاسم وشيخة العامر',
     },
     logo: '/images/stores/lam-sheen-logo.png',
-    banner: '/images/stores/lam-sheen-banner.jpg',
-    rating: 4.7,
-    productCount: 28,
-    reviewCount: 94,
+    banner: 'https://cdn.shopify.com/s/files/1/0723/3742/4573/files/WhatsAppImage2026-04-29at2.19.54PM.jpg?v=1777462574&width=1600',
+    rating: 4.8,
+    productCount: 87,
+    reviewCount: 312,
+    website: 'https://lam-sheen.com',
+    sizeChart: {
+      unit: 'in',
+      notes: {
+        en: 'Sizing taken from Lamsheen\'s tailored blazers and shirts. Bust grows ~2" per size, length ~0.5". Best worn slightly fitted through shoulders for the brand\'s signature silhouette.',
+        ar: 'القياسات مأخوذة من بليزرات وقمصان لامشين المفصلة. الصدر يكبر بحوالي 2 إنش لكل مقاس، الطول حوالي نصف إنش. يفضل أن يكون محدد قليلاً عند الأكتاف لإطلالة الماركة المميزة.',
+      },
+      measurements: [
+        { size: 'XS', bust: 36, waist: 30, hips: 38, length: 29.0, shoulder: 15.0 },
+        { size: 'S',  bust: 38, waist: 32, hips: 40, length: 29.5, shoulder: 15.5 },
+        { size: 'M',  bust: 40, waist: 34, hips: 42, length: 30.0, shoulder: 16.0 },
+        { size: 'L',  bust: 42, waist: 36, hips: 44, length: 30.5, shoulder: 16.5 },
+        { size: 'XL', bust: 44, waist: 38, hips: 46, length: 31.0, shoulder: 17.0 },
+        { size: 'XXL', bust: 46, waist: 40, hips: 48, length: 31.5, shoulder: 17.5 },
+      ],
+    },
   },
   {
     id: 'boz-kw',

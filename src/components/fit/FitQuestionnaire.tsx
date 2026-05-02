@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { getRecommendation } from '@/lib/fit-logic';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -33,16 +32,14 @@ export default function FitQuestionnaire({
   const [isOpen, setIsOpen] = useState(false);
   const [height, setHeight] = useState(165);
   const [weight, setWeight] = useState(60);
-  const [usualSize, setUsualSize] = useState<ProductSize | null>(null);
-  const [preferredFit, setPreferredFit] = useState<FitProfile['preferredFit'] | null>(null);
+  const [usualSize, setUsualSize] = useState<ProductSize | ''>('');
+  const [preferredFit, setPreferredFit] = useState<FitProfile['preferredFit']>('regular');
 
   const handleSubmit = () => {
-    if (!usualSize || !preferredFit) return;
-
     const profile: FitProfile = {
       height,
       weight,
-      usualSize,
+      usualSize: usualSize || undefined,
       preferredFit,
     };
 
@@ -50,22 +47,20 @@ export default function FitQuestionnaire({
     onResult(result);
   };
 
-  const isFormValid = usualSize !== null && preferredFit !== null;
-
   return (
-    <div className={cn('rounded-xl border border-soft/50 bg-cream/50', className)}>
+    <div className={cn('rounded-xl border border-soft/50 dark:border-border bg-cream/50 dark:bg-secondary/40', className)}>
       {/* Toggle header */}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
         className="flex w-full items-center justify-between p-4"
       >
-        <span className="font-semibold text-plum">
+        <span className="font-semibold text-plum dark:text-soft">
           {language === 'ar' ? 'مو متأكدة من مقاسك؟' : 'Not sure about your size?'}
         </span>
         <ChevronDown
           className={cn(
-            'size-5 text-plum transition-transform',
+            'size-5 text-plum dark:text-soft transition-transform',
             isOpen && 'rotate-180'
           )}
         />
@@ -77,7 +72,7 @@ export default function FitQuestionnaire({
           {/* Height slider */}
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <Label className="text-sm font-medium text-ink">
+              <Label className="text-sm font-medium text-ink dark:text-foreground">
                 {language === 'ar' ? 'الطول' : 'Height'}
               </Label>
               <span className="text-sm font-semibold text-hero">
@@ -92,7 +87,7 @@ export default function FitQuestionnaire({
               onChange={(e) => setHeight(Number(e.target.value))}
               className="w-full accent-hero"
             />
-            <div className="flex justify-between text-xs text-ink/40">
+            <div className="flex justify-between text-xs text-ink/40 dark:text-foreground/40">
               <span>150 cm</span>
               <span>185 cm</span>
             </div>
@@ -101,7 +96,7 @@ export default function FitQuestionnaire({
           {/* Weight slider */}
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <Label className="text-sm font-medium text-ink">
+              <Label className="text-sm font-medium text-ink dark:text-foreground">
                 {language === 'ar' ? 'الوزن' : 'Weight'}
               </Label>
               <span className="text-sm font-semibold text-hero">
@@ -116,59 +111,81 @@ export default function FitQuestionnaire({
               onChange={(e) => setWeight(Number(e.target.value))}
               className="w-full accent-hero"
             />
-            <div className="flex justify-between text-xs text-ink/40">
+            <div className="flex justify-between text-xs text-ink/40 dark:text-foreground/40">
               <span>40 kg</span>
               <span>120 kg</span>
             </div>
           </div>
 
-          {/* Usual size */}
+          {/* Usual size (optional) */}
           <div>
-            <Label className="mb-2 block text-sm font-medium text-ink">
-              {language === 'ar' ? 'مقاسك المعتاد' : 'Your usual size'}
-            </Label>
-            <RadioGroup
-              value={usualSize ?? undefined}
-              onValueChange={(val) => setUsualSize(val as ProductSize)}
-              className="flex flex-wrap gap-3"
-            >
-              {USUAL_SIZES.map((size) => (
-                <div key={size} className="flex items-center gap-1.5">
-                  <RadioGroupItem value={size} id={`size-${size}`} />
-                  <Label htmlFor={`size-${size}`} className="text-sm text-ink">
+            <div className="mb-2 flex items-center justify-between">
+              <Label className="block text-sm font-medium text-ink dark:text-foreground">
+                {language === 'ar' ? 'مقاسك المعتاد' : 'Your usual size'}
+              </Label>
+              <span className="text-xs text-ink/40 dark:text-foreground/40">
+                {language === 'ar' ? 'اختياري — للدقة' : 'Optional — for accuracy'}
+              </span>
+            </div>
+            <div role="radiogroup" className="flex flex-wrap gap-2">
+              {USUAL_SIZES.map((size) => {
+                const active = usualSize === size;
+                return (
+                  <button
+                    key={size}
+                    type="button"
+                    role="radio"
+                    aria-checked={active}
+                    onClick={() => setUsualSize(active ? '' : size)}
+                    className={cn(
+                      'flex min-w-11 cursor-pointer items-center justify-center rounded-full border px-3.5 py-1.5 text-sm font-semibold transition-colors select-none',
+                      'focus:outline-none focus-visible:ring-2 focus-visible:ring-hero/40',
+                      active
+                        ? 'border-hero bg-hero text-white shadow-sm shadow-hero/20'
+                        : 'border-soft/50 bg-white text-ink hover:border-hero/40 hover:text-hero dark:border-border dark:bg-card dark:text-foreground'
+                    )}
+                  >
                     {size}
-                  </Label>
-                </div>
-              ))}
-            </RadioGroup>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Fit preference */}
           <div>
-            <Label className="mb-2 block text-sm font-medium text-ink">
+            <Label className="mb-2 block text-sm font-medium text-ink dark:text-foreground">
               {language === 'ar' ? 'تفضيلك للقصة' : 'Fit preference'}
             </Label>
-            <RadioGroup
-              value={preferredFit ?? undefined}
-              onValueChange={(val) => setPreferredFit(val as FitProfile['preferredFit'])}
-              className="flex flex-wrap gap-3"
-            >
-              {FIT_PREFERENCES.map((pref) => (
-                <div key={pref.value} className="flex items-center gap-1.5">
-                  <RadioGroupItem value={pref.value} id={`fit-${pref.value}`} />
-                  <Label htmlFor={`fit-${pref.value}`} className="text-sm text-ink">
+            <div role="radiogroup" className="flex flex-wrap gap-2">
+              {FIT_PREFERENCES.map((pref) => {
+                const active = preferredFit === pref.value;
+                return (
+                  <button
+                    key={pref.value}
+                    type="button"
+                    role="radio"
+                    aria-checked={active}
+                    onClick={() => setPreferredFit(pref.value)}
+                    className={cn(
+                      'cursor-pointer rounded-full border px-4 py-1.5 text-sm font-semibold transition-colors select-none',
+                      'focus:outline-none focus-visible:ring-2 focus-visible:ring-hero/40',
+                      active
+                        ? 'border-hero bg-hero text-white shadow-sm shadow-hero/20'
+                        : 'border-soft/50 bg-white text-ink hover:border-hero/40 hover:text-hero dark:border-border dark:bg-card dark:text-foreground'
+                    )}
+                  >
                     {t(pref.label)}
-                  </Label>
-                </div>
-              ))}
-            </RadioGroup>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Submit */}
           <Button
             onClick={handleSubmit}
-            disabled={!isFormValid}
-            className="w-full bg-hero text-white hover:bg-hero/90 disabled:opacity-50"
+            className="w-full bg-hero text-white hover:bg-hero/90"
           >
             {language === 'ar' ? 'احسبي مقاسك' : 'Get my size'}
           </Button>

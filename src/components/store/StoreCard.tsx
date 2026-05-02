@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Star, ShoppingBag } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
@@ -11,38 +12,55 @@ interface StoreCardProps {
   className?: string;
 }
 
+function isExternalImage(src: string | undefined): src is string {
+  return !!src && /^https?:\/\//.test(src);
+}
+
 export default function StoreCard({ store, className }: StoreCardProps) {
   const { t } = useLanguage();
 
   const initial = t(store.name).charAt(0).toUpperCase();
+  const hasRealBanner = isExternalImage(store.banner);
 
   return (
     <Link
       href={`/store/${store.id}`}
       className={cn(
-        'group block overflow-hidden rounded-2xl bg-white shadow-md',
+        'group block overflow-hidden rounded-2xl bg-white dark:bg-card shadow-md dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),0_4px_16px_rgba(0,0,0,0.4)]',
         'transition-all duration-300 ease-out',
         'hover:shadow-xl hover:-translate-y-1',
         'border border-transparent hover:border-hero/20',
         className
       )}
     >
-      {/* Banner with gradient + pattern */}
+      {/* Banner — real photo when available, gradient otherwise */}
       <div className="relative">
-        <div className="relative flex aspect-[16/7] items-center justify-center bg-gradient-to-br from-plum via-hero/80 to-plum overflow-hidden">
-          {/* Pattern overlay */}
-          <div className="pattern-dots absolute inset-0" />
-          <div className="pattern-diagonal absolute inset-0" />
+        <div className="relative flex aspect-[16/7] items-center justify-center overflow-hidden bg-gradient-to-br from-plum via-hero/80 to-plum">
+          {hasRealBanner ? (
+            <Image
+              src={store.banner}
+              alt={t(store.name)}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+            />
+          ) : (
+            <>
+              {/* Pattern overlay */}
+              <div className="pattern-dots absolute inset-0" />
+              <div className="pattern-diagonal absolute inset-0" />
 
-          {/* Store name watermark */}
-          <span className="text-lg font-bold text-white/15 tracking-widest uppercase select-none">
-            {t(store.name)}
-          </span>
+              {/* Store name watermark */}
+              <span className="text-lg font-bold text-white/15 tracking-widest uppercase select-none">
+                {t(store.name)}
+              </span>
+            </>
+          )}
 
           {/* Hover shine */}
           <div
             className={cn(
-              'absolute inset-0 opacity-0 group-hover:opacity-100',
+              'absolute inset-0 opacity-0 group-hover:opacity-100 z-10 pointer-events-none',
               'bg-gradient-to-r from-transparent via-white/15 to-transparent',
               'translate-x-[-100%] group-hover:translate-x-[100%]',
               'transition-all duration-700 ease-in-out'
@@ -65,20 +83,20 @@ export default function StoreCard({ store, className }: StoreCardProps) {
 
       {/* Info area with glass effect */}
       <div className="px-4 pb-5 pt-10 text-center">
-        <h3 className="text-lg font-bold text-ink group-hover:text-hero transition-colors">
+        <h3 className="text-lg font-bold text-ink dark:text-foreground group-hover:text-hero transition-colors">
           {t(store.name)}
         </h3>
-        <p className="mt-1.5 text-sm text-ink/60 line-clamp-2 leading-relaxed">
+        <p className="mt-1.5 text-sm text-ink/60 dark:text-foreground/60 line-clamp-2 leading-relaxed">
           {t(store.description)}
         </p>
 
         {/* Stats as pills */}
         <div className="mt-3 flex items-center justify-center gap-2">
-          <span className="inline-flex items-center gap-1 rounded-full bg-blush/60 px-3 py-1 text-xs font-medium text-plum">
+          <span className="inline-flex items-center gap-1 rounded-full bg-blush/60 dark:bg-soft/15 px-3 py-1 text-xs font-medium text-plum dark:text-soft">
             <ShoppingBag className="size-3" />
             {store.productCount} {t({ en: 'products', ar: 'منتج' })}
           </span>
-          <span className="inline-flex items-center gap-1 rounded-full bg-cream px-3 py-1 text-xs font-medium text-ink/70">
+          <span className="inline-flex items-center gap-1 rounded-full bg-cream dark:bg-secondary px-3 py-1 text-xs font-medium text-ink/70 dark:text-foreground/70">
             <Star className="size-3 fill-amber-400 text-amber-400" />
             {store.rating}
           </span>

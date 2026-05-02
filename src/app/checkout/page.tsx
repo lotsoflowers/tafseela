@@ -56,7 +56,7 @@ export default function CheckoutPage() {
   if (items.length === 0) return null;
 
   return (
-    <div className="min-h-screen bg-cream">
+    <div className="min-h-screen bg-cream dark:bg-background">
       {/* Header */}
       <div className="sticky top-0 z-10 bg-cream/95 backdrop-blur-sm border-b border-blush/30">
         <div className="max-w-lg mx-auto px-4 py-3 flex items-center gap-3">
@@ -68,7 +68,7 @@ export default function CheckoutPage() {
           >
             <BackArrow className="size-5" />
           </Button>
-          <h1 className="text-lg font-bold text-ink flex-1">
+          <h1 className="text-lg font-bold text-ink dark:text-foreground flex-1">
             {language === 'ar' ? 'إتمام الطلب' : 'Checkout'}
           </h1>
         </div>

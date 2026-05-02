@@ -56,15 +56,15 @@ export default function DeliveryStep({ onNext, className }: DeliveryStepProps) {
   return (
     <div className={cn('space-y-6', className)}>
       {/* Saved addresses placeholder */}
-      <div className="rounded-xl bg-white p-4">
+      <div className="rounded-xl bg-white dark:bg-card p-4">
         <p className="text-sm text-muted-foreground">
           {language === 'ar' ? 'لا توجد عناوين محفوظة' : 'No saved addresses'}
         </p>
       </div>
 
       {/* New address form */}
-      <div className="rounded-xl bg-white p-4 space-y-4">
-        <h3 className="font-semibold text-ink text-sm">
+      <div className="rounded-xl bg-white dark:bg-card p-4 space-y-4">
+        <h3 className="font-semibold text-ink dark:text-foreground text-sm">
           {language === 'ar' ? 'أضيفي عنوان جديد' : 'Add new address'}
         </h3>
 

@@ -54,7 +54,7 @@ export default function StepIndicator({ currentStep, className }: StepIndicatorP
                 className={cn(
                   'text-xs whitespace-nowrap',
                   isActive && 'text-hero font-medium',
-                  isCompleted && 'text-plum font-medium',
+                  isCompleted && 'text-plum dark:text-soft font-medium',
                   isUpcoming && 'text-muted-foreground'
                 )}
               >

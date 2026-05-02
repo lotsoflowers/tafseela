@@ -77,7 +77,7 @@ export default function SearchPage() {
   const emptyState = (
     <div className="flex flex-col items-center justify-center py-20 text-center">
       <ShoppingBag className="size-16 text-soft/60" />
-      <p className="mt-4 text-lg font-semibold text-ink">
+      <p className="mt-4 text-lg font-semibold text-ink dark:text-foreground">
         {t({ en: 'No results found', ar: 'ما لقينا نتائج' })}
       </p>
       <p className="mt-1 text-sm text-ink/60">
@@ -87,7 +87,7 @@ export default function SearchPage() {
   );
 
   return (
-    <PageShell className="bg-cream">
+    <PageShell className="bg-cream dark:bg-background">
       <div className="px-4 pt-4">
         {/* Search input */}
         <div className="relative flex items-center gap-2">
@@ -101,7 +101,7 @@ export default function SearchPage() {
                 en: 'Search products or stores',
                 ar: 'ابحثي عن منتج أو متجر',
               })}
-              className="w-full rounded-full border border-soft bg-white py-3 pe-4 ps-10 text-sm text-ink outline-none transition-colors placeholder:text-soft focus:border-hero/40"
+              className="w-full rounded-full border border-soft dark:border-border bg-white dark:bg-card py-3 pe-4 ps-10 text-sm text-ink dark:text-foreground outline-none transition-colors placeholder:text-soft focus:border-hero/40"
             />
           </div>
 
@@ -111,11 +111,11 @@ export default function SearchPage() {
               render={
                 <button
                   type="button"
-                  className="flex size-11 shrink-0 items-center justify-center rounded-full border border-soft bg-white transition-colors hover:bg-blush/30"
+                  className="flex size-11 shrink-0 items-center justify-center rounded-full border border-soft dark:border-border bg-white dark:bg-card transition-colors hover:bg-blush/30"
                 />
               }
             >
-              <SlidersHorizontal className="size-5 text-ink" />
+              <SlidersHorizontal className="size-5 text-ink dark:text-foreground" />
             </SheetTrigger>
             <SheetContent side="bottom" className="rounded-t-2xl p-0">
               <SheetHeader className="border-b border-soft/30 px-4 pb-3 pt-4">
@@ -126,7 +126,7 @@ export default function SearchPage() {
               <div className="space-y-6 p-4">
                 {/* Category filter */}
                 <div>
-                  <p className="mb-2 text-sm font-semibold text-ink">
+                  <p className="mb-2 text-sm font-semibold text-ink dark:text-foreground">
                     {t({ en: 'Category', ar: 'الفئة' })}
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -143,7 +143,7 @@ export default function SearchPage() {
                               'rounded-full px-3 py-1.5 text-sm font-medium transition-colors',
                               isActive
                                 ? 'bg-hero text-white'
-                                : 'border border-soft bg-white text-ink hover:bg-blush/30'
+                                : 'border border-soft dark:border-border bg-white dark:bg-card text-ink dark:text-foreground hover:bg-blush/30'
                             )}
                           >
                             {t(cat.name)}
@@ -155,7 +155,7 @@ export default function SearchPage() {
 
                 {/* Price range */}
                 <div>
-                  <p className="mb-2 text-sm font-semibold text-ink">
+                  <p className="mb-2 text-sm font-semibold text-ink dark:text-foreground">
                     {t({ en: 'Price range', ar: 'نطاق السعر' })}
                   </p>
                   <div className="flex items-center gap-2">
@@ -179,7 +179,7 @@ export default function SearchPage() {
 
                 {/* Rating minimum */}
                 <div>
-                  <p className="mb-2 text-sm font-semibold text-ink">
+                  <p className="mb-2 text-sm font-semibold text-ink dark:text-foreground">
                     {t({ en: 'Minimum rating', ar: 'أقل تقييم' })}
                   </p>
                   <div className="flex items-center gap-1">

@@ -23,7 +23,7 @@ export default function FitBadge({ fit, className }: FitBadgeProps) {
   return (
     <span
       className={cn(
-        'inline-block rounded-full bg-soft/30 px-2 py-0.5 text-xs font-medium text-plum',
+        'inline-block rounded-full bg-soft/30 px-2 py-0.5 text-xs font-medium text-plum dark:text-soft',
         className
       )}
     >

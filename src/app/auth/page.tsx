@@ -40,17 +40,17 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-white">
+    <div className="flex min-h-screen flex-col bg-white dark:bg-card">
       {/* Top bar */}
       <div className="flex items-center px-4 py-3">
         <button
           type="button"
           onClick={() => router.back()}
-          className="flex size-10 items-center justify-center rounded-full bg-cream"
+          className="flex size-10 items-center justify-center rounded-full bg-cream dark:bg-background"
         >
           <ArrowLeft
             className={cn(
-              'size-5 text-ink',
+              'size-5 text-ink dark:text-foreground',
               direction === 'rtl' && 'rotate-180'
             )}
           />
@@ -64,7 +64,7 @@ export default function AuthPage() {
             <h1 className="mb-1 text-3xl font-bold text-hero">
               {language === 'ar' ? 'تفصيلة' : 'Tafseela'}
             </h1>
-            <p className="text-base font-medium text-ink">
+            <p className="text-base font-medium text-ink dark:text-foreground">
               {language === 'ar' ? 'سجلي دخولك' : 'Sign in to continue'}
             </p>
             <p className="mt-1 text-sm text-ink/50">
@@ -79,7 +79,7 @@ export default function AuthPage() {
               {/* Google */}
               <Button
                 onClick={() => handleLogin('google')}
-                className="h-12 w-full border border-gray-200 bg-white text-ink hover:bg-gray-50"
+                className="h-12 w-full border border-gray-200 bg-white dark:bg-card text-ink dark:text-foreground hover:bg-gray-50"
               >
                 <span className="me-2 text-base font-bold text-blue-500">G</span>
                 {language === 'ar'
@@ -109,7 +109,7 @@ export default function AuthPage() {
 
               {/* Phone */}
               <div className="flex gap-2" dir="ltr">
-                <div className="flex h-12 items-center rounded-lg border border-soft bg-cream/50 px-3 text-sm font-medium text-ink">
+                <div className="flex h-12 items-center rounded-lg border border-soft dark:border-border bg-cream/50 px-3 text-sm font-medium text-ink dark:text-foreground">
                   +965
                 </div>
                 <input
@@ -120,7 +120,7 @@ export default function AuthPage() {
                   onChange={(e) =>
                     setPhoneNumber(e.target.value.replace(/\D/g, '').slice(0, 8))
                   }
-                  className="flex-1 rounded-lg border border-soft bg-white px-3 py-2 text-sm text-ink placeholder:text-ink/30 focus:border-hero focus:outline-none"
+                  className="flex-1 rounded-lg border border-soft dark:border-border bg-white dark:bg-card px-3 py-2 text-sm text-ink dark:text-foreground placeholder:text-ink/30 focus:border-hero focus:outline-none"
                 />
               </div>
 

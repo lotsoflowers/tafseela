@@ -34,6 +34,21 @@ export type Product = {
   tags?: BilingualText[];
 };
 
+export type SizeMeasurement = {
+  size: ProductSize;
+  bust?: number;
+  waist?: number;
+  hips?: number;
+  length?: number;
+  shoulder?: number;
+};
+
+export type SizeChart = {
+  unit: 'in' | 'cm';
+  notes?: BilingualText;
+  measurements: SizeMeasurement[];
+};
+
 export type Store = {
   id: string;
   name: BilingualText;
@@ -43,6 +58,8 @@ export type Store = {
   rating: number;
   productCount: number;
   reviewCount: number;
+  website?: string;
+  sizeChart?: SizeChart;
 };
 
 export type Category = {
@@ -115,8 +132,8 @@ export type User = {
 export type FitProfile = {
   height: number;
   weight: number;
-  usualSize: ProductSize;
-  preferredFit: 'fitted' | 'regular' | 'loose';
+  usualSize?: ProductSize;
+  preferredFit?: 'fitted' | 'regular' | 'loose';
 };
 
 export type FitRecommendation = {

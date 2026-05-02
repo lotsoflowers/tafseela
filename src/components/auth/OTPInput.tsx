@@ -79,7 +79,7 @@ export default function OTPInput({ onComplete, className }: OTPInputProps) {
             value={digit}
             onChange={(e) => handleChange(index, e.target.value)}
             onKeyDown={(e) => handleKeyDown(index, e)}
-            className="flex size-12 items-center justify-center rounded-lg border-2 border-soft bg-white text-center text-xl font-bold text-ink transition-colors focus:border-hero focus:outline-none"
+            className="flex size-12 items-center justify-center rounded-lg border-2 border-soft dark:border-border bg-white dark:bg-card text-center text-xl font-bold text-ink dark:text-foreground transition-colors focus:border-hero focus:outline-none"
           />
         ))}
       </div>
