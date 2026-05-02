@@ -31,12 +31,13 @@ export default function SizeSelector({
             disabled={!isAvailable}
             onClick={() => onSelect(size)}
             className={cn(
-              'flex h-10 min-w-[3rem] items-center justify-center rounded-lg px-3 text-sm font-medium transition-colors',
+              'flex size-10 items-center justify-center rounded-full text-[13px] font-semibold transition-all',
+              'active:scale-[0.94]',
               isSelected
-                ? 'bg-hero text-white'
+                ? 'bg-ink text-white dark:bg-foreground dark:text-background'
                 : isAvailable
-                  ? 'border border-soft dark:border-border bg-white dark:bg-card text-ink dark:text-foreground hover:border-hero/50'
-                  : 'bg-gray-100 text-gray-400 line-through'
+                  ? 'border border-soft/60 dark:border-border bg-white dark:bg-card text-ink dark:text-foreground hover:border-ink/50'
+                  : 'bg-soft/20 dark:bg-secondary text-ink/30 dark:text-foreground/30 line-through cursor-not-allowed'
             )}
           >
             {size}

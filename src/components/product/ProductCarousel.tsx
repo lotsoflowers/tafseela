@@ -54,7 +54,7 @@ export default function ProductCarousel({
           {images.map((src, index) => (
             <CarouselItem key={index}>
               {isExternalImage(src) ? (
-                <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-blush/30">
+                <div className="relative aspect-[4/5] overflow-hidden bg-blush/30 dark:bg-secondary/40">
                   <Image
                     src={src}
                     alt={productName}
@@ -67,7 +67,7 @@ export default function ProductCarousel({
               ) : (
                 <div
                   className={cn(
-                    'flex aspect-[3/4] items-center justify-center rounded-lg',
+                    'flex aspect-[4/5] items-center justify-center',
                     SLIDE_COLORS[index % SLIDE_COLORS.length]
                   )}
                 >
@@ -81,25 +81,22 @@ export default function ProductCarousel({
         </CarouselContent>
       </Carousel>
 
-      {/* Dot indicators */}
-      <div className="absolute bottom-3 start-0 end-0 flex items-center justify-center gap-1.5">
-        <span className="rounded-full bg-black/40 px-2.5 py-1 text-xs font-medium text-white">
-          {current + 1}/{total}
-        </span>
-      </div>
-
-      {/* Dots row */}
-      <div className="mt-3 flex items-center justify-center gap-1.5">
-        {images.map((_, index) => (
-          <span
-            key={index}
-            className={cn(
-              'block size-2 rounded-full transition-colors',
-              index === current ? 'bg-hero' : 'bg-soft/50'
-            )}
-          />
-        ))}
-      </div>
+      {/* Pagination dots — sit at the bottom of the photo, like iOS PageControl */}
+      {total > 1 && (
+        <div className="absolute inset-x-0 bottom-4 flex items-center justify-center gap-1.5">
+          {images.map((_, index) => (
+            <span
+              key={index}
+              className={cn(
+                'block rounded-full transition-all duration-300',
+                index === current
+                  ? 'h-2 w-5 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.3)]'
+                  : 'size-2 bg-white/55'
+              )}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
