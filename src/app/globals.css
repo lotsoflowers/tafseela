@@ -16,8 +16,10 @@
     --font-sans: var(--font-sans);
   }
   :root {
-    /* Tafseela Brand Palette */
-    --background: #FFF4ED;
+    /* Tafseela Brand Palette
+       Hero #BF066A · Plum #5C0A3D · Soft #ED93B1 · Blush #FBE0E8 · Cream #FFF4ED · Ink #2C2C2A
+       Page bg moved from Cream to Blush; Cream now plays the role of secondary surface. */
+    --background: #FBE0E8;
     --foreground: #2C2C2A;
     --card: #FFFFFF;
     --card-foreground: #2C2C2A;
@@ -25,11 +27,11 @@
     --popover-foreground: #2C2C2A;
     --primary: #BF066A;
     --primary-foreground: #FFFFFF;
-    --secondary: #FBE0E8;
+    --secondary: #FFF4ED;
     --secondary-foreground: #5C0A3D;
-    --muted: #FBE0E8;
+    --muted: #FFF4ED;
     --muted-foreground: #ED93B1;
-    --accent: #FBE0E8;
+    --accent: #FFF4ED;
     --accent-foreground: #5C0A3D;
     --destructive: #DC2626;
     --border: #ED93B1;

@@ -2,17 +2,17 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Search, ShoppingBag, Heart, User } from 'lucide-react';
+import { Home, LayoutGrid, ShoppingBag, Heart, User } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useCart } from '@/contexts/CartContext';
 import { cn } from '@/lib/utils';
 
 const tabs = [
   { href: '/home', icon: Home, label: { en: 'Home', ar: 'الرئيسية' } },
-  { href: '/search', icon: Search, label: { en: 'Search', ar: 'البحث' } },
-  { href: '/cart', icon: ShoppingBag, label: { en: 'Cart', ar: 'سلتي' } },
-  { href: '/wishlist', icon: Heart, label: { en: 'Wishlist', ar: 'المفضلة' } },
-  { href: '/profile', icon: User, label: { en: 'Profile', ar: 'حسابي' } },
+  { href: '/catalog', icon: LayoutGrid, label: { en: 'Catalog', ar: 'الفئات' } },
+  { href: '/wishlist', icon: Heart, label: { en: 'Saved', ar: 'المحفوظات' } },
+  { href: '/cart', icon: ShoppingBag, label: { en: 'Bag', ar: 'الحقيبة' } },
+  { href: '/profile', icon: User, label: { en: 'Account', ar: 'الحساب' } },
 ] as const;
 
 export default function BottomNav() {
