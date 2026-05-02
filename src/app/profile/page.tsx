@@ -65,12 +65,12 @@ export default function ProfilePage() {
           icon: <Package className="size-[18px]" strokeWidth={2.25} />,
           iconTint: 'hero',
           label: { en: 'My orders', ar: 'طلباتي' },
-          href: '/order/ORD-2025-001',
+          href: '/orders',
         },
         {
           icon: <Heart className="size-[18px]" strokeWidth={2.25} />,
           iconTint: 'red',
-          label: { en: 'Wishlist', ar: 'المفضلة' },
+          label: { en: 'Saved', ar: 'المحفوظات' },
           href: '/wishlist',
         },
       ],
@@ -148,26 +148,84 @@ export default function ProfilePage() {
       <div className="min-h-screen bg-cream dark:bg-background px-4 pt-2 pb-6 animate-fade-in">
         {/* iOS large title */}
         <h1 className="text-[28px] font-bold tracking-tight text-ink dark:text-foreground mb-5">
-          {t({ en: 'Profile', ar: 'حسابي' })}
+          {t({ en: 'Account', ar: 'الحساب' })}
         </h1>
 
         {!isAuthenticated ? (
-          <div className="flex flex-col items-center justify-center py-20 text-center">
-            <div className="w-20 h-20 rounded-full bg-blush dark:bg-secondary flex items-center justify-center mb-4">
-              <User className="w-10 h-10 text-soft" />
+          <>
+            <div className="flex flex-col items-center justify-center py-12 text-center">
+              <div className="mb-5 flex size-24 items-center justify-center rounded-full bg-cream dark:bg-secondary">
+                <span className="text-[44px]" aria-hidden="true">👋</span>
+              </div>
+              <p className="mb-1 text-[20px] font-bold text-ink dark:text-foreground">
+                {t({ en: 'Hi, Guest', ar: 'مرحباً' })}
+              </p>
+              <p className="mb-6 max-w-xs text-[14px] text-muted-foreground">
+                {t({
+                  en: 'Log in to follow brands and manage your orders.',
+                  ar: 'سجلي الدخول لمتابعة الماركات وإدارة طلباتك.',
+                })}
+              </p>
+              <Link
+                href="/sign-in"
+                className="inline-flex items-center justify-center rounded-full bg-plum px-8 py-3 text-[15px] font-bold text-white shadow-[0_8px_24px_rgba(92,10,61,0.18)] hover:bg-plum/90"
+              >
+                {t({ en: 'Continue with account', ar: 'المتابعة بحساب' })}
+              </Link>
             </div>
-            <p className="text-ink dark:text-foreground font-medium text-lg mb-2">
-              {t({ en: 'Sign in to your account', ar: 'سجلي دخولج' })}
-            </p>
-            <p className="text-ink/50 text-sm mb-6">
-              {t({ en: 'Track orders, save addresses, and more', ar: 'تتبعي طلباتج وحفظي عناوينج وأكثر' })}
-            </p>
-            <Link href="/auth">
-              <Button className="bg-hero hover:bg-hero/90 text-white rounded-full px-8">
-                {t({ en: 'Sign in', ar: 'تسجيل الدخول' })}
-              </Button>
-            </Link>
-          </div>
+
+            {/* Settings & Support remain accessible for guests */}
+            <div className="space-y-6">
+              {menuSections
+                .filter(s => s.header && (t(s.header) === 'Support' || t(s.header) === 'الدعم'))
+                .map((section, si) => (
+                  <div key={si}>
+                    {section.header && (
+                      <p className="px-4 pb-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-ink/45 dark:text-foreground/45">
+                        {t(section.header)}
+                      </p>
+                    )}
+                    <div className="overflow-hidden rounded-2xl bg-white dark:bg-card shadow-[0_1px_2px_rgba(92,10,61,0.05)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3)]">
+                      {section.items.map((item, idx) => {
+                        const isLast = idx === section.items.length - 1;
+                        const content = (
+                          <div className={cn(
+                            'flex items-center gap-3 px-3.5 py-2.5 transition-colors',
+                            'active:bg-ink/[0.04] dark:active:bg-foreground/[0.06]'
+                          )}>
+                            <span className={cn(
+                              'flex size-7 shrink-0 items-center justify-center rounded-[7px] text-white',
+                              tintBg[item.iconTint]
+                            )}>
+                              {item.icon}
+                            </span>
+                            <span className="flex-1 text-[15px] font-medium text-ink dark:text-foreground">
+                              {t(item.label)}
+                            </span>
+                            <Chevron className="size-4 shrink-0 text-ink/30 dark:text-foreground/30" strokeWidth={2.5} />
+                          </div>
+                        );
+                        const wrapperClass = cn(
+                          'block w-full text-start',
+                          !isLast && 'border-b border-ink/[0.06] dark:border-foreground/[0.06] [&>div]:[mask-image:linear-gradient(to_right,transparent_3rem,black_3rem)]'
+                        );
+                        if (item.href && !item.external) {
+                          return <Link key={item.label.en} href={item.href} className={wrapperClass}>{content}</Link>;
+                        }
+                        if (item.href && item.external) {
+                          return (
+                            <a key={item.label.en} href={item.href} target="_blank" rel="noopener noreferrer" className={wrapperClass}>
+                              {content}
+                            </a>
+                          );
+                        }
+                        return <div key={item.label.en} className={wrapperClass}>{content}</div>;
+                      })}
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </>
         ) : (
           <>
             {/* User Info */}

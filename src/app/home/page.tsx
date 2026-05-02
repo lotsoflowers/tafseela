@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { ArrowLeft, ArrowRight, Sparkles, Store as StoreIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import PageShell from '@/components/layout/PageShell';
 import SearchBar from '@/components/shared/SearchBar';
@@ -11,6 +12,7 @@ import HeroOverlayActions from '@/components/shared/HeroOverlayActions';
 import ProductCard from '@/components/product/ProductCard';
 import StoreCard from '@/components/store/StoreCard';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useOnboarding } from '@/contexts/OnboardingContext';
 import { products } from '@/data/products';
 import { stores } from '@/data/stores';
 import { categories } from '@/data/categories';
@@ -20,9 +22,17 @@ const HERO_IMAGE = 'https://cdn.shopify.com/s/files/1/0601/9825/6875/files/SD1-2
 
 export default function HomePage() {
   const { language, t, direction } = useLanguage();
+  const { state: onboardingState, loaded: onboardingLoaded } = useOnboarding();
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<'products' | 'stores'>('products');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const featuredScrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (onboardingLoaded && !onboardingState.completed) {
+      router.replace('/onboarding');
+    }
+  }, [onboardingLoaded, onboardingState.completed, router]);
 
   const filteredProducts =
     selectedCategory === 'all'
