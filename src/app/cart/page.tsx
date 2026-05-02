@@ -2,109 +2,158 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ShoppingBag } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { useCart } from '@/contexts/CartContext';
-import { formatPrice } from '@/lib/format';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
+import { ShoppingBag, AlertCircle, BellOff } from 'lucide-react';
 import PageShell from '@/components/layout/PageShell';
 import LargeTitle from '@/components/layout/LargeTitle';
-import CartStoreGroup from '@/components/cart/CartStoreGroup';
+import CartItemRow from '@/components/cart/CartItemRow';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useCart } from '@/contexts/CartContext';
+import { products } from '@/data/products';
+import { formatPrice } from '@/lib/format';
+import { cn } from '@/lib/utils';
 
-export default function CartPage() {
-  const { language } = useLanguage();
-  const { items, getStoreGroups, getSubtotal, getTotal } = useCart();
+export default function BagPage() {
+  const { t } = useLanguage();
+  const { items, itemCount, total } = useCart();
   const router = useRouter();
 
-  const storeGroups = getStoreGroups();
-  const subtotal = getSubtotal();
-  const total = getTotal();
-  const storeCount = storeGroups.length;
+  const enriched = items
+    .map(item => {
+      const product = products.find(p => p.id === item.productId);
+      if (!product) return null;
+      const isOOS = product.isOutOfStock;
+      const sizeOOS = !isOOS && !product.availableSizes.includes(item.size);
+      const variant: 'normal' | 'action-needed' | 'unavailable' = isOOS
+        ? 'unavailable'
+        : sizeOOS
+          ? 'action-needed'
+          : 'normal';
+      return { item, product, variant };
+    })
+    .filter(Boolean) as { item: typeof items[number]; product: typeof products[number]; variant: 'normal' | 'action-needed' | 'unavailable' }[];
+
+  const normal = enriched.filter(e => e.variant === 'normal');
+  const actionNeeded = enriched.filter(e => e.variant === 'action-needed');
+  const unavailable = enriched.filter(e => e.variant === 'unavailable');
+
   const isEmpty = items.length === 0;
+  const checkoutItemCount = normal.reduce((c, e) => c + e.item.quantity, 0);
 
   return (
-    <PageShell className="bg-cream dark:bg-background">
-      <LargeTitle title={{ en: 'My Cart', ar: 'سلتي' }} />
-      <div className="max-w-lg mx-auto px-4 pb-6">
-        {isEmpty ? (
-          /* Empty state */
-          <div className="flex flex-col items-center justify-center py-20 text-center">
-            <div className="size-24 rounded-full bg-blush dark:bg-secondary flex items-center justify-center mb-6">
-              <ShoppingBag className="size-10 text-hero" />
-            </div>
-            <p className="text-lg font-medium text-ink dark:text-foreground mb-2">
-              {language === 'ar' ? 'سلتك فاضية' : 'Your cart is empty'}
-            </p>
-            <Link href="/home">
-              <Button className="mt-4 bg-hero hover:bg-hero/90 text-white">
-                {language === 'ar' ? 'تصفحي المتاجر' : 'Browse stores'}
-              </Button>
-            </Link>
-          </div>
-        ) : (
-          <>
-            {/* Store groups */}
-            <div className="space-y-4">
-              {storeGroups.map((group, idx) => (
-                <div key={group.storeId}>
-                  {idx > 0 && (
-                    <div className="flex items-center gap-3 my-4">
-                      <Separator className="flex-1 bg-soft/50" />
-                      <span className="text-xs text-muted-foreground whitespace-nowrap">
-                        {language === 'ar' ? 'متجر آخر' : 'Another store'}
-                      </span>
-                      <Separator className="flex-1 bg-soft/50" />
-                    </div>
-                  )}
-                  <CartStoreGroup storeId={group.storeId} items={group.items} />
-                </div>
-              ))}
-            </div>
-
-            {/* Order summary */}
-            <div className="mt-6 rounded-xl bg-white dark:bg-card p-4 space-y-3">
-              <h2 className="font-semibold text-ink dark:text-foreground text-sm">
-                {language === 'ar' ? 'ملخص الطلب' : 'Order Summary'}
-              </h2>
-              <div className="flex items-center justify-between text-sm text-muted-foreground">
-                <span>{language === 'ar' ? 'المجموع الفرعي' : 'Subtotal'}</span>
-                <span>{formatPrice(subtotal)}</span>
-              </div>
-              <div className="flex items-center justify-between text-sm text-muted-foreground">
-                <span>
-                  {language === 'ar'
-                    ? `رسوم التوصيل (${storeCount} ${storeCount > 1 ? 'متاجر' : 'متجر'})`
-                    : `Delivery (${storeCount} ${storeCount > 1 ? 'stores' : 'store'})`}
-                </span>
-                <span>{formatPrice(1.5 * storeCount)}</span>
-              </div>
-              <Separator className="bg-blush/50" />
-              <div className="flex items-center justify-between font-bold text-ink dark:text-foreground text-lg">
-                <span>{language === 'ar' ? 'الإجمالي' : 'Total'}</span>
-                <span>{formatPrice(total)}</span>
-              </div>
-            </div>
-
-            {/* Multi-store note */}
-            {storeCount > 1 && (
-              <p className="mt-3 text-xs text-muted-foreground text-center px-4">
-                {language === 'ar'
-                  ? `طلبك فيه ${storeCount} متاجر — كل متجر يوصل بشكل منفصل`
-                  : `Your order has ${storeCount} stores — each delivers separately`}
-              </p>
-            )}
-
-            {/* Checkout button */}
-            <Button
-              className="w-full mt-6 bg-plum hover:bg-plum/90 text-white h-12 text-base font-semibold rounded-xl"
-              onClick={() => router.push('/checkout')}
-            >
-              {language === 'ar' ? 'إتمام الطلب' : 'Checkout'}
-            </Button>
-          </>
-        )}
+    <PageShell>
+      <div className="px-4 pt-2">
+        <LargeTitle title={{ en: 'Bag', ar: 'الحقيبة' }} />
       </div>
+
+      {isEmpty ? (
+        <div className="flex flex-col items-center px-6 py-20 text-center">
+          <span className="mb-4 flex size-20 items-center justify-center rounded-full bg-cream dark:bg-secondary">
+            <ShoppingBag className="size-9 text-soft" strokeWidth={1.5} />
+          </span>
+          <p className="text-[15px] font-semibold text-ink dark:text-foreground">
+            {t({ en: 'Your bag is empty', ar: 'حقيبتك فارغة' })}
+          </p>
+          <Link
+            href="/catalog"
+            className="mt-4 inline-flex items-center gap-2 rounded-full bg-hero px-5 py-2.5 text-[13px] font-bold text-white"
+          >
+            {t({ en: 'Browse Catalog', ar: 'تصفّحي الفئات' })}
+          </Link>
+        </div>
+      ) : (
+        <>
+          <section className="pt-2">
+            {normal.length > 0 && (
+              <div className="mx-4 overflow-hidden rounded-3xl bg-white dark:bg-card">
+                {normal.map((e, i) => (
+                  <div
+                    key={`${e.product.id}-${e.item.size}`}
+                    className={cn(i > 0 && 'border-t border-blush/60 dark:border-border/60')}
+                  >
+                    <CartItemRow product={e.product} cartItem={e.item} variant="normal" />
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
+
+          {actionNeeded.length > 0 && (
+            <section className="mt-5">
+              <div className="mb-2 flex items-center gap-2 px-4">
+                <AlertCircle className="size-4 text-red-500" strokeWidth={2.25} />
+                <h2 className="text-[12px] font-bold uppercase tracking-[0.12em] text-red-500">
+                  {t({ en: 'Action needed', ar: 'يتطلب إجراء' })}
+                </h2>
+              </div>
+              <p className="mb-2 px-4 text-[12px] text-muted-foreground">
+                {t({
+                  en: 'Selected size is no longer available. Pick a new size or remove.',
+                  ar: 'المقاس المختار لم يعد متوفراً. اختاري مقاساً آخر أو أزيليه.',
+                })}
+              </p>
+              <div className="mx-4 overflow-hidden rounded-3xl bg-white dark:bg-card">
+                {actionNeeded.map((e, i) => (
+                  <div
+                    key={`${e.product.id}-${e.item.size}`}
+                    className={cn(i > 0 && 'border-t border-blush/60 dark:border-border/60')}
+                  >
+                    <CartItemRow product={e.product} cartItem={e.item} variant="action-needed" />
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {unavailable.length > 0 && (
+            <section className="mt-5">
+              <div className="mb-2 flex items-center gap-2 px-4">
+                <BellOff className="size-4 text-muted-foreground" strokeWidth={2} />
+                <h2 className="text-[12px] font-bold uppercase tracking-[0.12em] text-muted-foreground">
+                  {t({ en: 'Unavailable items', ar: 'قطع غير متوفرة' })}
+                </h2>
+              </div>
+              <div className="mx-4 overflow-hidden rounded-3xl bg-white dark:bg-card">
+                {unavailable.map((e, i) => (
+                  <div
+                    key={`${e.product.id}-${e.item.size}`}
+                    className={cn(i > 0 && 'border-t border-blush/60 dark:border-border/60')}
+                  >
+                    <CartItemRow product={e.product} cartItem={e.item} variant="unavailable" />
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Sticky bottom checkout CTA — sits above BottomNav */}
+          <div className="fixed inset-x-3 bottom-[88px] z-40 lg:bottom-3">
+            <button
+              type="button"
+              disabled={checkoutItemCount === 0}
+              onClick={() => router.push('/checkout')}
+              className={cn(
+                'flex w-full items-center justify-between rounded-full px-6 py-3.5 text-[14px] font-bold transition-colors',
+                'shadow-[0_8px_24px_rgba(92,10,61,0.18)]',
+                checkoutItemCount === 0
+                  ? 'bg-ink/30 text-white/80 dark:bg-foreground/20'
+                  : 'bg-plum text-white hover:bg-plum/90'
+              )}
+            >
+              <span>
+                {t({ en: 'Checkout', ar: 'إتمام الطلب' })}
+              </span>
+              <span className="text-[13px] opacity-90">
+                {t({
+                  en: `${checkoutItemCount} items · ${formatPrice(total)}`,
+                  ar: `${checkoutItemCount} قطعة · ${formatPrice(total)}`,
+                })}
+              </span>
+            </button>
+          </div>
+
+          <div className="h-32" />
+        </>
+      )}
     </PageShell>
   );
 }
