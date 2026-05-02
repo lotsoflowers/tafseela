@@ -189,3 +189,10 @@ export type OnboardingState = {
   language: Language | null;
   notificationsAllowed: boolean | null;
 };
+
+export type Folder = {
+  id: string;
+  name: string;
+  itemIds: string[];
+  createdAt: string;
+};

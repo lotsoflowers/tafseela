@@ -11,6 +11,7 @@ import { ReviewsProvider } from '@/contexts/ReviewsContext';
 import { OrdersProvider } from '@/contexts/OrdersContext';
 import { RestockAlertsProvider } from '@/contexts/RestockAlertsContext';
 import { OnboardingProvider } from '@/contexts/OnboardingContext';
+import { FoldersProvider } from '@/contexts/FoldersContext';
 import './globals.css';
 
 const inter = Inter({
@@ -50,15 +51,17 @@ export default function RootLayout({
               <AuthProvider>
                 <CartProvider>
                   <WishlistProvider>
-                    <BrandFollowProvider>
-                      <ReviewsProvider>
-                        <OrdersProvider>
-                          <RestockAlertsProvider>
-                            {children}
-                          </RestockAlertsProvider>
-                        </OrdersProvider>
-                      </ReviewsProvider>
-                    </BrandFollowProvider>
+                    <FoldersProvider>
+                      <BrandFollowProvider>
+                        <ReviewsProvider>
+                          <OrdersProvider>
+                            <RestockAlertsProvider>
+                              {children}
+                            </RestockAlertsProvider>
+                          </OrdersProvider>
+                        </ReviewsProvider>
+                      </BrandFollowProvider>
+                    </FoldersProvider>
                   </WishlistProvider>
                 </CartProvider>
               </AuthProvider>
