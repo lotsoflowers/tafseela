@@ -106,12 +106,9 @@ export default function SavedPage() {
               />
             </div>
           ) : (
-            <div className="mx-4 overflow-hidden rounded-3xl bg-white dark:bg-card">
-              {savedItems.map((p, i) => (
-                <div
-                  key={p.id}
-                  className={cn(i > 0 && 'border-t border-blush/60 dark:border-border/60')}
-                >
+            <div className="ios-list mx-4 shadow-card">
+              {savedItems.map(p => (
+                <div key={p.id} className="ios-list-row">
                   <SavedItemRow product={p} />
                 </div>
               ))}

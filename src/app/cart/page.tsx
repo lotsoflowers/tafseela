@@ -64,11 +64,11 @@ export default function BagPage() {
         <>
           <section className="pt-2">
             {normal.length > 0 && (
-              <div className="mx-4 overflow-hidden rounded-3xl bg-white dark:bg-card">
-                {normal.map((e, i) => (
+              <div className="ios-list mx-4 shadow-card">
+                {normal.map(e => (
                   <div
                     key={`${e.product.id}-${e.item.size}`}
-                    className={cn(i > 0 && 'border-t border-blush/60 dark:border-border/60')}
+                    className="ios-list-row"
                   >
                     <CartItemRow product={e.product} cartItem={e.item} variant="normal" />
                   </div>
@@ -91,12 +91,9 @@ export default function BagPage() {
                   ar: 'المقاس المختار لم يعد متوفراً. اختاري مقاساً آخر أو أزيليه.',
                 })}
               </p>
-              <div className="mx-4 overflow-hidden rounded-3xl bg-white dark:bg-card">
-                {actionNeeded.map((e, i) => (
-                  <div
-                    key={`${e.product.id}-${e.item.size}`}
-                    className={cn(i > 0 && 'border-t border-blush/60 dark:border-border/60')}
-                  >
+              <div className="ios-list mx-4 shadow-card">
+                {actionNeeded.map(e => (
+                  <div key={`${e.product.id}-${e.item.size}`} className="ios-list-row">
                     <CartItemRow product={e.product} cartItem={e.item} variant="action-needed" />
                   </div>
                 ))}
@@ -112,12 +109,9 @@ export default function BagPage() {
                   {t({ en: 'Unavailable items', ar: 'قطع غير متوفرة' })}
                 </h2>
               </div>
-              <div className="mx-4 overflow-hidden rounded-3xl bg-white dark:bg-card">
-                {unavailable.map((e, i) => (
-                  <div
-                    key={`${e.product.id}-${e.item.size}`}
-                    className={cn(i > 0 && 'border-t border-blush/60 dark:border-border/60')}
-                  >
+              <div className="ios-list mx-4 shadow-card">
+                {unavailable.map(e => (
+                  <div key={`${e.product.id}-${e.item.size}`} className="ios-list-row">
                     <CartItemRow product={e.product} cartItem={e.item} variant="unavailable" />
                   </div>
                 ))}

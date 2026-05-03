@@ -82,12 +82,9 @@ export default function CatalogPage() {
             {t({ en: 'Brands', ar: 'الماركات' })}
           </h2>
         </div>
-        <div className="mx-4 overflow-hidden rounded-3xl bg-white shadow-[0_1px_2px_rgba(92,10,61,0.04),0_8px_24px_rgba(92,10,61,0.05)] dark:bg-card dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),0_8px_24px_rgba(0,0,0,0.5)]">
-          {sortedStores.map((store, i) => (
-            <div
-              key={store.id}
-              className={i > 0 ? 'border-t border-blush/60 dark:border-border/60' : undefined}
-            >
+        <div className="ios-list mx-4 shadow-card">
+          {sortedStores.map(store => (
+            <div key={store.id} className="ios-list-row">
               <BrandRow store={store} />
             </div>
           ))}

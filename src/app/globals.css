@@ -329,6 +329,51 @@
     0 12px 32px -8px rgba(0, 0, 0, 0.6);
 }
 
+/* ===== iOS inset-grouped list patterns =====
+   A grouped list tile uses .ios-list as the wrapper (rounded white tile,
+   plum-tinted shadow). Each row inside is .ios-list-row — gets a hairline
+   separator drawn via ::after that's indented from the leading edge so it
+   aligns under the row's text content (not the leading thumb/icon).
+   The default indent is 4rem; tune via --ios-list-indent. */
+
+.ios-list {
+  background: var(--card);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.ios-list-section-header {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(44, 44, 42, 0.45);
+  padding: 0 16px 6px;
+}
+
+.dark .ios-list-section-header {
+  color: rgba(251, 224, 232, 0.45);
+}
+
+.ios-list-row {
+  position: relative;
+}
+
+.ios-list-row:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  inset-inline-start: var(--ios-list-indent, 4rem);
+  inset-inline-end: 0;
+  bottom: 0;
+  height: 1px;
+  background: rgba(44, 44, 42, 0.08);
+  pointer-events: none;
+}
+
+.dark .ios-list-row:not(:last-child)::after {
+  background: rgba(251, 224, 232, 0.08);
+}
+
 /* ===== Staggered Grid Children ===== */
 
 .stagger-grid > *:nth-child(1) { animation-delay: 0ms; }

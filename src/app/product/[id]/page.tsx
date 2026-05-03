@@ -28,6 +28,7 @@ import AuthModal from '@/components/auth/AuthModal';
 import ProductCard from '@/components/product/ProductCard';
 import OutfitCard from '@/components/outfit/OutfitCard';
 import { SparkleRating } from '@/components/ui/SparkleStar';
+import Banner from '@/components/shared/Banner';
 import {
   Accordion,
   AccordionContent,
@@ -216,20 +217,16 @@ export default function ProductPage({
 
         {/* Subscribe-state banner — visible only when user has subscribed for any size of this product */}
         {selectedSize && subscribedToSelected && (
-          <div className="mt-4 flex items-start gap-3 rounded-2xl bg-cream p-3 dark:bg-secondary">
-            <Bell className="size-4 shrink-0 text-plum dark:text-foreground" strokeWidth={2} />
-            <div className="min-w-0 flex-1 text-[13px]">
-              <p className="font-semibold text-ink dark:text-foreground">
-                {t({ en: 'Push notifications are on', ar: 'الإشعارات مفعّلة' })}
-              </p>
-              <p className="mt-0.5 text-muted-foreground">
-                {t({
-                  en: `You'll be alerted when size ${selectedSize} is back in stock.`,
-                  ar: `سيتم إشعارك عندما يعود مقاس ${selectedSize} إلى المخزون.`,
-                })}
-              </p>
-            </div>
-          </div>
+          <Banner
+            variant="info"
+            icon={<Bell className="size-4" strokeWidth={2} />}
+            title={{ en: 'Push notifications are on', ar: 'الإشعارات مفعّلة' }}
+            body={{
+              en: `You'll be alerted when size ${selectedSize} is back in stock.`,
+              ar: `سيتم إشعارك عندما يعود مقاس ${selectedSize} إلى المخزون.`,
+            }}
+            className="mt-4"
+          />
         )}
 
         {/* Primary CTA — Add to Bag, Notify, or Stop alerts */}
