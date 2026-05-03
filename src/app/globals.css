@@ -18,8 +18,9 @@
   :root {
     /* Tafseela Brand Palette
        Hero #BF066A · Plum #5C0A3D · Soft #ED93B1 · Blush #FBE0E8 · Cream #FFF4ED · Ink #2C2C2A
-       Page bg is pure white (Plum-style); Blush and Cream play secondary-surface roles. */
-    --background: #FFFFFF;
+       Page bg is Cream (iOS systemGroupedBackground vibe); white cards float
+       on top of it; Blush is the secondary tint. */
+    --background: #FFF4ED;
     --foreground: #2C2C2A;
     --card: #FFFFFF;
     --card-foreground: #2C2C2A;
@@ -29,7 +30,7 @@
     --primary-foreground: #FFFFFF;
     --secondary: #FBE0E8;
     --secondary-foreground: #5C0A3D;
-    --muted: #FFF4ED;
+    --muted: #FBE0E8;
     --muted-foreground: #ED93B1;
     --accent: #FBE0E8;
     --accent-foreground: #5C0A3D;
