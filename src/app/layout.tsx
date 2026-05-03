@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import { IBM_Plex_Sans_Arabic } from 'next/font/google';
 import ThemeProvider from '@/components/shared/ThemeProvider';
 import { TweaksProvider } from '@/components/glass';
+import { Toaster } from '@/components/ui/sonner';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { CartProvider } from '@/contexts/CartContext';
@@ -61,6 +62,7 @@ export default function RootLayout({
                             <OrdersProvider>
                               <RestockAlertsProvider>
                                 {children}
+                                <Toaster position="top-center" />
                               </RestockAlertsProvider>
                             </OrdersProvider>
                           </AddressesProvider>

@@ -10,13 +10,14 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useReviews } from '@/contexts/ReviewsContext';
 import { products } from '@/data/products';
 import { cn, isLoadableImage } from '@/lib/utils';
+import { notifyReviewSubmitted } from '@/lib/notify';
 
 const MAX_PHOTOS = 10;
 const MAX_BODY = 500;
 
 function WriteReviewContent({ id }: { id: string }) {
   const router = useRouter();
-  const { t, direction } = useLanguage();
+  const { t, direction, language } = useLanguage();
   const { addReview } = useReviews();
   const product = products.find(p => p.id === id);
 
@@ -55,6 +56,7 @@ function WriteReviewContent({ id }: { id: string }) {
       fit: product.fit,
       images: photos.length > 0 ? photos : undefined,
     });
+    notifyReviewSubmitted(language);
     router.push(`/product/${product.id}/reviews?just=submitted`);
   };
 

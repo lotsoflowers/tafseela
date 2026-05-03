@@ -11,6 +11,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { stores } from '@/data/stores';
 import { formatPrice } from '@/lib/format';
 import { cn, isLoadableImage } from '@/lib/utils';
+import { notifyAddedToBag, notifyRemovedFromSaved } from '@/lib/notify';
 import type { Product } from '@/types';
 import AddToFolderMenu from './AddToFolderMenu';
 
@@ -19,7 +20,7 @@ interface SavedItemRowProps {
 }
 
 export default function SavedItemRow({ product }: SavedItemRowProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { addItem } = useCart();
   const { toggleWishlist } = useWishlist();
   const { isAuthenticated, openAuthModal } = useAuth();
@@ -38,6 +39,7 @@ export default function SavedItemRow({ product }: SavedItemRowProps) {
       return;
     }
     addItem(product.id, product.storeId, firstAvailableSize);
+    notifyAddedToBag(language, product.name);
   };
 
   return (
@@ -136,6 +138,7 @@ export default function SavedItemRow({ product }: SavedItemRowProps) {
               type="button"
               onClick={() => {
                 toggleWishlist(product.id);
+                notifyRemovedFromSaved(language, product.name);
                 setMenuOpen(false);
               }}
               className="mt-2 flex w-full items-center gap-3 rounded-2xl bg-red-50 px-4 py-3 text-start text-red-600 dark:bg-red-950/40 dark:text-red-400"

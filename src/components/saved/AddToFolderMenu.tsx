@@ -5,6 +5,7 @@ import { Folder, Plus, Check, X } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useFolders } from '@/contexts/FoldersContext';
 import { cn } from '@/lib/utils';
+import { notifyFolderCreated, notifyAddedToFolder } from '@/lib/notify';
 
 interface AddToFolderMenuProps {
   itemId: string;
@@ -12,7 +13,7 @@ interface AddToFolderMenuProps {
 }
 
 export default function AddToFolderMenu({ itemId, onClose }: AddToFolderMenuProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { folders, createFolder, addToFolder, getFoldersForItem } = useFolders();
   const [creating, setCreating] = useState(false);
   const [newName, setNewName] = useState('');
@@ -25,6 +26,7 @@ export default function AddToFolderMenu({ itemId, onClose }: AddToFolderMenuProp
     if (!name) return;
     const folder = createFolder(name);
     addToFolder(folder.id, itemId);
+    notifyFolderCreated(language, name);
     setNewName('');
     setCreating(false);
     onClose();
@@ -104,6 +106,7 @@ export default function AddToFolderMenu({ itemId, onClose }: AddToFolderMenuProp
                       onClick={() => {
                         if (!has) {
                           addToFolder(folder.id, itemId);
+                          notifyAddedToFolder(language, folder.name);
                           onClose();
                         }
                       }}

@@ -29,6 +29,7 @@ import ProductCard from '@/components/product/ProductCard';
 import OutfitCard from '@/components/outfit/OutfitCard';
 import { SparkleRating } from '@/components/ui/SparkleStar';
 import Banner from '@/components/shared/Banner';
+import { notifyAddedToBag } from '@/lib/notify';
 import {
   Accordion,
   AccordionContent,
@@ -125,6 +126,7 @@ export default function ProductPage({
       addItem(product.id, product.storeId, selectedSize);
     }
     setAddedToCart(true);
+    notifyAddedToBag(language, product.name);
     setTimeout(() => setAddedToCart(false), 2000);
   };
 
