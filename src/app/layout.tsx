@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { IBM_Plex_Sans_Arabic } from 'next/font/google';
 import ThemeProvider from '@/components/shared/ThemeProvider';
+import { TweaksProvider } from '@/components/glass';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { CartProvider } from '@/contexts/CartContext';
@@ -47,6 +48,7 @@ export default function RootLayout({
     >
       <body className="font-sans antialiased">
         <ThemeProvider>
+          <TweaksProvider>
           <LanguageProvider>
             <OnboardingProvider>
               <AuthProvider>
@@ -70,6 +72,7 @@ export default function RootLayout({
               </AuthProvider>
             </OnboardingProvider>
           </LanguageProvider>
+          </TweaksProvider>
         </ThemeProvider>
       </body>
     </html>
