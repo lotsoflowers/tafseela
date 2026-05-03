@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Bell, BellOff, Sparkle, Check } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useOnboarding } from '@/contexts/OnboardingContext';
+import { Button } from '@/components/glass';
 import { cn } from '@/lib/utils';
 import type { Language } from '@/types';
 
@@ -115,13 +116,9 @@ function LanguageStep({
       </div>
 
       <div className="px-6 pb-[calc(env(safe-area-inset-bottom)+24px)]">
-        <button
-          type="button"
-          onClick={onContinue}
-          className="w-full rounded-full bg-plum py-3.5 text-[15px] font-bold text-white shadow-[0_8px_24px_rgba(92,10,61,0.18)] hover:bg-plum/90"
-        >
+        <Button variant="primary" size="lg" full onClick={onContinue}>
           {t({ en: 'Continue', ar: 'متابعة' })}
-        </button>
+        </Button>
       </div>
     </>
   );
@@ -147,22 +144,12 @@ function NotificationsStep({ onAnswer }: { onAnswer: (allowed: boolean) => void 
       </div>
 
       <div className="space-y-3 px-6 pb-[calc(env(safe-area-inset-bottom)+24px)]">
-        <button
-          type="button"
-          onClick={() => onAnswer(true)}
-          className="flex w-full items-center justify-center gap-2 rounded-full bg-plum py-3.5 text-[15px] font-bold text-white shadow-[0_8px_24px_rgba(92,10,61,0.18)] hover:bg-plum/90"
-        >
-          <Bell className="size-5" strokeWidth={2} />
+        <Button variant="primary" size="lg" full icon={<Bell size={18} />} onClick={() => onAnswer(true)}>
           {t({ en: 'Allow', ar: 'السماح' })}
-        </button>
-        <button
-          type="button"
-          onClick={() => onAnswer(false)}
-          className="flex w-full items-center justify-center gap-2 rounded-full bg-cream py-3.5 text-[15px] font-bold text-plum hover:bg-cream/80 dark:bg-secondary dark:text-foreground"
-        >
-          <BellOff className="size-5" strokeWidth={2} />
+        </Button>
+        <Button variant="secondary" size="lg" full icon={<BellOff size={18} />} onClick={() => onAnswer(false)}>
           {t({ en: 'Do not allow', ar: 'عدم السماح' })}
-        </button>
+        </Button>
       </div>
     </>
   );

@@ -2,12 +2,14 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { notFound } from 'next/navigation';
 import { ChevronLeft, ChevronRight, Share2 } from 'lucide-react';
 import PageShell from '@/components/layout/PageShell';
 import ProductCard from '@/components/product/ProductCard';
 import OutfitCard from '@/components/outfit/OutfitCard';
 import WishlistButton from '@/components/shared/WishlistButton';
+import { IconButton } from '@/components/glass';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { getOutfit, getOutfitTotalPrice, getRelatedOutfits } from '@/data/outfits';
 import { products } from '@/data/products';
@@ -37,22 +39,14 @@ export default function OutfitDetailPage({
 
   return (
     <PageShell showTopBar={false}>
-      {/* Floating top bar over hero photo */}
+      {/* Floating top bar over hero photo — glass IconButtons */}
       <div className="pointer-events-none fixed inset-x-0 top-0 z-40 flex items-center justify-between p-3">
-        <Link
-          href="/catalog"
-          className="pointer-events-auto flex size-10 items-center justify-center rounded-full bg-white/85 text-ink shadow-md backdrop-blur-md dark:bg-card/85 dark:text-foreground"
-          aria-label={t({ en: 'Back', ar: 'رجوع' })}
-        >
-          <Back className="size-5" />
+        <Link href="/catalog" className="pointer-events-auto" aria-label={t({ en: 'Back', ar: 'رجوع' })}>
+          <IconButton size={40} icon={<Back size={18} />} />
         </Link>
-        <button
-          type="button"
-          className="pointer-events-auto flex size-10 items-center justify-center rounded-full bg-white/85 text-ink shadow-md backdrop-blur-md dark:bg-card/85 dark:text-foreground"
-          aria-label={t({ en: 'Share', ar: 'مشاركة' })}
-        >
-          <Share2 className="size-5" strokeWidth={1.75} />
-        </button>
+        <span className="pointer-events-auto">
+          <IconButton size={40} icon={<Share2 size={18} strokeWidth={1.75} />} ariaLabel={t({ en: 'Share', ar: 'مشاركة' })} />
+        </span>
       </div>
 
       {/* Lifestyle hero */}

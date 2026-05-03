@@ -36,6 +36,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { IconButton } from '@/components/glass';
 import { formatPrice } from '@/lib/format';
 import type { ProductSize, FitRecommendation } from '@/types';
 
@@ -192,32 +193,28 @@ export default function ProductPage({
         <ProductCarousel images={product.images} productName={t(product.name)} />
       </div>
 
-      {/* Floating top bar */}
+      {/* Floating top bar — glass IconButtons */}
       <div className="absolute inset-x-0 top-0 z-30 flex items-center justify-between p-3 pt-[calc(env(safe-area-inset-top)+12px)]">
-        <button
-          type="button"
+        <IconButton
+          size={40}
+          icon={<ChevronBack size={20} strokeWidth={2.5} />}
+          ariaLabel={t({ en: 'Back', ar: 'رجوع' })}
           onClick={() => router.back()}
-          aria-label={t({ en: 'Back', ar: 'رجوع' })}
-          className="flex size-10 items-center justify-center rounded-full bg-white/85 text-ink shadow-md backdrop-blur-md active:scale-95 dark:bg-card/85 dark:text-foreground"
-        >
-          <ChevronBack className="size-5" strokeWidth={2.5} />
-        </button>
+        />
         <div className="flex items-center gap-2">
-          <button
-            type="button"
-            aria-label={t({ en: 'Share', ar: 'مشاركة' })}
-            className="flex size-10 items-center justify-center rounded-full bg-white/85 text-ink shadow-md backdrop-blur-md active:scale-95 dark:bg-card/85 dark:text-foreground"
-          >
-            <Share2 className="size-5" strokeWidth={1.75} />
-          </button>
+          <IconButton
+            size={40}
+            icon={<Share2 size={18} strokeWidth={1.75} />}
+            ariaLabel={t({ en: 'Share', ar: 'مشاركة' })}
+          />
           <Link
             href="/cart"
             aria-label={t({ en: 'Bag', ar: 'الحقيبة' })}
-            className="relative flex size-10 items-center justify-center rounded-full bg-white/85 text-ink shadow-md backdrop-blur-md active:scale-95 dark:bg-card/85 dark:text-foreground"
+            className="relative inline-flex"
           >
-            <ShoppingBag className="size-[18px]" strokeWidth={2} />
+            <IconButton size={40} icon={<ShoppingBag size={18} strokeWidth={2} />} />
             {itemCount > 0 && (
-              <span className="absolute -end-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-hero px-1 text-[9px] font-bold text-white ring-2 ring-white dark:ring-card animate-pop-in">
+              <span className="absolute -end-0.5 -top-0.5 z-10 flex h-4 min-w-4 items-center justify-center rounded-full bg-hero px-1 text-[9px] font-bold text-white ring-2 ring-white dark:ring-card animate-pop-in">
                 {itemCount}
               </span>
             )}

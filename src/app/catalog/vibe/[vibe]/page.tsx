@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import PageShell from '@/components/layout/PageShell';
 import OutfitCard from '@/components/outfit/OutfitCard';
+import { IconButton } from '@/components/glass';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { getOutfitsByVibe } from '@/data/outfits';
 import { vibeMeta } from '@/components/outfit/VibeCard';
@@ -31,14 +32,10 @@ export default function VibeDetailPage({
 
   return (
     <PageShell showTopBar={false}>
-      {/* Floating back over blurred hero */}
+      {/* Floating back over blurred hero — glass IconButton */}
       <div className="pointer-events-none fixed inset-x-0 top-0 z-40 p-3">
-        <Link
-          href="/catalog"
-          className="pointer-events-auto flex size-10 items-center justify-center rounded-full bg-white/85 text-ink shadow-md backdrop-blur-md dark:bg-card/85 dark:text-foreground"
-          aria-label={t({ en: 'Back', ar: 'رجوع' })}
-        >
-          <Back className="size-5" />
+        <Link href="/catalog" className="pointer-events-auto" aria-label={t({ en: 'Back', ar: 'رجوع' })}>
+          <IconButton size={40} icon={<Back size={18} />} />
         </Link>
       </div>
 
