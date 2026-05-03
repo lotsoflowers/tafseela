@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { X, Eye, EyeOff } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useAuth } from '@/contexts/AuthContext';
+import { Button, IconButton, Wallpaper } from '@/components/glass';
 import { cn } from '@/lib/utils';
 
 function SetPasswordContent() {
@@ -30,16 +31,14 @@ function SetPasswordContent() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="relative flex min-h-screen flex-col">
+      <Wallpaper />
       <div className="flex justify-end p-3">
-        <button
-          type="button"
+        <IconButton
+          icon={<X size={20} />}
+          ariaLabel={t({ en: 'Close', ar: 'إغلاق' })}
           onClick={() => router.back()}
-          aria-label={t({ en: 'Close', ar: 'إغلاق' })}
-          className="flex size-10 items-center justify-center rounded-full text-ink hover:bg-cream dark:text-foreground dark:hover:bg-secondary"
-        >
-          <X className="size-5" />
-        </button>
+        />
       </div>
 
       <div className="flex-1 px-6 pt-8">
@@ -80,19 +79,9 @@ function SetPasswordContent() {
       </div>
 
       <div className="px-6 pb-[calc(env(safe-area-inset-bottom)+24px)] pt-8">
-        <button
-          type="button"
-          onClick={handleContinue}
-          disabled={!valid}
-          className={cn(
-            'flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-[15px] font-bold transition-colors',
-            valid
-              ? 'bg-plum text-white shadow-[0_8px_24px_rgba(92,10,61,0.18)] hover:bg-plum/90'
-              : 'bg-ink/30 text-white/80 dark:bg-foreground/20'
-          )}
-        >
+        <Button variant="primary" size="lg" full disabled={!valid} onClick={handleContinue}>
           {t({ en: 'Continue', ar: 'متابعة' })}
-        </button>
+        </Button>
         <p className="mt-3 text-center text-[12px] text-muted-foreground">
           <span className="underline-offset-2">
             {t({ en: 'Privacy Notice', ar: 'سياسة الخصوصية' })}

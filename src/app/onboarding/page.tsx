@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Bell, BellOff, Sparkle, Check } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useOnboarding } from '@/contexts/OnboardingContext';
-import { Button } from '@/components/glass';
+import { Button, Wallpaper } from '@/components/glass';
 import { cn } from '@/lib/utils';
 import type { Language } from '@/types';
 
@@ -29,7 +29,8 @@ export default function OnboardingPage() {
   };
 
   return (
-    <div className="relative flex min-h-screen flex-col bg-background">
+    <div className="relative flex min-h-screen flex-col">
+      <Wallpaper />
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <Sparkle className="absolute start-8 top-16 size-6 text-soft/50" fill="currentColor" />
         <Sparkle className="absolute end-12 top-32 size-4 text-hero/30" fill="currentColor" />

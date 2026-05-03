@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { X, Mail } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useAuth } from '@/contexts/AuthContext';
-import { Button, IconButton, TextField } from '@/components/glass';
+import { Button, IconButton, TextField, Wallpaper } from '@/components/glass';
 import { cn } from '@/lib/utils';
 
 export default function SignInPage() {
@@ -27,7 +27,8 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="relative flex min-h-screen flex-col">
+      <Wallpaper />
       <div className="flex justify-end p-3">
         <IconButton
           icon={<X size={20} />}
