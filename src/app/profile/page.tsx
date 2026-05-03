@@ -11,7 +11,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { useWishlist } from '@/contexts/WishlistContext';
 import PageShell from '@/components/layout/PageShell';
-import { Button } from '@/components/ui/button';
+import { Avatar, Alert } from '@/components/glass';
 import { cn } from '@/lib/utils';
 import type { BilingualText } from '@/types';
 
@@ -51,6 +51,7 @@ export default function ProfilePage() {
   const { items: wishlistItems } = useWishlist();
   const { resolvedTheme, setTheme } = useTheme();
   const [themeMounted, setThemeMounted] = useState(false);
+  const [showSignOutAlert, setShowSignOutAlert] = useState(false);
   useEffect(() => setThemeMounted(true), []);
   const isDark = themeMounted && resolvedTheme === 'dark';
   const toggleTheme = () => setTheme(isDark ? 'light' : 'dark');
@@ -136,7 +137,7 @@ export default function ProfilePage() {
           icon: <LogOut className="size-[18px]" strokeWidth={2.25} />,
           iconTint: 'red',
           label: { en: 'Sign out', ar: 'تسجيل الخروج' },
-          action: logout,
+          action: () => setShowSignOutAlert(true),
           destructive: true,
         },
       ],
@@ -228,11 +229,13 @@ export default function ProfilePage() {
           </>
         ) : (
           <>
-            {/* User Info */}
+            {/* User Info — uses glass Avatar */}
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-16 rounded-full bg-hero flex items-center justify-center text-white text-2xl font-bold">
-                {user?.name?.charAt(0) || 'S'}
-              </div>
+              <Avatar
+                initials={(user?.name?.charAt(0) || 'S').toUpperCase()}
+                size={64}
+                status="online"
+              />
               <div>
                 <p className="text-lg font-bold text-ink dark:text-foreground">{user?.name}</p>
                 <p className="text-sm text-ink/60">{user?.phone}</p>
@@ -324,6 +327,41 @@ export default function ProfilePage() {
               ))}
             </div>
           </>
+        )}
+
+        {/* Sign-out confirmation — uses glass Alert */}
+        {showSignOutAlert && (
+          <div
+            onClick={() => setShowSignOutAlert(false)}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 60,
+              background: 'rgba(0,0,0,0.45)',
+              backdropFilter: 'blur(2px)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <div onClick={e => e.stopPropagation()}>
+              <Alert
+                title={t({ en: 'Sign out?', ar: 'تسجيل الخروج؟' })}
+                message={t({
+                  en: "You'll need to sign in again to access your saved items and orders.",
+                  ar: 'ستحتاجين لتسجيل الدخول مجدداً للوصول إلى المحفوظات والطلبات.',
+                })}
+                primary={t({ en: 'Sign out', ar: 'تسجيل الخروج' })}
+                secondary={t({ en: 'Cancel', ar: 'إلغاء' })}
+                destructive
+                onPrimary={() => {
+                  setShowSignOutAlert(false);
+                  logout();
+                }}
+                onSecondary={() => setShowSignOutAlert(false)}
+              />
+            </div>
+          </div>
         )}
       </div>
     </PageShell>

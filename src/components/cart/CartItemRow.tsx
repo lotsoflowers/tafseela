@@ -2,12 +2,13 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Minus, Plus, RefreshCw, X } from 'lucide-react';
+import { RefreshCw, X } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useCart } from '@/contexts/CartContext';
 import { stores } from '@/data/stores';
 import { formatPrice } from '@/lib/format';
 import { cn, isLoadableImage } from '@/lib/utils';
+import { Stepper } from '@/components/glass';
 import type { Product, CartItem } from '@/types';
 
 type Variant = 'normal' | 'action-needed' | 'unavailable';
@@ -25,8 +26,6 @@ export default function CartItemRow({ product, cartItem, variant = 'normal' }: C
   const hasPhoto = isLoadableImage(product.images[0]);
   const grayscale = variant === 'unavailable';
 
-  const incQty = () => updateQuantity(product.id, cartItem.size, cartItem.quantity + 1);
-  const decQty = () => updateQuantity(product.id, cartItem.size, cartItem.quantity - 1);
   const remove = () => removeItem(product.id, cartItem.size);
 
   return (
@@ -99,28 +98,12 @@ export default function CartItemRow({ product, cartItem, variant = 'normal' }: C
               {t({ en: 'Pick a size', ar: 'اختاري مقاس' })}
             </span>
           ) : (
-            <div className="flex items-center gap-1 rounded-full border border-soft/40 bg-white px-1.5 py-1 dark:border-border dark:bg-card">
-              <button
-                type="button"
-                onClick={decQty}
-                aria-label={t({ en: 'Decrease', ar: 'إنقاص' })}
-                disabled={cartItem.quantity <= 1}
-                className="flex size-9 items-center justify-center rounded-full text-ink transition-[background-color,transform] hover:bg-cream active:scale-90 disabled:opacity-30 dark:text-foreground dark:hover:bg-secondary"
-              >
-                <Minus className="size-4" strokeWidth={2.5} />
-              </button>
-              <span className="min-w-5 text-center text-[14px] font-bold tabular-nums text-ink dark:text-foreground">
-                {cartItem.quantity}
-              </span>
-              <button
-                type="button"
-                onClick={incQty}
-                aria-label={t({ en: 'Increase', ar: 'زيادة' })}
-                className="flex size-9 items-center justify-center rounded-full text-ink transition-[background-color,transform] hover:bg-cream active:scale-90 dark:text-foreground dark:hover:bg-secondary"
-              >
-                <Plus className="size-4" strokeWidth={2.5} />
-              </button>
-            </div>
+            <Stepper
+              value={cartItem.quantity}
+              min={1}
+              max={10}
+              onChange={n => updateQuantity(product.id, cartItem.size, n)}
+            />
           )}
         </div>
       </div>
